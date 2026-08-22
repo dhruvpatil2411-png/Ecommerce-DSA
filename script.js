@@ -1,8 +1,12 @@
 /* =====================================================
-   TECHNOVA FINAL JAVASCRIPT
+   TECHNOVA - FINAL JAVASCRIPT
 ===================================================== */
 
+
+/* ================= PRODUCTS ================= */
+
 const products = [
+
     {
         id: 1,
         name: "Zenith Pro Laptop",
@@ -10,6 +14,7 @@ const products = [
         category: "laptop",
         icon: "💻"
     },
+
     {
         id: 2,
         name: "Nexa 7 Smartphone",
@@ -17,6 +22,7 @@ const products = [
         category: "electronics",
         icon: "📱"
     },
+
     {
         id: 3,
         name: "SoundWave Max Headphones",
@@ -24,6 +30,7 @@ const products = [
         category: "audio",
         icon: "🎧"
     },
+
     {
         id: 4,
         name: "PulseFit Smart Watch",
@@ -31,6 +38,7 @@ const products = [
         category: "wearables",
         icon: "⌚"
     },
+
     {
         id: 5,
         name: "Titan Gaming Mouse",
@@ -38,6 +46,7 @@ const products = [
         category: "gaming",
         icon: "🖱️"
     },
+
     {
         id: 6,
         name: "Elite Mechanical Keyboard",
@@ -45,6 +54,7 @@ const products = [
         category: "gaming",
         icon: "⌨️"
     },
+
     {
         id: 7,
         name: "BassBoom Speaker",
@@ -52,6 +62,7 @@ const products = [
         category: "audio",
         icon: "🔊"
     },
+
     {
         id: 8,
         name: "Nova Power Bank 20K",
@@ -59,12 +70,11 @@ const products = [
         category: "power",
         icon: "🔋"
     }
+
 ];
 
 
-/* =====================================================
-   LOCAL STORAGE
-===================================================== */
+/* ================= LOCAL STORAGE ================= */
 
 let cart =
     JSON.parse(
@@ -82,11 +92,9 @@ let orders =
     ) || [];
 
 
-/* =====================================================
-   FORMAT PRICE
-===================================================== */
+/* ================= HELPERS ================= */
 
-function price(value) {
+function money(value) {
 
     return "₹" +
         Number(value)
@@ -94,10 +102,6 @@ function price(value) {
 
 }
 
-
-/* =====================================================
-   SAVE DATA
-===================================================== */
 
 function saveData() {
 
@@ -119,40 +123,40 @@ function saveData() {
 }
 
 
-/* =====================================================
-   TOAST
-===================================================== */
+function showToast(message) {
 
-function toast(message) {
-
-    const box =
+    const toast =
         document.getElementById("toast");
 
-    box.textContent = message;
+    toast.textContent = message;
 
-    box.classList.add("show");
+    toast.classList.add("show");
 
-    setTimeout(() => {
+    setTimeout(function () {
 
-        box.classList.remove("show");
+        toast.classList.remove("show");
 
-    }, 2200);
+    }, 2000);
 
 }
 
 
-/* =====================================================
-   CART
-===================================================== */
+/* ================= CART ================= */
 
-function addToCart(name) {
+function addToCart(productId) {
 
     const product =
         products.find(
-            p => p.name === name
+            p => p.id === Number(productId)
         );
 
-    if (!product) return;
+    if (!product) {
+
+        showToast("Product not found ❌");
+
+        return;
+
+    }
 
 
     const existing =
@@ -188,7 +192,7 @@ function addToCart(name) {
 
     updateRecommendations();
 
-    toast(
+    showToast(
         product.name +
         " added to cart 🛒"
     );
@@ -196,110 +200,42 @@ function addToCart(name) {
 }
 
 
-function changeQuantity(id, amount) {
-
-    const item =
-        cart.find(
-            product => product.id === id
-        );
-
-    if (!item) return;
-
-
-    item.quantity += amount;
-
-
-    if (item.quantity <= 0) {
-
-        cart =
-            cart.filter(
-                product =>
-                    product.id !== id
-            );
-
-    }
-
-
-    saveData();
-
-    updateCart();
-
-    updateRecommendations();
-
-}
-
-
-function removeFromCart(id) {
-
-    cart =
-        cart.filter(
-            item => item.id !== id
-        );
-
-    saveData();
-
-    updateCart();
-
-    updateRecommendations();
-
-}
-
-
-function cartCount() {
-
-    return cart.reduce(
-        (sum, item) =>
-            sum + item.quantity,
-        0
-    );
-
-}
-
-
-function cartTotal() {
-
-    return cart.reduce(
-        (sum, item) =>
-            sum +
-            item.price *
-            item.quantity,
-        0
-    );
-
-}
-
-
-/* =====================================================
-   UPDATE CART
-===================================================== */
-
 function updateCart() {
+
+    const cartCount =
+        cart.reduce(
+            (total, item) =>
+                total + item.quantity,
+            0
+        );
+
 
     document.getElementById(
         "cartCount"
     ).textContent =
-        cartCount();
+        cartCount;
 
 
     const container =
         document.getElementById(
-            "modalCartItems"
+            "cartItems"
         );
 
 
     if (cart.length === 0) {
 
-        container.innerHTML =
-            `<p class="empty-cart">
-                Your cart is empty.
-            </p>`;
+        container.innerHTML = `
+            <div class="empty-cart">
+                🛒 Your cart is empty.
+            </div>
+        `;
 
     } else {
 
         container.innerHTML = "";
 
 
-        cart.forEach(item => {
+        cart.forEach(function(item) {
 
             const div =
                 document.createElement("div");
@@ -315,10 +251,10 @@ function updateCart() {
                 </h3>
 
                 <p>
-                    ${price(item.price)}
+                    ${money(item.price)}
                 </p>
 
-                <div class="quantity-control">
+                <div class="quantity">
 
                     <button
                         onclick="
@@ -349,7 +285,7 @@ function updateCart() {
                 </div>
 
                 <button
-                    class="remove-btn"
+                    class="remove"
                     onclick="
                     removeFromCart(
                         ${item.id}
@@ -369,23 +305,88 @@ function updateCart() {
     }
 
 
+    const total =
+        cart.reduce(
+            (sum, item) =>
+                sum +
+                item.price *
+                item.quantity,
+            0
+        );
+
+
     document.getElementById(
-        "modalCartTotal"
+        "cartTotal"
     ).textContent =
-        price(cartTotal());
+        money(total);
 
 }
 
 
-/* =====================================================
-   CART MODAL
-===================================================== */
+function changeQuantity(id, amount) {
+
+    const item =
+        cart.find(
+            product =>
+                product.id === Number(id)
+        );
+
+
+    if (!item) return;
+
+
+    item.quantity += amount;
+
+
+    if (item.quantity <= 0) {
+
+        cart =
+            cart.filter(
+                product =>
+                    product.id !== Number(id)
+            );
+
+    }
+
+
+    saveData();
+
+    updateCart();
+
+    updateRecommendations();
+
+}
+
+
+function removeFromCart(id) {
+
+    cart =
+        cart.filter(
+            item =>
+                item.id !== Number(id)
+        );
+
+
+    saveData();
+
+    updateCart();
+
+    updateRecommendations();
+
+    showToast(
+        "Product removed from cart"
+    );
+
+}
+
+
+/* ================= CART MODAL ================= */
 
 function openCart() {
 
     document
-        .getElementById("cartPanel")
-        .classList.add("active");
+        .getElementById("cartModal")
+        .classList.add("show");
 
     updateCart();
 
@@ -395,20 +396,31 @@ function openCart() {
 function closeCart() {
 
     document
-        .getElementById("cartPanel")
-        .classList.remove("active");
+        .getElementById("cartModal")
+        .classList.remove("show");
 
 }
 
 
 document
-    .getElementById("cartPanel")
+    .getElementById("closeCart")
     .addEventListener(
         "click",
-        function(e) {
+        closeCart
+    );
+
+
+document
+    .getElementById("cartModal")
+    .addEventListener(
+        "click",
+        function(event) {
 
             if (
-                e.target === this
+                event.target ===
+                document.getElementById(
+                    "cartModal"
+                )
             ) {
 
                 closeCart();
@@ -419,33 +431,20 @@ document
     );
 
 
-/* =====================================================
-   WISHLIST
-===================================================== */
+/* ================= WISHLIST ================= */
 
-function toggleWishlist(
-    button,
-    name
-) {
+function toggleWishlist(id, button) {
 
-    const product =
-        products.find(
-            p => p.name === name
-        );
-
-    if (!product) return;
+    id = Number(id);
 
 
     if (
-        wishlist.includes(
-            product.id
-        )
+        wishlist.includes(id)
     ) {
 
         wishlist =
             wishlist.filter(
-                id =>
-                    id !== product.id
+                item => item !== id
             );
 
         button.textContent = "♡";
@@ -454,15 +453,13 @@ function toggleWishlist(
             "active"
         );
 
-        toast(
+        showToast(
             "Removed from wishlist"
         );
 
     } else {
 
-        wishlist.push(
-            product.id
-        );
+        wishlist.push(id);
 
         button.textContent = "♥";
 
@@ -470,7 +467,7 @@ function toggleWishlist(
             "active"
         );
 
-        toast(
+        showToast(
             "Added to wishlist ❤️"
         );
 
@@ -501,10 +498,11 @@ function renderWishlist() {
 
     if (wishlist.length === 0) {
 
-        container.innerHTML =
-            `<div class="empty-orders">
-                Your wishlist is empty.
-            </div>`;
+        container.innerHTML = `
+            <div class="empty-cart">
+                ❤️ Your wishlist is empty.
+            </div>
+        `;
 
         return;
 
@@ -514,26 +512,27 @@ function renderWishlist() {
     container.innerHTML = "";
 
 
-    wishlist.forEach(id => {
+    wishlist.forEach(function(id) {
 
         const product =
             products.find(
                 p => p.id === id
             );
 
+
         if (!product) return;
 
 
-        const div =
+        const card =
             document.createElement("div");
 
-        div.className =
-            "wishlist-item";
+        card.className =
+            "wishlist-card";
 
 
-        div.innerHTML = `
+        card.innerHTML = `
 
-            <div class="recommendation-icon">
+            <div class="icon">
                 ${product.icon}
             </div>
 
@@ -542,14 +541,13 @@ function renderWishlist() {
             </h3>
 
             <p>
-                ${price(product.price)}
+                ${money(product.price)}
             </p>
 
             <button
                 onclick="
-                addToCart(
-                    '${product.name}'
-                )">
+                addToCart(${product.id})
+                ">
 
                 Add to Cart
 
@@ -568,7 +566,7 @@ function renderWishlist() {
         `;
 
 
-        container.appendChild(div);
+        container.appendChild(card);
 
     });
 
@@ -579,52 +577,34 @@ function removeWishlist(id) {
 
     wishlist =
         wishlist.filter(
-            item => item !== id
+            item => item !== Number(id)
         );
 
     saveData();
 
     renderWishlist();
 
-    updateWishlistButtons();
+    updateHeartButtons();
 
 }
 
 
-/* =====================================================
-   UPDATE HEARTS
-===================================================== */
+/* ================= HEART BUTTONS ================= */
 
-function updateWishlistButtons() {
+function updateHeartButtons() {
 
     document
-        .querySelectorAll(
-            ".product-card"
-        )
-        .forEach(card => {
+        .querySelectorAll(".heart")
+        .forEach(function(button) {
 
-            const name =
-                card.dataset.name;
-
-            const product =
-                products.find(
-                    p => p.name === name
+            const id =
+                Number(
+                    button.dataset.id
                 );
-
-            const button =
-                card.querySelector(
-                    ".wishlist-btn"
-                );
-
-
-            if (!product || !button)
-                return;
 
 
             if (
-                wishlist.includes(
-                    product.id
-                )
+                wishlist.includes(id)
             ) {
 
                 button.textContent = "♥";
@@ -648,132 +628,16 @@ function updateWishlistButtons() {
 }
 
 
-/* =====================================================
-   SEARCH
-===================================================== */
+/* ================= SEARCH ================= */
 
-function syncSearch() {
-
-    const top =
-        document.getElementById(
-            "searchInput"
-        );
-
-    const product =
-        document.getElementById(
-            "productSearch"
-        );
-
-
-    if (
-        document.activeElement === top
-    ) {
-
-        product.value =
-            top.value;
-
-    } else {
-
-        top.value =
-            product.value;
-
-    }
-
-
-    applyFilters();
-
-}
-
-
-/* =====================================================
-   CATEGORY
-===================================================== */
-
-function selectCategory(category) {
-
-    document.getElementById(
-        "categoryFilter"
-    ).value = category;
-
-
-    document
-        .querySelectorAll(
-            ".category-option"
-        )
-        .forEach(button =>
-            button.classList.remove(
-                "active"
-            )
-        );
-
-
-    event.currentTarget
-        .classList.add("active");
-
-
-    applyFilters();
-
-}
-
-
-function changeCategoryFromSelect() {
-
-    const category =
-        document.getElementById(
-            "categoryFilter"
-        ).value;
-
-
-    document
-        .querySelectorAll(
-            ".category-option"
-        )
-        .forEach(button =>
-            button.classList.remove(
-                "active"
-            )
-        );
-
-
-    applyFilters();
-
-}
-
-
-/* =====================================================
-   PRICE FILTER
-===================================================== */
-
-function filterByPrice() {
-
-    const value =
-        document.getElementById(
-            "priceFilter"
-        ).value;
-
-
-    document.getElementById(
-        "priceValue"
-    ).textContent =
-        "Up to " +
-        price(value);
-
-
-    applyFilters();
-
-}
-
-
-/* =====================================================
-   FILTER
-===================================================== */
-
-function applyFilters() {
+function filterProducts() {
 
     const search =
-        document.getElementById(
-            "productSearch"
-        ).value
+        document
+            .getElementById(
+                "productSearch"
+            )
+            .value
             .toLowerCase()
             .trim();
 
@@ -794,21 +658,23 @@ function applyFilters() {
 
     const cards =
         document.querySelectorAll(
-            ".product-card"
+            ".product"
         );
 
 
-    let visible = 0;
+    let count = 0;
 
 
-    cards.forEach(card => {
+    cards.forEach(function(card) {
 
         const name =
             card.dataset.name
                 .toLowerCase();
 
+
         const cardCategory =
             card.dataset.category;
+
 
         const cardPrice =
             Number(
@@ -816,28 +682,29 @@ function applyFilters() {
             );
 
 
-        const searchMatch =
+        const matchesSearch =
             name.includes(search);
 
 
-        const categoryMatch =
+        const matchesCategory =
             category === "all" ||
             cardCategory === category;
 
 
-        const priceMatch =
+        const matchesPrice =
             cardPrice <= maxPrice;
 
 
         if (
-            searchMatch &&
-            categoryMatch &&
-            priceMatch
+            matchesSearch &&
+            matchesCategory &&
+            matchesPrice
         ) {
 
-            card.style.display = "";
+            card.style.display =
+                "";
 
-            visible++;
+            count++;
 
         } else {
 
@@ -852,110 +719,304 @@ function applyFilters() {
     document.getElementById(
         "resultCount"
     ).textContent =
-        `Showing ${visible} products`;
+        "Showing " +
+        count +
+        " products";
 
 }
 
 
-/* =====================================================
-   SORT
-===================================================== */
+/* ================= SEARCH SYNC ================= */
 
-function sortProducts() {
+document
+    .getElementById("topSearch")
+    .addEventListener(
+        "input",
+        function() {
 
-    const type =
-        document.getElementById(
-            "sortSelect"
-        ).value;
+            document.getElementById(
+                "productSearch"
+            ).value =
+                this.value;
 
+            filterProducts();
 
-    const container =
-        document.getElementById(
-            "productContainer"
-        );
-
-
-    const cards =
-        Array.from(
-            container.querySelectorAll(
-                ".product-card"
-            )
-        );
+        }
+    );
 
 
-    cards.sort(
-        (a,b) => {
+document
+    .getElementById("productSearch")
+    .addEventListener(
+        "input",
+        function() {
 
-            if (type === "low") {
+            document.getElementById(
+                "topSearch"
+            ).value =
+                this.value;
 
-                return (
-                    Number(
-                        a.dataset.price
-                    ) -
-                    Number(
-                        b.dataset.price
+            filterProducts();
+
+        }
+    );
+
+
+/* ================= CATEGORY ================= */
+
+document
+    .querySelectorAll(".category")
+    .forEach(function(button) {
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                const category =
+                    this.dataset.category;
+
+
+                document.getElementById(
+                    "categoryFilter"
+                ).value =
+                    category;
+
+
+                document
+                    .querySelectorAll(
+                        ".category"
                     )
+                    .forEach(function(btn) {
+
+                        btn.classList.remove(
+                            "active"
+                        );
+
+                    });
+
+
+                this.classList.add(
+                    "active"
                 );
 
-            }
 
-
-            if (type === "high") {
-
-                return (
-                    Number(
-                        b.dataset.price
-                    ) -
-                    Number(
-                        a.dataset.price
-                    )
-                );
+                filterProducts();
 
             }
+        );
+
+    });
 
 
-            if (type === "name") {
+document
+    .getElementById(
+        "categoryFilter"
+    )
+    .addEventListener(
+        "change",
+        function() {
 
-                return a.dataset.name
-                    .localeCompare(
-                        b.dataset.name
+            document
+                .querySelectorAll(
+                    ".category"
+                )
+                .forEach(function(btn) {
+
+                    btn.classList.remove(
+                        "active"
                     );
 
-            }
+                    if (
+                        btn.dataset.category ===
+                        document.getElementById(
+                            "categoryFilter"
+                        ).value
+                    ) {
+
+                        btn.classList.add(
+                            "active"
+                        );
+
+                    }
+
+                });
 
 
-            return (
-                Number(
-                    a.dataset.name
-                ) -
-                Number(
-                    b.dataset.name
-                )
+            filterProducts();
+
+        }
+    );
+
+
+/* ================= PRICE ================= */
+
+document
+    .getElementById("priceFilter")
+    .addEventListener(
+        "input",
+        function() {
+
+            document.getElementById(
+                "priceValue"
+            ).textContent =
+                "Up to " +
+                money(this.value);
+
+            filterProducts();
+
+        }
+    );
+
+
+document
+    .getElementById("applyPrice")
+    .addEventListener(
+        "click",
+        function() {
+
+            filterProducts();
+
+            showToast(
+                "Price filter applied"
             );
 
         }
     );
 
 
-    cards.forEach(card =>
-        container.appendChild(card)
+/* ================= SORT ================= */
+
+document
+    .getElementById("sortFilter")
+    .addEventListener(
+        "change",
+        function() {
+
+            const type =
+                this.value;
+
+
+            const grid =
+                document.getElementById(
+                    "productsGrid"
+                );
+
+
+            const cards =
+                Array.from(
+                    grid.querySelectorAll(
+                        ".product"
+                    )
+                );
+
+
+            cards.sort(
+                function(a,b) {
+
+                    if (
+                        type === "low"
+                    ) {
+
+                        return Number(
+                            a.dataset.price
+                        ) -
+                        Number(
+                            b.dataset.price
+                        );
+
+                    }
+
+
+                    if (
+                        type === "high"
+                    ) {
+
+                        return Number(
+                            b.dataset.price
+                        ) -
+                        Number(
+                            a.dataset.price
+                        );
+
+                    }
+
+
+                    if (
+                        type === "name"
+                    ) {
+
+                        return a.dataset.name
+                            .localeCompare(
+                                b.dataset.name
+                            );
+
+                    }
+
+
+                    return 0;
+
+                }
+            );
+
+
+            cards.forEach(
+                card =>
+                    grid.appendChild(card)
+            );
+
+
+            filterProducts();
+
+        }
     );
 
 
-    applyFilters();
+/* ================= PRODUCT BUTTONS ================= */
 
-}
+document
+    .querySelectorAll(".add-cart")
+    .forEach(function(button) {
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                addToCart(
+                    this.dataset.id
+                );
+
+            }
+        );
+
+    });
 
 
-/* =====================================================
-   RECOMMENDATION
-===================================================== */
+document
+    .querySelectorAll(".heart")
+    .forEach(function(button) {
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                toggleWishlist(
+                    this.dataset.id,
+                    this
+                );
+
+            }
+        );
+
+    });
+
+
+/* ================= RECOMMENDATIONS ================= */
 
 function updateRecommendations() {
 
     const container =
         document.getElementById(
-            "recommendationContainer"
+            "recommendations"
         );
 
 
@@ -965,7 +1026,7 @@ function updateRecommendations() {
     if (cart.length > 0) {
 
         const cartCategories =
-            cart.map(item => {
+            cart.map(function(item) {
 
                 const product =
                     products.find(
@@ -980,19 +1041,20 @@ function updateRecommendations() {
 
 
         recommended =
-            products.filter(
-                product =>
+            products.filter(function(product) {
 
+                return (
                     !cart.some(
                         item =>
                             item.id ===
                             product.id
                     ) &&
-
                     cartCategories.includes(
                         product.category
                     )
-            );
+                );
+
+            });
 
     }
 
@@ -1012,7 +1074,7 @@ function updateRecommendations() {
 
     recommended
         .slice(0,3)
-        .forEach(product => {
+        .forEach(function(product) {
 
             const div =
                 document.createElement(
@@ -1020,14 +1082,12 @@ function updateRecommendations() {
                 );
 
             div.className =
-                "recommendation-card";
+                "recommend-card";
 
 
             div.innerHTML = `
 
-                <div class="
-                    recommendation-icon
-                ">
+                <div class="icon">
                     ${product.icon}
                 </div>
 
@@ -1036,14 +1096,13 @@ function updateRecommendations() {
                 </h3>
 
                 <p>
-                    ${price(product.price)}
+                    ${money(product.price)}
                 </p>
 
                 <button
-                    class="add-btn"
                     onclick="
                     addToCart(
-                        '${product.name}'
+                        ${product.id}
                     )">
 
                     Add to Cart
@@ -1060,9 +1119,7 @@ function updateRecommendations() {
 }
 
 
-/* =====================================================
-   BINARY SEARCH TREE
-===================================================== */
+/* ================= BST ================= */
 
 class Node {
 
@@ -1079,7 +1136,7 @@ class Node {
 }
 
 
-class BST {
+class BinarySearchTree {
 
     constructor() {
 
@@ -1094,7 +1151,9 @@ class BST {
             new Node(value);
 
 
-        if (!this.root) {
+        if (
+            this.root === null
+        ) {
 
             this.root = node;
 
@@ -1157,7 +1216,7 @@ class BST {
             this.root;
 
 
-        while (current) {
+        while (current !== null) {
 
             if (
                 current.value ===
@@ -1192,13 +1251,15 @@ class BST {
     }
 
 
-    inorder(
-        node,
-        result = []
-    ) {
+    inorder(node, result = []) {
 
-        if (!node)
+        if (
+            node === null
+        ) {
+
             return result;
+
+        }
 
 
         this.inorder(
@@ -1225,255 +1286,238 @@ class BST {
 }
 
 
-const priceTree =
-    new BST();
+const bst =
+    new BinarySearchTree();
 
 
-products.forEach(
-    product =>
-        priceTree.insert(
-            product.price
-        )
-);
+products.forEach(function(product) {
+
+    bst.insert(
+        product.price
+    );
+
+});
 
 
-/* =====================================================
-   BST SEARCH
-===================================================== */
+document
+    .getElementById("bstSearch")
+    .addEventListener(
+        "click",
+        function() {
 
-function searchBST() {
-
-    const input =
-        Number(
-            document.getElementById(
-                "bstSearchInput"
-            ).value
-        );
-
-
-    const result =
-        document.getElementById(
-            "bstResult"
-        );
+            const value =
+                Number(
+                    document.getElementById(
+                        "bstInput"
+                    ).value
+                );
 
 
-    if (!input) {
-
-        result.innerHTML =
-            "Please enter a price.";
-
-        return;
-
-    }
+            const result =
+                document.getElementById(
+                    "bstResult"
+                );
 
 
-    if (
-        priceTree.search(input)
-    ) {
+            if (!value) {
 
-        const product =
-            products.find(
-                p =>
-                    p.price ===
-                    input
-            );
+                result.textContent =
+                    "Please enter a price.";
+
+                return;
+
+            }
 
 
-        result.innerHTML = `
-
-            ✅ Price found!
-
-            <br><br>
-
-            Product:
-            <strong>
-                ${product.name}
-            </strong>
-
-            <br>
-
-            Price:
-            <strong>
-                ${price(input)}
-            </strong>
-
-        `;
-
-    } else {
-
-        result.innerHTML = `
-
-            ❌ ${price(input)}
-            was not found in BST.
-
-        `;
-
-    }
-
-}
+            const found =
+                bst.search(value);
 
 
-/* =====================================================
-   SHOW BST
-===================================================== */
+            if (found) {
 
-function showBSTData() {
-
-    const result =
-        document.getElementById(
-            "bstResult"
-        );
+                const product =
+                    products.find(
+                        p =>
+                            p.price ===
+                            value
+                    );
 
 
-    const values =
-        priceTree.inorder(
-            priceTree.root
-        );
+                result.innerHTML = `
+                    ✅ Price found!
+                    <br><br>
+                    Product:
+                    <b>${product.name}</b>
+                    <br>
+                    Price:
+                    <b>${money(value)}</b>
+                `;
 
+            } else {
 
-    result.innerHTML = `
+                result.innerHTML = `
+                    ❌ ${money(value)}
+                    was not found in BST.
+                `;
 
-        <strong>
-            BST Inorder Traversal
-        </strong>
+            }
 
-        <br><br>
-
-        ${
-            values
-                .map(
-                    value =>
-                        price(value)
-                )
-                .join(" → ")
         }
-
-    `;
-
-}
-
-
-/* =====================================================
-   CHECKOUT
-===================================================== */
-
-function checkout() {
-
-    if (cart.length === 0) {
-
-        toast(
-            "Your cart is empty ❌"
-        );
-
-        return;
-
-    }
-
-
-    const order = {
-
-        id:
-            "TN" +
-            Date.now()
-                .toString()
-                .slice(-6),
-
-        date:
-            new Date()
-                .toLocaleString(
-                    "en-IN"
-                ),
-
-        items:
-            cart.map(
-                item => ({
-                    ...item
-                })
-            ),
-
-        total:
-            cartTotal(),
-
-        status:
-            "Confirmed"
-
-    };
-
-
-    orders.unshift(order);
-
-    cart = [];
-
-
-    saveData();
-
-    updateCart();
-
-    renderOrders();
-
-    updateRecommendations();
-
-    closeCart();
-
-
-    toast(
-        "Order placed successfully 🎉"
     );
 
 
-    document
-        .getElementById("orders")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
+document
+    .getElementById("bstShow")
+    .addEventListener(
+        "click",
+        function() {
 
-}
+            const values =
+                bst.inorder(
+                    bst.root
+                );
 
 
-/* =====================================================
-   ORDERS
-===================================================== */
+            document.getElementById(
+                "bstResult"
+            ).innerHTML = `
+
+                <b>BST Inorder Traversal:</b>
+
+                <br><br>
+
+                ${values
+                    .map(
+                        value =>
+                            money(value)
+                    )
+                    .join(" → ")}
+
+            `;
+
+        }
+    );
+
+
+/* ================= CHECKOUT ================= */
+
+document
+    .getElementById("checkout")
+    .addEventListener(
+        "click",
+        function() {
+
+            if (
+                cart.length === 0
+            ) {
+
+                showToast(
+                    "Cart is empty ❌"
+                );
+
+                return;
+
+            }
+
+
+            const total =
+                cart.reduce(
+                    (sum,item) =>
+                        sum +
+                        item.price *
+                        item.quantity,
+                    0
+                );
+
+
+            const order = {
+
+                id:
+                    "TN" +
+                    Date.now()
+                        .toString()
+                        .slice(-6),
+
+                date:
+                    new Date()
+                        .toLocaleString(
+                            "en-IN"
+                        ),
+
+                items:
+                    cart.map(
+                        item => ({
+                            ...item
+                        })
+                    ),
+
+                total: total,
+
+                status:
+                    "Confirmed"
+
+            };
+
+
+            orders.unshift(order);
+
+            cart = [];
+
+
+            saveData();
+
+            updateCart();
+
+            renderOrders();
+
+            updateRecommendations();
+
+            closeCart();
+
+            showToast(
+                "Order placed successfully 🎉"
+            );
+
+
+            document
+                .getElementById("orders")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+    );
+
+
+/* ================= ORDERS ================= */
 
 function renderOrders() {
 
     const container =
         document.getElementById(
-            "orderContainer"
+            "ordersContainer"
         );
 
 
-    const message =
-        document.getElementById(
-            "orderMessage"
-        );
-
-
-    if (orders.length === 0) {
+    if (
+        orders.length === 0
+    ) {
 
         container.innerHTML = `
-
-            <div class="empty-orders">
-                No orders yet.
+            <div class="empty-cart">
+                📦 No orders yet.
             </div>
-
         `;
-
-        message.textContent =
-            "Your previous orders will appear here.";
 
         return;
 
     }
 
 
-    message.textContent =
-        `${orders.length} order(s) found.`;
-
-
     container.innerHTML = "";
 
 
-    orders.forEach(order => {
+    orders.forEach(function(order) {
 
         const card =
             document.createElement(
@@ -1484,46 +1528,45 @@ function renderOrders() {
             "order-card";
 
 
-        let itemHTML = "";
+        let itemsHTML = "";
 
 
-        order.items.forEach(item => {
+        order.items.forEach(
+            function(item) {
 
-            itemHTML += `
+                itemsHTML += `
 
-                <div class="order-product">
+                    <div class="order-item">
 
-                    <span>
-                        ${item.name}
-                        × ${item.quantity}
-                    </span>
+                        <span>
+                            ${item.name}
+                            × ${item.quantity}
+                        </span>
 
-                    <strong>
-                        ${price(
-                            item.price *
-                            item.quantity
-                        )}
-                    </strong>
+                        <b>
+                            ${money(
+                                item.price *
+                                item.quantity
+                            )}
+                        </b>
 
-                </div>
+                    </div>
 
-            `;
+                `;
 
-        });
+            }
+        );
 
 
         card.innerHTML = `
 
-            <div class="order-header">
+            <div class="order-top">
 
                 <div>
 
-                    <strong>
-                        Order
-                        <span class="order-id">
-                            #${order.id}
-                        </span>
-                    </strong>
+                    <b>
+                        Order #${order.id}
+                    </b>
 
                     <br>
 
@@ -1539,14 +1582,12 @@ function renderOrders() {
 
             </div>
 
-            <div>
-                ${itemHTML}
-            </div>
+            ${itemsHTML}
 
             <div class="order-total">
 
                 Total:
-                ${price(order.total)}
+                ${money(order.total)}
 
             </div>
 
@@ -1560,54 +1601,54 @@ function renderOrders() {
 }
 
 
-/* =====================================================
-   CLEAR ORDERS
-===================================================== */
+/* ================= CLEAR ORDERS ================= */
 
-function clearOrderHistory() {
+document
+    .getElementById("clearOrders")
+    .addEventListener(
+        "click",
+        function() {
 
-    if (
-        orders.length === 0
-    ) {
+            if (
+                orders.length === 0
+            ) {
 
-        toast(
-            "No orders to clear."
-        );
+                showToast(
+                    "No orders to clear"
+                );
 
-        return;
+                return;
 
-    }
-
-
-    if (
-        !confirm(
-            "Clear all order history?"
-        )
-    ) {
-
-        return;
-
-    }
+            }
 
 
-    orders = [];
+            const confirmClear =
+                confirm(
+                    "Clear all orders?"
+                );
 
-    saveData();
 
-    renderOrders();
+            if (!confirmClear)
+                return;
 
-    toast(
-        "Order history cleared."
+
+            orders = [];
+
+            saveData();
+
+            renderOrders();
+
+            showToast(
+                "Orders cleared"
+            );
+
+        }
     );
 
-}
 
+/* ================= SHOP NOW ================= */
 
-/* =====================================================
-   SHOP NOW
-===================================================== */
-
-function scrollToProducts() {
+function goProducts() {
 
     document
         .getElementById("products")
@@ -1618,9 +1659,7 @@ function scrollToProducts() {
 }
 
 
-/* =====================================================
-   INITIALIZE
-===================================================== */
+/* ================= INITIALIZE ================= */
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -1630,13 +1669,13 @@ document.addEventListener(
 
         renderWishlist();
 
-        updateWishlistButtons();
+        updateHeartButtons();
 
         renderOrders();
 
         updateRecommendations();
 
-        filterByPrice();
+        filterProducts();
 
     }
 );

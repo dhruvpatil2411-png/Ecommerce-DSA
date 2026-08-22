@@ -1,23 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>TechNova | Smart Shopping</title>
 
-    <link rel="stylesheet"
-          href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
-<!-- =====================================================
-     NAVBAR
-===================================================== -->
 
 <header class="navbar">
 
@@ -30,1114 +22,909 @@
         </div>
     </div>
 
-    <nav class="nav-links">
-
+    <nav>
         <a href="#home">Home</a>
-
         <a href="#products">Products</a>
-
         <a href="#wishlist">Wishlist</a>
-
         <a href="#orders">Orders</a>
-
         <a href="#about">About Us</a>
-
     </nav>
 
     <div class="header-search">
-
         <input
             type="text"
-            id="searchInput"
+            id="topSearch"
             placeholder="Search products..."
-            oninput="syncSearch()">
-
+        >
         <span>🔍</span>
-
     </div>
 
-    <button
-        class="header-cart"
-        onclick="openCart()">
-
+    <button class="cart-button" onclick="openCart()">
         🛒
-
         <span id="cartCount">0</span>
-
-        <small>Cart</small>
-
+        Cart
     </button>
 
 </header>
 
 
-<!-- =====================================================
-     MAIN
-===================================================== -->
+<main class="layout">
 
-<main class="main-layout">
+    <!-- SIDEBAR -->
 
+    <aside class="sidebar">
 
-<!-- =====================================================
-     LEFT SIDEBAR
-===================================================== -->
+        <div class="side-card">
 
-<aside class="sidebar">
+            <h3>CATEGORIES</h3>
 
-    <div class="side-card">
+            <button class="category active"
+                    data-category="all">
+                🏠 All Categories
+            </button>
 
-        <h3>CATEGORIES</h3>
+            <button class="category"
+                    data-category="laptop">
+                💻 Laptops
+            </button>
 
-        <button
-            class="category-option active"
-            onclick="selectCategory('all')">
+            <button class="category"
+                    data-category="electronics">
+                📱 Smartphones
+            </button>
 
-            🏠 All Categories
+            <button class="category"
+                    data-category="audio">
+                🎧 Audio
+            </button>
 
-        </button>
+            <button class="category"
+                    data-category="wearables">
+                ⌚ Wearables
+            </button>
 
-        <button
-            class="category-option"
-            onclick="selectCategory('laptop')">
+            <button class="category"
+                    data-category="gaming">
+                🎮 Gaming
+            </button>
 
-            💻 Laptops
-
-        </button>
-
-        <button
-            class="category-option"
-            onclick="selectCategory('electronics')">
-
-            📱 Smartphones
-
-        </button>
-
-        <button
-            class="category-option"
-            onclick="selectCategory('audio')">
-
-            🎧 Audio
-
-        </button>
-
-        <button
-            class="category-option"
-            onclick="selectCategory('wearables')">
-
-            ⌚ Wearables
-
-        </button>
-
-        <button
-            class="category-option"
-            onclick="selectCategory('gaming')">
-
-            🎮 Gaming
-
-        </button>
-
-        <button
-            class="category-option"
-            onclick="selectCategory('power')">
-
-            🔋 Power Solutions
-
-        </button>
-
-    </div>
-
-
-    <div class="side-card">
-
-        <h3>FILTER BY PRICE</h3>
-
-        <div class="price-labels">
-
-            <span>₹500</span>
-
-            <span>₹60,000+</span>
+            <button class="category"
+                    data-category="power">
+                🔋 Power Solutions
+            </button>
 
         </div>
 
-        <input
-            type="range"
-            id="priceFilter"
-            min="500"
-            max="60000"
-            value="60000"
-            oninput="filterByPrice()">
 
-        <div
-            class="price-value"
-            id="priceValue">
+        <div class="side-card">
 
-            Up to ₹60,000
+            <h3>FILTER BY PRICE</h3>
+
+            <div class="price-row">
+                <span>₹500</span>
+                <span>₹60,000+</span>
+            </div>
+
+            <input
+                type="range"
+                id="priceFilter"
+                min="500"
+                max="60000"
+                value="60000"
+            >
+
+            <p id="priceValue">
+                Up to ₹60,000
+            </p>
+
+            <button
+                class="blue-button"
+                id="applyPrice">
+
+                Apply Filter
+
+            </button>
 
         </div>
 
-        <button
-            class="filter-btn"
-            onclick="applyFilters()">
 
-            Apply Filter
+        <div class="side-card">
 
-        </button>
+            <h3>FEATURES</h3>
 
-    </div>
+            <div class="feature">
+                🚚
+                <div>
+                    <b>Free Shipping</b>
+                    <small>Orders above ₹999</small>
+                </div>
+            </div>
 
+            <div class="feature">
+                🛡️
+                <div>
+                    <b>1 Year Warranty</b>
+                    <small>On all products</small>
+                </div>
+            </div>
 
-    <div class="side-card">
+            <div class="feature">
+                ↩️
+                <div>
+                    <b>Easy Returns</b>
+                    <small>Within 7 days</small>
+                </div>
+            </div>
 
-        <h3>FEATURES</h3>
-
-        <div class="feature">
-
-            <span>🚚</span>
-
-            <div>
-                <strong>Free Shipping</strong>
-                <small>On orders above ₹999</small>
+            <div class="feature">
+                🔒
+                <div>
+                    <b>Secure Payments</b>
+                    <small>100% secure checkout</small>
+                </div>
             </div>
 
         </div>
 
-        <div class="feature">
+    </aside>
 
-            <span>🛡️</span>
 
-            <div>
-                <strong>1 Year Warranty</strong>
-                <small>On all products</small>
-            </div>
+    <!-- MAIN -->
 
-        </div>
+    <section class="content" id="home">
 
-        <div class="feature">
-
-            <span>↩️</span>
+        <section class="hero">
 
             <div>
-                <strong>Easy Returns</strong>
-                <small>Within 7 days</small>
+                <p class="hero-small">
+                    NEXT-GEN TECHNOLOGY
+                </p>
+
+                <h2>
+                    The Future<br>
+                    Is Now
+                </h2>
+
+                <p>
+                    Discover the latest tech that inspires.
+                </p>
+
+                <button
+                    class="hero-button"
+                    onclick="goProducts()">
+
+                    Shop Now
+
+                </button>
             </div>
 
-        </div>
-
-        <div class="feature">
-
-            <span>🔒</span>
-
-            <div>
-                <strong>Secure Payments</strong>
-                <small>100% secure checkout</small>
+            <div class="hero-icons">
+                💻 🎧
             </div>
 
-        </div>
+        </section>
 
-    </div>
 
-</aside>
+        <!-- TOOLS -->
 
+        <section class="tools">
 
-<!-- =====================================================
-     CENTER CONTENT
-===================================================== -->
+            <div class="search-box">
 
-<section class="content-area"
-         id="home">
+                <input
+                    type="text"
+                    id="productSearch"
+                    placeholder="Search products..."
+                >
 
+                <span>🔍</span>
 
-<!-- HERO -->
+            </div>
 
-<div class="hero-banner">
+            <select id="categoryFilter">
 
-    <div class="hero-text">
+                <option value="all">
+                    All Categories
+                </option>
 
-        <p>NEXT-GEN TECHNOLOGY</p>
+                <option value="laptop">
+                    Laptops
+                </option>
 
-        <h2>
-            The Future<br>
-            Is Now
-        </h2>
+                <option value="electronics">
+                    Smartphones
+                </option>
 
-        <span>
-            Discover the latest tech that inspires.
-        </span>
+                <option value="audio">
+                    Audio
+                </option>
 
-        <button
-            onclick="scrollToProducts()">
+                <option value="wearables">
+                    Wearables
+                </option>
 
-            Shop Now
+                <option value="gaming">
+                    Gaming
+                </option>
 
-        </button>
+                <option value="power">
+                    Power Solutions
+                </option>
 
-    </div>
+            </select>
 
-    <div class="hero-products">
+            <select id="sortFilter">
 
-        <span class="hero-laptop">💻</span>
+                <option value="featured">
+                    Sort By: Featured
+                </option>
 
-        <span class="hero-headphone">🎧</span>
+                <option value="low">
+                    Price: Low to High
+                </option>
 
-    </div>
+                <option value="high">
+                    Price: High to Low
+                </option>
 
-</div>
+                <option value="name">
+                    Name: A-Z
+                </option>
 
+            </select>
 
-<!-- SEARCH / SORT -->
+        </section>
 
-<div
-    class="product-tools"
-    id="products">
 
-    <div class="search-wrapper">
+        <section id="products">
 
-        <input
-            type="text"
-            id="productSearch"
-            placeholder="Search products..."
-            oninput="syncSearch()">
+            <div class="section-title">
 
-        <span>🔍</span>
+                <div>
+                    <h2>Featured Products</h2>
+                    <p>Premium technology for everyday life</p>
+                </div>
 
-    </div>
+                <span id="resultCount">
+                    Showing 8 products
+                </span>
 
-    <select
-        id="categoryFilter"
-        onchange="changeCategoryFromSelect()">
+            </div>
 
-        <option value="all">
-            All Categories
-        </option>
 
-        <option value="laptop">
-            Laptops
-        </option>
+            <div
+                class="products-grid"
+                id="productsGrid"
+            >
 
-        <option value="electronics">
-            Smartphones
-        </option>
+                <!-- LAPTOP -->
 
-        <option value="audio">
-            Audio
-        </option>
+                <div class="product"
+                     data-name="Zenith Pro Laptop"
+                     data-category="laptop"
+                     data-price="54990">
 
-        <option value="wearables">
-            Wearables
-        </option>
+                    <span class="badge">
+                        Best Seller
+                    </span>
 
-        <option value="gaming">
-            Gaming
-        </option>
+                    <button
+                        class="heart"
+                        data-id="1">
+                        ♡
+                    </button>
 
-        <option value="power">
-            Power Solutions
-        </option>
+                    <div class="image-box">
 
-    </select>
+                        <img
+                            src="images/laptop.jpg"
+                            alt="Zenith Pro Laptop"
+                        >
 
-    <select
-        id="sortSelect"
-        onchange="sortProducts()">
+                    </div>
 
-        <option value="featured">
-            Sort By: Featured
-        </option>
+                    <h3>Zenith Pro Laptop</h3>
 
-        <option value="low">
-            Price: Low to High
-        </option>
+                    <p>Ultra-performance laptop</p>
 
-        <option value="high">
-            Price: High to Low
-        </option>
+                    <div class="rating">
+                        ★★★★★
+                        <span>(128)</span>
+                    </div>
 
-        <option value="name">
-            Name: A-Z
-        </option>
+                    <h4>₹54,990</h4>
 
-    </select>
+                    <small class="stock">
+                        ✓ In Stock
+                    </small>
 
-</div>
+                    <button
+                        class="add-cart"
+                        data-id="1">
 
+                        Add to Cart
 
-<!-- PRODUCTS -->
+                    </button>
 
-<div class="section-heading">
+                </div>
 
-    <div>
 
-        <h2>Featured Products</h2>
+                <!-- PHONE -->
 
-        <p>
-            Premium technology for everyday life
-        </p>
+                <div class="product"
+                     data-name="Nexa 7 Smartphone"
+                     data-category="electronics"
+                     data-price="24999">
 
-    </div>
+                    <span class="badge new">
+                        New
+                    </span>
 
-    <span id="resultCount">
-        Showing 8 products
-    </span>
+                    <button
+                        class="heart"
+                        data-id="2">
+                        ♡
+                    </button>
 
-</div>
+                    <div class="image-box">
 
+                        <img
+                            src="images/smartphone.jpg"
+                            alt="Nexa 7 Smartphone"
+                        >
 
-<div
-    class="product-grid"
-    id="productContainer">
+                    </div>
 
+                    <h3>Nexa 7 Smartphone</h3>
 
-<!-- PRODUCT 1 -->
+                    <p>Next-generation smartphone</p>
 
-<article
-    class="product-card"
-    data-name="Zenith Pro Laptop"
-    data-category="laptop"
-    data-price="54990">
+                    <div class="rating">
+                        ★★★★★
+                        <span>(95)</span>
+                    </div>
 
-    <span class="product-badge">
-        Best Seller
-    </span>
+                    <h4>₹24,999</h4>
 
-    <button
-        class="wishlist-btn"
-        onclick="toggleWishlist(this,'Zenith Pro Laptop')">
+                    <small class="stock">
+                        ✓ In Stock
+                    </small>
 
-        ♡
+                    <button
+                        class="add-cart"
+                        data-id="2">
 
-    </button>
+                        Add to Cart
 
-    <div class="product-image">
+                    </button>
 
-        <img
-            src="images/laptop.jpg"
-            alt="Zenith Pro Laptop">
+                </div>
 
-    </div>
 
-    <h3>
-        Zenith Pro Laptop
-    </h3>
+                <!-- HEADPHONES -->
 
-    <p>
-        Ultra-performance laptop
-    </p>
+                <div class="product"
+                     data-name="SoundWave Max Headphones"
+                     data-category="audio"
+                     data-price="2999">
 
-    <div class="rating">
-        ★★★★★
-        <small>(128)</small>
-    </div>
+                    <span class="badge">
+                        Popular
+                    </span>
 
-    <h4>₹54,990</h4>
+                    <button
+                        class="heart"
+                        data-id="3">
+                        ♡
+                    </button>
 
-    <span class="stock">
-        ✓ In Stock
-    </span>
+                    <div class="image-box">
 
-    <button
-        class="add-btn"
-        onclick="addToCart('Zenith Pro Laptop')">
+                        <img
+                            src="images/headphones.jpg"
+                            alt="Headphones"
+                        >
 
-        Add to Cart
+                    </div>
 
-    </button>
+                    <h3>SoundWave Max Headphones</h3>
 
-</article>
+                    <p>Immersive wireless audio</p>
 
+                    <div class="rating">
+                        ★★★★★
+                        <span>(210)</span>
+                    </div>
 
-<!-- PRODUCT 2 -->
+                    <h4>₹2,999</h4>
 
-<article
-    class="product-card"
-    data-name="Nexa 7 Smartphone"
-    data-category="electronics"
-    data-price="24999">
+                    <small class="stock">
+                        ✓ In Stock
+                    </small>
 
-    <span class="product-badge new">
-        New
-    </span>
+                    <button
+                        class="add-cart"
+                        data-id="3">
 
-    <button
-        class="wishlist-btn"
-        onclick="toggleWishlist(this,'Nexa 7 Smartphone')">
+                        Add to Cart
 
-        ♡
+                    </button>
 
-    </button>
+                </div>
 
-    <div class="product-image">
 
-        <img
-            src="images/smartphone.jpg"
-            alt="Nexa 7 Smartphone">
+                <!-- WATCH -->
 
-    </div>
+                <div class="product"
+                     data-name="PulseFit Smart Watch"
+                     data-category="wearables"
+                     data-price="4999">
 
-    <h3>
-        Nexa 7 Smartphone
-    </h3>
+                    <span class="badge">
+                        Trending
+                    </span>
 
-    <p>
-        Next-generation smartphone
-    </p>
+                    <button
+                        class="heart"
+                        data-id="4">
+                        ♡
+                    </button>
 
-    <div class="rating">
-        ★★★★★
-        <small>(95)</small>
-    </div>
+                    <div class="image-box">
 
-    <h4>₹24,999</h4>
+                        <img
+                            src="images/smartwatch.jpg"
+                            alt="Smart Watch"
+                        >
 
-    <span class="stock">
-        ✓ In Stock
-    </span>
+                    </div>
 
-    <button
-        class="add-btn"
-        onclick="addToCart('Nexa 7 Smartphone')">
+                    <h3>PulseFit Smart Watch</h3>
 
-        Add to Cart
+                    <p>Smart fitness companion</p>
 
-    </button>
+                    <div class="rating">
+                        ★★★★☆
+                        <span>(76)</span>
+                    </div>
 
-</article>
+                    <h4>₹4,999</h4>
 
+                    <small class="stock">
+                        ✓ In Stock
+                    </small>
 
-<!-- PRODUCT 3 -->
+                    <button
+                        class="add-cart"
+                        data-id="4">
 
-<article
-    class="product-card"
-    data-name="SoundWave Max Headphones"
-    data-category="audio"
-    data-price="2999">
+                        Add to Cart
 
-    <span class="product-badge">
-        Popular
-    </span>
+                    </button>
 
-    <button
-        class="wishlist-btn"
-        onclick="toggleWishlist(this,'SoundWave Max Headphones')">
+                </div>
 
-        ♡
 
-    </button>
+                <!-- MOUSE -->
 
-    <div class="product-image">
+                <div class="product"
+                     data-name="Titan Gaming Mouse"
+                     data-category="gaming"
+                     data-price="1499">
 
-        <img
-            src="images/headphones.jpg"
-            alt="SoundWave Max Headphones">
+                    <span class="badge">
+                        Gaming
+                    </span>
 
-    </div>
+                    <button
+                        class="heart"
+                        data-id="5">
+                        ♡
+                    </button>
 
-    <h3>
-        SoundWave Max Headphones
-    </h3>
+                    <div class="image-box">
 
-    <p>
-        Immersive wireless audio
-    </p>
+                        <img
+                            src="images/mouse.jpg"
+                            alt="Gaming Mouse"
+                        >
 
-    <div class="rating">
-        ★★★★★
-        <small>(210)</small>
-    </div>
+                    </div>
 
-    <h4>₹2,999</h4>
+                    <h3>Titan Gaming Mouse</h3>
 
-    <span class="stock">
-        ✓ In Stock
-    </span>
+                    <p>Precision RGB gaming mouse</p>
 
-    <button
-        class="add-btn"
-        onclick="addToCart('SoundWave Max Headphones')">
+                    <div class="rating">
+                        ★★★★★
+                        <span>(164)</span>
+                    </div>
 
-        Add to Cart
+                    <h4>₹1,499</h4>
 
-    </button>
+                    <small class="stock">
+                        ✓ In Stock
+                    </small>
 
-</article>
+                    <button
+                        class="add-cart"
+                        data-id="5">
 
+                        Add to Cart
 
-<!-- PRODUCT 4 -->
+                    </button>
 
-<article
-    class="product-card"
-    data-name="PulseFit Smart Watch"
-    data-category="wearables"
-    data-price="4999">
+                </div>
 
-    <span class="product-badge">
-        Trending
-    </span>
 
-    <button
-        class="wishlist-btn"
-        onclick="toggleWishlist(this,'PulseFit Smart Watch')">
+                <!-- KEYBOARD -->
 
-        ♡
+                <div class="product"
+                     data-name="Elite Mechanical Keyboard"
+                     data-category="gaming"
+                     data-price="2499">
 
-    </button>
+                    <span class="badge">
+                        Popular
+                    </span>
 
-    <div class="product-image">
+                    <button
+                        class="heart"
+                        data-id="6">
+                        ♡
+                    </button>
 
-        <img
-            src="images/smartwatch.jpg"
-            alt="PulseFit Smart Watch">
+                    <div class="image-box">
 
-    </div>
+                        <img
+                            src="images/keyboard.jpg"
+                            alt="Keyboard"
+                        >
 
-    <h3>
-        PulseFit Smart Watch
-    </h3>
+                    </div>
 
-    <p>
-        Smart fitness companion
-    </p>
+                    <h3>Elite Mechanical Keyboard</h3>
 
-    <div class="rating">
-        ★★★★☆
-        <small>(76)</small>
-    </div>
+                    <p>RGB mechanical keyboard</p>
 
-    <h4>₹4,999</h4>
+                    <div class="rating">
+                        ★★★★★
+                        <span>(143)</span>
+                    </div>
 
-    <span class="stock">
-        ✓ In Stock
-    </span>
+                    <h4>₹2,499</h4>
 
-    <button
-        class="add-btn"
-        onclick="addToCart('PulseFit Smart Watch')">
+                    <small class="stock">
+                        ✓ In Stock
+                    </small>
 
-        Add to Cart
+                    <button
+                        class="add-cart"
+                        data-id="6">
 
-    </button>
+                        Add to Cart
 
-</article>
+                    </button>
 
+                </div>
 
-<!-- PRODUCT 5 -->
 
-<article
-    class="product-card"
-    data-name="Titan Gaming Mouse"
-    data-category="gaming"
-    data-price="1499">
+                <!-- SPEAKER -->
 
-    <span class="product-badge">
-        Gaming
-    </span>
+                <div class="product"
+                     data-name="BassBoom Speaker"
+                     data-category="audio"
+                     data-price="2199">
 
-    <button
-        class="wishlist-btn"
-        onclick="toggleWishlist(this,'Titan Gaming Mouse')">
+                    <span class="badge new">
+                        New
+                    </span>
 
-        ♡
+                    <button
+                        class="heart"
+                        data-id="7">
+                        ♡
+                    </button>
 
-    </button>
+                    <div class="image-box">
 
-    <div class="product-image">
+                        <img
+                            src="images/speaker.jpg"
+                            alt="Speaker"
+                        >
 
-        <img
-            src="images/mouse.jpg"
-            alt="Titan Gaming Mouse">
+                    </div>
 
-    </div>
+                    <h3>BassBoom Speaker</h3>
 
-    <h3>
-        Titan Gaming Mouse
-    </h3>
+                    <p>Portable powerful speaker</p>
 
-    <p>
-        Precision RGB gaming mouse
-    </p>
+                    <div class="rating">
+                        ★★★★☆
+                        <span>(88)</span>
+                    </div>
 
-    <div class="rating">
-        ★★★★★
-        <small>(164)</small>
-    </div>
+                    <h4>₹2,199</h4>
 
-    <h4>₹1,499</h4>
+                    <small class="stock">
+                        ✓ In Stock
+                    </small>
 
-    <span class="stock">
-        ✓ In Stock
-    </span>
+                    <button
+                        class="add-cart"
+                        data-id="7">
 
-    <button
-        class="add-btn"
-        onclick="addToCart('Titan Gaming Mouse')">
+                        Add to Cart
 
-        Add to Cart
+                    </button>
 
-    </button>
+                </div>
 
-</article>
 
+                <!-- POWERBANK -->
 
-<!-- PRODUCT 6 -->
+                <div class="product"
+                     data-name="Nova Power Bank 20K"
+                     data-category="power"
+                     data-price="1299">
 
-<article
-    class="product-card"
-    data-name="Elite Mechanical Keyboard"
-    data-category="gaming"
-    data-price="2499">
+                    <span class="badge">
+                        Value Pick
+                    </span>
 
-    <span class="product-badge">
-        Popular
-    </span>
+                    <button
+                        class="heart"
+                        data-id="8">
+                        ♡
+                    </button>
 
-    <button
-        class="wishlist-btn"
-        onclick="toggleWishlist(this,'Elite Mechanical Keyboard')">
+                    <div class="image-box">
 
-        ♡
+                        <img
+                            src="images/powerbank.jpg"
+                            alt="Power Bank"
+                        >
 
-    </button>
+                    </div>
 
-    <div class="product-image">
+                    <h3>Nova Power Bank 20K</h3>
 
-        <img
-            src="images/keyboard.jpg"
-            alt="Elite Mechanical Keyboard">
+                    <p>Fast charging power bank</p>
 
-    </div>
+                    <div class="rating">
+                        ★★★★☆
+                        <span>(112)</span>
+                    </div>
 
-    <h3>
-        Elite Mechanical Keyboard
-    </h3>
+                    <h4>₹1,299</h4>
 
-    <p>
-        RGB mechanical keyboard
-    </p>
+                    <small class="stock">
+                        ✓ In Stock
+                    </small>
 
-    <div class="rating">
-        ★★★★★
-        <small>(143)</small>
-    </div>
+                    <button
+                        class="add-cart"
+                        data-id="8">
 
-    <h4>₹2,499</h4>
+                        Add to Cart
 
-    <span class="stock">
-        ✓ In Stock
-    </span>
+                    </button>
 
-    <button
-        class="add-btn"
-        onclick="addToCart('Elite Mechanical Keyboard')">
+                </div>
 
-        Add to Cart
+            </div>
 
-    </button>
+        </section>
 
-</article>
 
+        <!-- RECOMMENDATIONS -->
 
-<!-- PRODUCT 7 -->
+        <section class="section-box">
 
-<article
-    class="product-card"
-    data-name="BassBoom Speaker"
-    data-category="audio"
-    data-price="2199">
+            <div class="section-title">
 
-    <span class="product-badge new">
-        New
-    </span>
+                <div>
+                    <h2>Recommended For You</h2>
+                    <p>Smart recommendations based on your cart</p>
+                </div>
 
-    <button
-        class="wishlist-btn"
-        onclick="toggleWishlist(this,'BassBoom Speaker')">
+            </div>
 
-        ♡
+            <div
+                id="recommendations"
+                class="recommendations">
+            </div>
 
-    </button>
+        </section>
 
-    <div class="product-image">
 
-        <img
-            src="images/speaker.jpg"
-            alt="BassBoom Speaker">
+        <!-- DSA -->
 
-    </div>
+        <section class="dsa-section">
 
-    <h3>
-        BassBoom Speaker
-    </h3>
+            <h2>⚡ Powered by Data Structures & Algorithms</h2>
 
-    <p>
-        Portable powerful speaker
-    </p>
+            <div class="dsa-grid">
 
-    <div class="rating">
-        ★★★★☆
-        <small>(88)</small>
-    </div>
+                <div>
+                    🔎
+                    <h3>Searching</h3>
+                    <p>Fast product searching.</p>
+                </div>
 
-    <h4>₹2,199</h4>
+                <div>
+                    ↕️
+                    <h3>Sorting</h3>
+                    <p>Price and name sorting.</p>
+                </div>
 
-    <span class="stock">
-        ✓ In Stock
-    </span>
+                <div>
+                    🛒
+                    <h3>Arrays</h3>
+                    <p>Cart and wishlist management.</p>
+                </div>
 
-    <button
-        class="add-btn"
-        onclick="addToCart('BassBoom Speaker')">
+                <div>
+                    🌳
+                    <h3>Binary Search Tree</h3>
+                    <p>Product price searching.</p>
+                </div>
 
-        Add to Cart
+            </div>
 
-    </button>
+        </section>
 
-</article>
 
+        <!-- BST -->
 
-<!-- PRODUCT 8 -->
+        <section class="section-box">
 
-<article
-    class="product-card"
-    data-name="Nova Power Bank 20K"
-    data-category="power"
-    data-price="1299">
-
-    <span class="product-badge">
-        Value Pick
-    </span>
-
-    <button
-        class="wishlist-btn"
-        onclick="toggleWishlist(this,'Nova Power Bank 20K')">
-
-        ♡
-
-    </button>
-
-    <div class="product-image">
-
-        <img
-            src="images/powerbank.jpg"
-            alt="Nova Power Bank">
-
-    </div>
-
-    <h3>
-        Nova Power Bank 20K
-    </h3>
-
-    <p>
-        Fast charging power bank
-    </p>
-
-    <div class="rating">
-        ★★★★☆
-        <small>(112)</small>
-    </div>
-
-    <h4>₹1,299</h4>
-
-    <span class="stock">
-        ✓ In Stock
-    </span>
-
-    <button
-        class="add-btn"
-        onclick="addToCart('Nova Power Bank 20K')">
-
-        Add to Cart
-
-    </button>
-
-</article>
-
-
-</div>
-
-
-<p class="products-footer">
-    Powered by efficient data structures and algorithms.
-</p>
-
-
-<!-- =====================================================
-     RECOMMENDATION
-===================================================== -->
-
-<section class="recommendation-section">
-
-    <div class="section-heading">
-
-        <div>
-
-            <h2>Recommended For You</h2>
-
-            <p id="recommendationText">
-                Popular products you may like.
-            </p>
-
-        </div>
-
-    </div>
-
-    <div
-        class="recommendation-grid"
-        id="recommendationContainer">
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     DSA / BST
-===================================================== -->
-
-<section class="dsa-section">
-
-    <h2>
-        ⚡ Powered by Data Structures & Algorithms
-    </h2>
-
-    <div class="dsa-grid">
-
-        <div class="dsa-card">
-
-            <div>🔎</div>
-
-            <h3>Searching</h3>
+            <h2>🌳 Binary Search Tree</h2>
 
             <p>
-                Product search using efficient
-                filtering techniques.
+                Search a product price using BST.
             </p>
 
-        </div>
+            <div class="bst-controls">
 
-        <div class="dsa-card">
+                <input
+                    type="number"
+                    id="bstInput"
+                    placeholder="Enter price"
+                >
 
-            <div>↕️</div>
+                <button
+                    id="bstSearch">
 
-            <h3>Sorting</h3>
+                    Search BST
+
+                </button>
+
+                <button
+                    id="bstShow">
+
+                    Show BST
+
+                </button>
+
+            </div>
+
+            <div
+                id="bstResult"
+                class="bst-result">
+
+                Enter a price.
+
+            </div>
+
+        </section>
+
+
+        <!-- WISHLIST -->
+
+        <section
+            class="section-box"
+            id="wishlist">
+
+            <div class="section-title">
+
+                <div>
+                    <h2>❤️ Wishlist</h2>
+                    <p>Your saved products</p>
+                </div>
+
+                <span id="wishlistCount">
+                    0 ITEMS
+                </span>
+
+            </div>
+
+            <div
+                id="wishlistContainer"
+                class="wishlist-grid">
+
+            </div>
+
+        </section>
+
+
+        <!-- ORDERS -->
+
+        <section
+            class="section-box"
+            id="orders">
+
+            <div class="section-title">
+
+                <div>
+                    <h2>📦 Orders</h2>
+                    <p>Your order history</p>
+                </div>
+
+            </div>
+
+            <div id="ordersContainer">
+            </div>
+
+            <button
+                id="clearOrders"
+                class="danger-button">
+
+                Clear Orders
+
+            </button>
+
+        </section>
+
+
+        <!-- ABOUT -->
+
+        <section
+            class="section-box about"
+            id="about">
+
+            <h2>About TechNova</h2>
 
             <p>
-                Sort products by price and name.
+                TechNova is an E-Commerce Product Management
+                and Recommendation System using Data Structures
+                and Algorithms.
             </p>
 
-        </div>
+            <div class="tech-stack">
 
-        <div class="dsa-card">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+                <span>Arrays</span>
+                <span>Searching</span>
+                <span>Sorting</span>
+                <span>BST</span>
+                <span>LocalStorage</span>
 
-            <div>❤️</div>
+            </div>
 
-            <h3>Array / List</h3>
+        </section>
 
-            <p>
-                Cart and wishlist are managed
-                using JavaScript arrays.
-            </p>
-
-        </div>
-
-        <div class="dsa-card">
-
-            <div>🌳</div>
-
-            <h3>Binary Search Tree</h3>
-
-            <p>
-                Product prices are stored and
-                searched using BST.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<section class="bst-section">
-
-    <h2>🌳 Product Price Binary Search Tree</h2>
-
-    <p>
-        Search whether a product price exists
-        inside the Binary Search Tree.
-    </p>
-
-    <div class="bst-controls">
-
-        <input
-            type="number"
-            id="bstSearchInput"
-            placeholder="Enter price e.g. 24999">
-
-        <button onclick="searchBST()">
-            Search BST
-        </button>
-
-        <button onclick="showBSTData()">
-            Show BST
-        </button>
-
-    </div>
-
-    <div
-        class="bst-result"
-        id="bstResult">
-
-        Enter a price to search.
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     WISHLIST
-===================================================== -->
-
-<section
-    class="wishlist-section"
-    id="wishlist">
-
-    <div class="section-heading">
-
-        <div>
-
-            <h2>❤️ My Wishlist</h2>
-
-            <p>
-                Products you saved for later.
-            </p>
-
-        </div>
-
-        <span id="wishlistCount">
-            0 ITEMS
-        </span>
-
-    </div>
-
-    <div
-        class="wishlist-grid"
-        id="wishlistContainer">
-
-        <div class="empty-orders">
-            Your wishlist is empty.
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     ORDERS
-===================================================== -->
-
-<section
-    class="orders-section"
-    id="orders">
-
-    <div class="section-heading">
-
-        <div>
-
-            <h2>📦 Order History</h2>
-
-            <p id="orderMessage">
-                Your previous orders will appear here.
-            </p>
-
-        </div>
-
-    </div>
-
-    <div
-        class="order-container"
-        id="orderContainer">
-
-        <div class="empty-orders">
-            No orders yet.
-        </div>
-
-    </div>
-
-    <button
-        class="clear-orders-btn"
-        onclick="clearOrderHistory()">
-
-        Clear Order History
-
-    </button>
-
-</section>
-
-
-<!-- =====================================================
-     ABOUT
-===================================================== -->
-
-<section
-    class="about-section"
-    id="about">
-
-    <h2>
-        About TechNova
-    </h2>
-
-    <p>
-        TechNova is an E-Commerce Product Management
-        and Recommendation System developed as a
-        Data Structures and Algorithms mini project.
-    </p>
-
-    <p>
-        The project demonstrates searching,
-        sorting, arrays, lists, recommendation logic
-        and Binary Search Tree operations.
-    </p>
-
-    <div class="tech-stack">
-
-        <span>HTML5</span>
-        <span>CSS3</span>
-        <span>JavaScript</span>
-        <span>Arrays</span>
-        <span>Searching</span>
-        <span>Sorting</span>
-        <span>BST</span>
-        <span>LocalStorage</span>
-
-    </div>
-
-</section>
-
-
-</section>
+    </section>
 
 </main>
 
 
-<!-- =====================================================
-     CART MODAL
-===================================================== -->
+<!-- CART MODAL -->
 
 <div
-    class="cart-modal"
-    id="cartPanel">
+    id="cartModal"
+    class="modal">
 
-    <div class="cart-modal-content">
+    <div class="cart-box">
 
-        <div class="cart-modal-header">
+        <div class="cart-header">
 
-            <h2>
-                🛒 Your Shopping Cart
-            </h2>
+            <h2>🛒 Shopping Cart</h2>
 
             <button
-                onclick="closeCart()">
+                id="closeCart">
 
                 ✕
 
@@ -1145,25 +932,21 @@
 
         </div>
 
-
-        <div
-            id="modalCartItems">
-
+        <div id="cartItems">
         </div>
 
+        <div class="cart-footer">
 
-        <div class="modal-cart-footer">
-
-            <strong>
+            <h3>
                 Total:
-                <span id="modalCartTotal">
+                <span id="cartTotal">
                     ₹0
                 </span>
-            </strong>
+            </h3>
 
             <button
-                class="checkout-btn"
-                onclick="checkout()">
+                id="checkout"
+                class="checkout-button">
 
                 Checkout
 
@@ -1176,38 +959,22 @@
 </div>
 
 
-<!-- =====================================================
-     TOAST
-===================================================== -->
+<!-- TOAST -->
 
 <div
-    class="toast"
-    id="toast">
+    id="toast"
+    class="toast">
 
 </div>
 
 
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
 <footer>
 
-    <div>
+    <h2>⚡ TechNova</h2>
 
-        <h2>⚡ TechNova</h2>
-
-        <p>
-            Smart Shopping • Smart Algorithms
-        </p>
-
-    </div>
-
-    <div class="payment-icons">
-
-        💳 📱 🔒
-
-    </div>
+    <p>
+        Smart Shopping • Smart Algorithms
+    </p>
 
 </footer>
 
@@ -1215,5 +982,4 @@
 <script src="script.js"></script>
 
 </body>
-
 </html>
