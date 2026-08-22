@@ -1,6 +1,5 @@
 // ============================================
-// SHOPSMART - FINAL DSA JAVASCRIPT
-// ACTUAL LINKED LIST SHOPPING CART
+// SHOPSMART E-COMMERCE DSA MINI PROJECT
 // ============================================
 
 
@@ -54,324 +53,13 @@ const products = {
 
 
 // ============================================
-// LINKED LIST NODE
+// CART
 // ============================================
 
-class CartNode {
-
-    constructor(name, price, quantity = 1) {
-
-        this.name = name;
-
-        this.price = price;
-
-        this.quantity = quantity;
-
-        this.next = null;
-
-    }
-
-}
-
-
-// ============================================
-// LINKED LIST
-// ============================================
-
-class ShoppingCart {
-
-    constructor() {
-
-        this.head = null;
-
-    }
-
-
-    // ========================================
-    // INSERT NODE
-    // ========================================
-
-    add(name, price) {
-
-        let current = this.head;
-
-
-        // Product already exists
-
-        while (current !== null) {
-
-            if (current.name === name) {
-
-                current.quantity++;
-
-                return;
-
-            }
-
-            current = current.next;
-
-        }
-
-
-        // Create new node
-
-        const newNode =
-            new CartNode(
-                name,
-                price,
-                1
-            );
-
-
-        // Empty list
-
-        if (this.head === null) {
-
-            this.head = newNode;
-
-            return;
-
-        }
-
-
-        // Traverse to last node
-
-        current = this.head;
-
-        while (current.next !== null) {
-
-            current = current.next;
-
-        }
-
-
-        // Add at end
-
-        current.next = newNode;
-
-    }
-
-
-    // ========================================
-    // DELETE NODE
-    // ========================================
-
-    remove(name) {
-
-        if (this.head === null) {
-
-            return false;
-
-        }
-
-
-        // Delete head
-
-        if (this.head.name === name) {
-
-            this.head =
-                this.head.next;
-
-            return true;
-
-        }
-
-
-        let current = this.head;
-
-
-        while (
-            current.next !== null
-        ) {
-
-            if (
-                current.next.name === name
-            ) {
-
-                current.next =
-                    current.next.next;
-
-                return true;
-
-            }
-
-
-            current = current.next;
-
-        }
-
-
-        return false;
-
-    }
-
-
-    // ========================================
-    // SEARCH NODE
-    // ========================================
-
-    find(name) {
-
-        let current = this.head;
-
-
-        while (current !== null) {
-
-            if (current.name === name) {
-
-                return current;
-
-            }
-
-            current = current.next;
-
-        }
-
-
-        return null;
-
-    }
-
-
-    // ========================================
-    // CHANGE QUANTITY
-    // ========================================
-
-    changeQuantity(name, change) {
-
-        const node =
-            this.find(name);
-
-
-        if (node === null) {
-
-            return;
-
-        }
-
-
-        node.quantity += change;
-
-
-        // Delete if quantity becomes zero
-
-        if (node.quantity <= 0) {
-
-            this.remove(name);
-
-        }
-
-    }
-
-
-    // ========================================
-    // CLEAR LIST
-    // ========================================
-
-    clear() {
-
-        this.head = null;
-
-    }
-
-
-    // ========================================
-    // TRAVERSAL
-    // ========================================
-
-    toArray() {
-
-        const items = [];
-
-        let current = this.head;
-
-
-        while (current !== null) {
-
-            items.push({
-
-                name: current.name,
-
-                price: current.price,
-
-                quantity: current.quantity
-
-            });
-
-
-            current = current.next;
-
-        }
-
-
-        return items;
-
-    }
-
-
-    // ========================================
-    // TOTAL PRICE
-    // ========================================
-
-    getTotal() {
-
-        let total = 0;
-
-        let current = this.head;
-
-
-        while (current !== null) {
-
-            total +=
-                current.price *
-                current.quantity;
-
-
-            current = current.next;
-
-        }
-
-
-        return total;
-
-    }
-
-
-    // ========================================
-    // TOTAL QUANTITY
-    // ========================================
-
-    getTotalQuantity() {
-
-        let total = 0;
-
-        let current = this.head;
-
-
-        while (current !== null) {
-
-            total +=
-                current.quantity;
-
-
-            current = current.next;
-
-        }
-
-
-        return total;
-
-    }
-
-}
-
-
-// ============================================
-// CREATE CART
-// ============================================
-
-const shoppingCart =
-    new ShoppingCart();
+let cart =
+    JSON.parse(
+        localStorage.getItem("shopSmartCart")
+    ) || [];
 
 
 // ============================================
@@ -380,14 +68,12 @@ const shoppingCart =
 
 let wishlist =
     JSON.parse(
-        localStorage.getItem(
-            "shopSmartWishlist"
-        )
+        localStorage.getItem("shopSmartWishlist")
     ) || [];
 
 
 // ============================================
-// RECOMMENDATIONS
+// RECOMMENDATION DATA
 // ============================================
 
 const recommendations = {
@@ -444,120 +130,42 @@ const recommendations = {
 
 
 // ============================================
-// LOCAL STORAGE
+// SAVE DATA
 // ============================================
 
-function saveCart() {
+function saveData() {
 
     localStorage.setItem(
         "shopSmartCart",
-        JSON.stringify(
-            shoppingCart.toArray()
-        )
+        JSON.stringify(cart)
     );
-
-}
-
-
-function saveWishlist() {
 
     localStorage.setItem(
         "shopSmartWishlist",
-        JSON.stringify(
-            wishlist
-        )
+        JSON.stringify(wishlist)
     );
 
 }
 
 
 // ============================================
-// RESTORE CART
-// ============================================
-
-function restoreCart() {
-
-    const savedCart =
-        JSON.parse(
-            localStorage.getItem(
-                "shopSmartCart"
-            )
-        );
-
-
-    if (!savedCart) {
-
-        return;
-
-    }
-
-
-    savedCart.forEach(
-        function(item) {
-
-            shoppingCart.add(
-                item.name,
-                item.price
-            );
-
-
-            const node =
-                shoppingCart.find(
-                    item.name
-                );
-
-
-            if (node) {
-
-                node.quantity =
-                    item.quantity;
-
-            }
-
-        }
-    );
-
-}
-
-
-// ============================================
-// TOAST
+// TOAST MESSAGE
 // ============================================
 
 function showToast(message) {
 
     const toast =
-        document.getElementById(
-            "toast"
-        );
+        document.getElementById("toast");
 
+    toast.textContent = message;
 
-    if (!toast) {
+    toast.classList.add("show");
 
-        return;
+    setTimeout(function() {
 
-    }
+        toast.classList.remove("show");
 
-
-    toast.textContent =
-        message;
-
-
-    toast.classList.add(
-        "show"
-    );
-
-
-    setTimeout(
-        function() {
-
-            toast.classList.remove(
-                "show"
-            );
-
-        },
-        2000
-    );
+    }, 2000);
 
 }
 
@@ -568,27 +176,38 @@ function showToast(message) {
 
 function addToCart(productName) {
 
-    if (!products[productName]) {
+    const existing =
+        cart.find(
+            item =>
+                item.name === productName
+        );
 
-        return;
+
+    if (existing) {
+
+        existing.quantity++;
+
+    } else {
+
+        cart.push({
+
+            name: productName,
+
+            price:
+                products[productName].price,
+
+            quantity: 1
+
+        });
 
     }
 
 
-    shoppingCart.add(
-        productName,
-        products[productName].price
-    );
-
-
-    saveCart();
+    saveData();
 
     updateCart();
 
-    showRecommendations(
-        productName
-    );
-
+    showRecommendations(productName);
 
     showToast(
         "✅ " +
@@ -600,7 +219,7 @@ function addToCart(productName) {
 
 
 // ============================================
-// UPDATE CART UI
+// UPDATE CART
 // ============================================
 
 function updateCart() {
@@ -610,12 +229,10 @@ function updateCart() {
             "cartItems"
         );
 
-
     const cartCount =
         document.getElementById(
             "cartCount"
         );
-
 
     const cartTotal =
         document.getElementById(
@@ -623,52 +240,50 @@ function updateCart() {
         );
 
 
-    if (!cartItems) {
-
-        return;
-
-    }
-
-
     cartItems.innerHTML = "";
 
 
-    const items =
-        shoppingCart.toArray();
-
-
-    if (items.length === 0) {
+    if (cart.length === 0) {
 
         cartItems.innerHTML = `
-
             <p class="empty-cart">
                 Your cart is empty.
             </p>
-
         `;
 
+        cartCount.textContent = "0";
 
-        cartCount.textContent =
-            "0";
-
-
-        cartTotal.textContent =
-            "₹0";
-
+        cartTotal.textContent = "₹0";
 
         return;
 
     }
 
 
-    items.forEach(
+    let total = 0;
+
+    let totalQuantity = 0;
+
+
+    // Traverse cart
+    cart.forEach(
         function(item, index) {
+
+            const subtotal =
+                item.price *
+                item.quantity;
+
+
+            total += subtotal;
+
+            totalQuantity +=
+                item.quantity;
+
 
             const itemElement =
                 document.createElement(
                     "div"
                 );
-
 
             itemElement.className =
                 "cart-item";
@@ -685,52 +300,34 @@ function updateCart() {
                     ₹${item.price.toLocaleString()}
                 </p>
 
-
-                <div
-                    class="quantity-control"
-                >
+                <div class="quantity-control">
 
                     <button
-                        onclick="changeQuantityByIndex(
-                            ${index},
-                            -1
-                        )"
+                        onclick="changeQuantity(${index}, -1)"
                     >
                         −
                     </button>
-
 
                     <strong>
                         ${item.quantity}
                     </strong>
 
-
                     <button
-                        onclick="changeQuantityByIndex(
-                            ${index},
-                            1
-                        )"
+                        onclick="changeQuantity(${index}, 1)"
                     >
                         +
                     </button>
 
                 </div>
 
-
                 <p>
                     Subtotal:
-                    ₹${(
-                        item.price *
-                        item.quantity
-                    ).toLocaleString()}
+                    ₹${subtotal.toLocaleString()}
                 </p>
-
 
                 <button
                     class="remove-btn"
-                    onclick="removeCartItem(
-                        '${item.name}'
-                    )"
+                    onclick="removeFromCart(${index})"
                 >
                     ❌ Remove
                 </button>
@@ -747,14 +344,12 @@ function updateCart() {
 
 
     cartCount.textContent =
-        shoppingCart.getTotalQuantity();
+        totalQuantity;
 
 
     cartTotal.textContent =
         "₹" +
-        shoppingCart
-            .getTotal()
-            .toLocaleString();
+        total.toLocaleString();
 
 }
 
@@ -763,29 +358,21 @@ function updateCart() {
 // CHANGE QUANTITY
 // ============================================
 
-function changeQuantityByIndex(
-    index,
-    change
-) {
+function changeQuantity(index, change) {
 
-    const items =
-        shoppingCart.toArray();
+    cart[index].quantity += change;
 
 
-    if (!items[index]) {
+    if (
+        cart[index].quantity <= 0
+    ) {
 
-        return;
+        cart.splice(index, 1);
 
     }
 
 
-    shoppingCart.changeQuantity(
-        items[index].name,
-        change
-    );
-
-
-    saveCart();
+    saveData();
 
     updateCart();
 
@@ -793,20 +380,19 @@ function changeQuantityByIndex(
 
 
 // ============================================
-// REMOVE CART ITEM
+// REMOVE FROM CART
 // ============================================
 
-function removeCartItem(name) {
+function removeFromCart(index) {
 
-    shoppingCart.remove(
-        name
-    );
+    const name =
+        cart[index].name;
 
+    cart.splice(index, 1);
 
-    saveCart();
+    saveData();
 
     updateCart();
-
 
     showToast(
         "❌ " +
@@ -823,9 +409,7 @@ function removeCartItem(name) {
 
 function clearCart() {
 
-    if (
-        shoppingCart.head === null
-    ) {
+    if (cart.length === 0) {
 
         showToast(
             "Cart is already empty"
@@ -836,40 +420,11 @@ function clearCart() {
     }
 
 
-    shoppingCart.clear();
+    cart = [];
 
-    saveCart();
+    saveData();
 
     updateCart();
-
-
-    const recommendationContainer =
-        document.getElementById(
-            "recommendationContainer"
-        );
-
-
-    const recommendationText =
-        document.getElementById(
-            "recommendationText"
-        );
-
-
-    if (recommendationContainer) {
-
-        recommendationContainer.innerHTML =
-            "";
-
-    }
-
-
-    if (recommendationText) {
-
-        recommendationText.textContent =
-            "Add a product to your cart to get recommendations.";
-
-    }
-
 
     showToast(
         "🗑️ Cart cleared"
@@ -885,13 +440,9 @@ function clearCart() {
 function openCart() {
 
     document
-        .getElementById(
-            "cartPanel"
-        )
+        .getElementById("cartPanel")
         .classList
-        .add(
-            "active"
-        );
+        .add("active");
 
 }
 
@@ -903,13 +454,9 @@ function openCart() {
 function closeCart() {
 
     document
-        .getElementById(
-            "cartPanel"
-        )
+        .getElementById("cartPanel")
         .classList
-        .remove(
-            "active"
-        );
+        .remove("active");
 
 }
 
@@ -920,9 +467,7 @@ function closeCart() {
 
 function checkout() {
 
-    if (
-        shoppingCart.head === null
-    ) {
+    if (cart.length === 0) {
 
         showToast(
             "🛒 Cart is empty"
@@ -933,28 +478,31 @@ function checkout() {
     }
 
 
-    const total =
-        shoppingCart.getTotal();
+    let total = 0;
 
 
-    alert(
+    cart.forEach(
+        function(item) {
 
-        "🎉 Order placed successfully!\n\n" +
+            total +=
+                item.price *
+                item.quantity;
 
-        "Total Amount: ₹" +
-
-        total.toLocaleString() +
-
-        "\n\n" +
-
-        "This is a demo checkout."
-
+        }
     );
 
 
-    shoppingCart.clear();
+    alert(
+        "🎉 Order placed successfully!\n\n" +
+        "Total Amount: ₹" +
+        total.toLocaleString() +
+        "\n\nThis is a demo checkout."
+    );
 
-    saveCart();
+
+    cart = [];
+
+    saveData();
 
     updateCart();
 
@@ -1042,16 +590,6 @@ function filterProducts() {
             .value;
 
 
-    const searchText =
-        document
-            .getElementById(
-                "searchInput"
-            )
-            .value
-            .toLowerCase()
-            .trim();
-
-
     const cards =
         document.querySelectorAll(
             ".product-card"
@@ -1068,25 +606,9 @@ function filterProducts() {
                 card.dataset.category;
 
 
-            const productName =
-                card.dataset.name
-                    .toLowerCase();
-
-
-            const categoryMatch =
-                category === "all" ||
-                cardCategory === category;
-
-
-            const searchMatch =
-                productName.includes(
-                    searchText
-                );
-
-
             if (
-                categoryMatch &&
-                searchMatch
+                category === "all" ||
+                cardCategory === category
             ) {
 
                 card.style.display =
@@ -1118,7 +640,7 @@ function filterProducts() {
 
 
 // ============================================
-// SORT PRODUCTS
+// SORT
 // ============================================
 
 function sortProducts() {
@@ -1145,9 +667,7 @@ function sortProducts() {
             .value;
 
 
-    if (
-        option === "low"
-    ) {
+    if (option === "low") {
 
         cards.sort(
             function(a, b) {
@@ -1167,9 +687,7 @@ function sortProducts() {
     }
 
 
-    if (
-        option === "high"
-    ) {
+    if (option === "high") {
 
         cards.sort(
             function(a, b) {
@@ -1189,9 +707,7 @@ function sortProducts() {
     }
 
 
-    if (
-        option === "name"
-    ) {
+    if (option === "name") {
 
         cards.sort(
             function(a, b) {
@@ -1221,12 +737,10 @@ function sortProducts() {
 
 
 // ============================================
-// RECOMMENDATION
+// RECOMMENDATION SYSTEM
 // ============================================
 
-function showRecommendations(
-    productName
-) {
+function showRecommendations(productName) {
 
     const container =
         document.getElementById(
@@ -1240,15 +754,7 @@ function showRecommendations(
         );
 
 
-    if (!container || !text) {
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        "";
+    container.innerHTML = "";
 
 
     text.textContent =
@@ -1257,20 +763,18 @@ function showRecommendations(
         ":";
 
 
-    const list =
-        recommendations[
-            productName
-        ];
+    const recommended =
+        recommendations[productName];
 
 
-    if (!list) {
+    if (!recommended) {
 
         return;
 
     }
 
 
-    list.forEach(
+    recommended.forEach(
         function(name) {
 
             const card =
@@ -1285,31 +789,23 @@ function showRecommendations(
 
             card.innerHTML = `
 
-                <div
-                    class="recommendation-icon"
-                >
+                <div class="recommendation-icon">
                     ${products[name].icon}
                 </div>
-
 
                 <h3>
                     ${name}
                 </h3>
 
-
                 <p>
                     ₹${products[name].price.toLocaleString()}
                 </p>
 
-
                 <br>
-
 
                 <button
                     class="add-btn"
-                    onclick="addToCart(
-                        '${name}'
-                    )"
+                    onclick="addToCart('${name}')"
                 >
                     Add to Cart
                 </button>
@@ -1331,10 +827,7 @@ function showRecommendations(
 // WISHLIST
 // ============================================
 
-function toggleWishlist(
-    button,
-    productName
-) {
+function toggleWishlist(button, productName) {
 
     const index =
         wishlist.indexOf(
@@ -1348,15 +841,11 @@ function toggleWishlist(
             productName
         );
 
-
         button.classList.add(
             "active"
         );
 
-
-        button.textContent =
-            "♥";
-
+        button.textContent = "♥";
 
         showToast(
             "❤️ Added to wishlist"
@@ -1369,15 +858,11 @@ function toggleWishlist(
             1
         );
 
-
         button.classList.remove(
             "active"
         );
 
-
-        button.textContent =
-            "♡";
-
+        button.textContent = "♡";
 
         showToast(
             "Removed from wishlist"
@@ -1386,7 +871,7 @@ function toggleWishlist(
     }
 
 
-    saveWishlist();
+    saveData();
 
     displayWishlist();
 
@@ -1411,20 +896,10 @@ function displayWishlist() {
         );
 
 
-    if (!container || !text) {
-
-        return;
-
-    }
+    container.innerHTML = "";
 
 
-    container.innerHTML =
-        "";
-
-
-    if (
-        wishlist.length === 0
-    ) {
+    if (wishlist.length === 0) {
 
         text.textContent =
             "No products added to wishlist.";
@@ -1454,27 +929,20 @@ function displayWishlist() {
 
             item.innerHTML = `
 
-                <div
-                    class="product-icon"
-                >
+                <div class="product-icon">
                     ${products[name].icon}
                 </div>
-
 
                 <h3>
                     ${name}
                 </h3>
 
-
                 <p>
                     ₹${products[name].price.toLocaleString()}
                 </p>
 
-
                 <button
-                    onclick="removeFromWishlist(
-                        '${name}'
-                    )"
+                    onclick="removeFromWishlist('${name}')"
                 >
                     Remove
                 </button>
@@ -1496,14 +964,10 @@ function displayWishlist() {
 // REMOVE WISHLIST
 // ============================================
 
-function removeFromWishlist(
-    name
-) {
+function removeFromWishlist(name) {
 
     const index =
-        wishlist.indexOf(
-            name
-        );
+        wishlist.indexOf(name);
 
 
     if (index !== -1) {
@@ -1516,12 +980,9 @@ function removeFromWishlist(
     }
 
 
-    saveWishlist();
+    saveData();
 
     displayWishlist();
-
-    restoreWishlistButtons();
-
 
     showToast(
         "Removed from wishlist"
@@ -1551,13 +1012,6 @@ function restoreWishlistButtons() {
                 );
 
 
-            if (!onclickText) {
-
-                return;
-
-            }
-
-
             const match =
                 onclickText.match(
                     /'([^']+)'/
@@ -1565,26 +1019,23 @@ function restoreWishlistButtons() {
 
 
             if (!match) {
-
                 return;
-
             }
 
 
-            const name =
+            const productName =
                 match[1];
 
 
             if (
                 wishlist.includes(
-                    name
+                    productName
                 )
             ) {
 
                 button.classList.add(
                     "active"
                 );
-
 
                 button.textContent =
                     "♥";
@@ -1598,53 +1049,12 @@ function restoreWishlistButtons() {
 
 
 // ============================================
-// DSA DEBUG / DEMO
-// ============================================
-
-function displayLinkedList() {
-
-    let current =
-        shoppingCart.head;
-
-
-    let result = [];
-
-
-    while (
-        current !== null
-    ) {
-
-        result.push(
-            current.name
-        );
-
-
-        current =
-            current.next;
-
-    }
-
-
-    console.log(
-        "Linked List:",
-        result.join(
-            " -> "
-        ),
-        "-> NULL"
-    );
-
-}
-
-
-// ============================================
-// INITIALIZE PROJECT
+// INITIALIZE
 // ============================================
 
 document.addEventListener(
     "DOMContentLoaded",
     function() {
-
-        restoreCart();
 
         updateCart();
 
@@ -1652,7 +1062,5 @@ document.addEventListener(
 
         restoreWishlistButtons();
 
-        displayLinkedList();
-
     }
-);
+);s
