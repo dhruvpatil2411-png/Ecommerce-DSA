@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>TechNova | Smart Shopping</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -15,7 +13,6 @@
 
     <div class="brand">
         <div class="brand-icon">⚡</div>
-
         <div>
             <h1>TechNova</h1>
             <span>Upgrade Your Life</span>
@@ -27,17 +24,15 @@
         <a href="#products">Products</a>
         <a href="#wishlist">Wishlist</a>
         <a href="#orders">Orders</a>
-        <a href="#about">About Us</a>
+        <a href="#about">About</a>
     </nav>
 
     <div class="header-search">
-        <input
-            type="text"
-            id="topSearch"
-            placeholder="Search products..."
-        >
+        <input type="text" id="topSearch" placeholder="Search products...">
         <span>🔍</span>
     </div>
+
+    <button class="login-button">👤 Login</button>
 
     <button class="cart-button" onclick="openCart()">
         🛒
@@ -50,872 +45,607 @@
 
 <main class="layout">
 
-    <!-- SIDEBAR -->
+<aside class="sidebar">
 
-    <aside class="sidebar">
+    <div class="side-card">
+        <h3>CATEGORIES</h3>
 
-        <div class="side-card">
+        <button class="category active" data-category="all">🏠 All Categories</button>
+        <button class="category" data-category="laptop">💻 Laptops</button>
+        <button class="category" data-category="electronics">📱 Smartphones</button>
+        <button class="category" data-category="audio">🎧 Audio</button>
+        <button class="category" data-category="wearables">⌚ Wearables</button>
+        <button class="category" data-category="gaming">🎮 Gaming</button>
+        <button class="category" data-category="power">🔋 Power Solutions</button>
+    </div>
 
-            <h3>CATEGORIES</h3>
 
-            <button class="category active"
-                    data-category="all">
-                🏠 All Categories
-            </button>
+    <div class="side-card">
 
-            <button class="category"
-                    data-category="laptop">
-                💻 Laptops
-            </button>
+        <h3>FILTER BY PRICE</h3>
 
-            <button class="category"
-                    data-category="electronics">
-                📱 Smartphones
-            </button>
-
-            <button class="category"
-                    data-category="audio">
-                🎧 Audio
-            </button>
-
-            <button class="category"
-                    data-category="wearables">
-                ⌚ Wearables
-            </button>
-
-            <button class="category"
-                    data-category="gaming">
-                🎮 Gaming
-            </button>
-
-            <button class="category"
-                    data-category="power">
-                🔋 Power Solutions
-            </button>
-
+        <div class="price-row">
+            <span>₹500</span>
+            <span>₹60,000+</span>
         </div>
 
+        <input
+            type="range"
+            id="priceFilter"
+            min="500"
+            max="60000"
+            value="60000"
+        >
 
-        <div class="side-card">
+        <p id="priceValue">Up to ₹60,000</p>
 
-            <h3>FILTER BY PRICE</h3>
+        <button class="blue-button" id="applyPrice">
+            Apply Filter
+        </button>
 
-            <div class="price-row">
-                <span>₹500</span>
-                <span>₹60,000+</span>
-            </div>
-
-            <input
-                type="range"
-                id="priceFilter"
-                min="500"
-                max="60000"
-                value="60000"
-            >
-
-            <p id="priceValue">
-                Up to ₹60,000
-            </p>
-
-            <button
-                class="blue-button"
-                id="applyPrice">
-
-                Apply Filter
-
-            </button>
-
-        </div>
+    </div>
 
 
-        <div class="side-card">
+    <div class="side-card">
 
-            <h3>FEATURES</h3>
+        <h3>FEATURES</h3>
 
-            <div class="feature">
-                🚚
-                <div>
-                    <b>Free Shipping</b>
-                    <small>Orders above ₹999</small>
-                </div>
-            </div>
-
-            <div class="feature">
-                🛡️
-                <div>
-                    <b>1 Year Warranty</b>
-                    <small>On all products</small>
-                </div>
-            </div>
-
-            <div class="feature">
-                ↩️
-                <div>
-                    <b>Easy Returns</b>
-                    <small>Within 7 days</small>
-                </div>
-            </div>
-
-            <div class="feature">
-                🔒
-                <div>
-                    <b>Secure Payments</b>
-                    <small>100% secure checkout</small>
-                </div>
-            </div>
-
-        </div>
-
-    </aside>
-
-
-    <!-- MAIN -->
-
-    <section class="content" id="home">
-
-        <section class="hero">
-
+        <div class="feature">
+            🚚
             <div>
-                <p class="hero-small">
-                    NEXT-GEN TECHNOLOGY
-                </p>
+                <b>Free Shipping</b>
+                <small>Orders above ₹999</small>
+            </div>
+        </div>
 
-                <h2>
-                    The Future<br>
-                    Is Now
-                </h2>
+        <div class="feature">
+            🛡️
+            <div>
+                <b>1 Year Warranty</b>
+                <small>On all products</small>
+            </div>
+        </div>
 
-                <p>
-                    Discover the latest tech that inspires.
-                </p>
+        <div class="feature">
+            ↩️
+            <div>
+                <b>Easy Returns</b>
+                <small>Within 7 days</small>
+            </div>
+        </div>
 
-                <button
-                    class="hero-button"
-                    onclick="goProducts()">
+        <div class="feature">
+            🔒
+            <div>
+                <b>Secure Payments</b>
+                <small>100% secure checkout</small>
+            </div>
+        </div>
 
-                    Shop Now
+    </div>
 
-                </button>
+</aside>
+
+
+<section class="content" id="home">
+
+<section class="hero">
+
+    <div>
+        <p class="hero-small">NEXT-GEN TECHNOLOGY</p>
+
+        <h2>
+            The Future<br>
+            Is Now
+        </h2>
+
+        <p>Discover the latest tech that inspires.</p>
+
+        <button class="hero-button" onclick="goProducts()">
+            Shop Now
+        </button>
+    </div>
+
+    <div class="hero-icons">
+        💻 🎧
+    </div>
+
+</section>
+
+
+<section class="tools">
+
+    <div class="search-box">
+        <input
+            type="text"
+            id="productSearch"
+            placeholder="Search products..."
+        >
+        <span>🔍</span>
+    </div>
+
+    <select id="categoryFilter">
+        <option value="all">All Categories</option>
+        <option value="laptop">Laptops</option>
+        <option value="electronics">Smartphones</option>
+        <option value="audio">Audio</option>
+        <option value="wearables">Wearables</option>
+        <option value="gaming">Gaming</option>
+        <option value="power">Power Solutions</option>
+    </select>
+
+    <select id="sortFilter">
+        <option value="featured">Sort By: Featured</option>
+        <option value="low">Price: Low to High</option>
+        <option value="high">Price: High to Low</option>
+        <option value="name">Name: A-Z</option>
+    </select>
+
+</section>
+
+
+<section id="products">
+
+    <div class="section-title">
+
+        <div>
+            <h2>Featured Products</h2>
+            <p>Premium technology for everyday life</p>
+        </div>
+
+        <span id="resultCount">Showing 8 products</span>
+
+    </div>
+
+
+    <div class="products-grid" id="productsGrid">
+
+
+        <div class="product"
+             data-name="Zenith Pro Laptop"
+             data-category="laptop"
+             data-price="54990">
+
+            <span class="badge">Best Seller</span>
+
+            <button class="heart" data-id="1">♡</button>
+
+            <div class="image-box">
+                <img src="images/laptop.jpg" alt="Zenith Pro Laptop">
             </div>
 
-            <div class="hero-icons">
-                💻 🎧
+            <h3>Zenith Pro Laptop</h3>
+            <p>Ultra-performance laptop</p>
+
+            <div class="rating">
+                ★★★★★ <span>(128)</span>
             </div>
 
-        </section>
+            <h4>₹54,990</h4>
 
+            <small class="stock">✓ In Stock</small>
 
-        <!-- TOOLS -->
-
-        <section class="tools">
-
-            <div class="search-box">
-
-                <input
-                    type="text"
-                    id="productSearch"
-                    placeholder="Search products..."
-                >
-
-                <span>🔍</span>
-
-            </div>
-
-            <select id="categoryFilter">
-
-                <option value="all">
-                    All Categories
-                </option>
-
-                <option value="laptop">
-                    Laptops
-                </option>
-
-                <option value="electronics">
-                    Smartphones
-                </option>
-
-                <option value="audio">
-                    Audio
-                </option>
-
-                <option value="wearables">
-                    Wearables
-                </option>
-
-                <option value="gaming">
-                    Gaming
-                </option>
-
-                <option value="power">
-                    Power Solutions
-                </option>
-
-            </select>
-
-            <select id="sortFilter">
-
-                <option value="featured">
-                    Sort By: Featured
-                </option>
-
-                <option value="low">
-                    Price: Low to High
-                </option>
-
-                <option value="high">
-                    Price: High to Low
-                </option>
-
-                <option value="name">
-                    Name: A-Z
-                </option>
-
-            </select>
-
-        </section>
-
-
-        <section id="products">
-
-            <div class="section-title">
-
-                <div>
-                    <h2>Featured Products</h2>
-                    <p>Premium technology for everyday life</p>
-                </div>
-
-                <span id="resultCount">
-                    Showing 8 products
-                </span>
-
-            </div>
-
-
-            <div
-                class="products-grid"
-                id="productsGrid"
-            >
-
-                <!-- LAPTOP -->
-
-                <div class="product"
-                     data-name="Zenith Pro Laptop"
-                     data-category="laptop"
-                     data-price="54990">
-
-                    <span class="badge">
-                        Best Seller
-                    </span>
-
-                    <button
-                        class="heart"
-                        data-id="1">
-                        ♡
-                    </button>
-
-                    <div class="image-box">
-
-                        <img
-                            src="images/laptop.jpg"
-                            alt="Zenith Pro Laptop"
-                        >
-
-                    </div>
-
-                    <h3>Zenith Pro Laptop</h3>
-
-                    <p>Ultra-performance laptop</p>
-
-                    <div class="rating">
-                        ★★★★★
-                        <span>(128)</span>
-                    </div>
-
-                    <h4>₹54,990</h4>
-
-                    <small class="stock">
-                        ✓ In Stock
-                    </small>
-
-                    <button
-                        class="add-cart"
-                        data-id="1">
-
-                        Add to Cart
-
-                    </button>
-
-                </div>
-
-
-                <!-- PHONE -->
-
-                <div class="product"
-                     data-name="Nexa 7 Smartphone"
-                     data-category="electronics"
-                     data-price="24999">
-
-                    <span class="badge new">
-                        New
-                    </span>
-
-                    <button
-                        class="heart"
-                        data-id="2">
-                        ♡
-                    </button>
-
-                    <div class="image-box">
-
-                        <img
-                            src="images/smartphone.jpg"
-                            alt="Nexa 7 Smartphone"
-                        >
-
-                    </div>
-
-                    <h3>Nexa 7 Smartphone</h3>
-
-                    <p>Next-generation smartphone</p>
-
-                    <div class="rating">
-                        ★★★★★
-                        <span>(95)</span>
-                    </div>
-
-                    <h4>₹24,999</h4>
-
-                    <small class="stock">
-                        ✓ In Stock
-                    </small>
-
-                    <button
-                        class="add-cart"
-                        data-id="2">
-
-                        Add to Cart
-
-                    </button>
-
-                </div>
-
-
-                <!-- HEADPHONES -->
-
-                <div class="product"
-                     data-name="SoundWave Max Headphones"
-                     data-category="audio"
-                     data-price="2999">
-
-                    <span class="badge">
-                        Popular
-                    </span>
-
-                    <button
-                        class="heart"
-                        data-id="3">
-                        ♡
-                    </button>
-
-                    <div class="image-box">
-
-                        <img
-                            src="images/headphones.jpg"
-                            alt="Headphones"
-                        >
-
-                    </div>
-
-                    <h3>SoundWave Max Headphones</h3>
-
-                    <p>Immersive wireless audio</p>
-
-                    <div class="rating">
-                        ★★★★★
-                        <span>(210)</span>
-                    </div>
-
-                    <h4>₹2,999</h4>
-
-                    <small class="stock">
-                        ✓ In Stock
-                    </small>
-
-                    <button
-                        class="add-cart"
-                        data-id="3">
-
-                        Add to Cart
-
-                    </button>
-
-                </div>
-
-
-                <!-- WATCH -->
-
-                <div class="product"
-                     data-name="PulseFit Smart Watch"
-                     data-category="wearables"
-                     data-price="4999">
-
-                    <span class="badge">
-                        Trending
-                    </span>
-
-                    <button
-                        class="heart"
-                        data-id="4">
-                        ♡
-                    </button>
-
-                    <div class="image-box">
-
-                        <img
-                            src="images/smartwatch.jpg"
-                            alt="Smart Watch"
-                        >
-
-                    </div>
-
-                    <h3>PulseFit Smart Watch</h3>
-
-                    <p>Smart fitness companion</p>
-
-                    <div class="rating">
-                        ★★★★☆
-                        <span>(76)</span>
-                    </div>
-
-                    <h4>₹4,999</h4>
-
-                    <small class="stock">
-                        ✓ In Stock
-                    </small>
-
-                    <button
-                        class="add-cart"
-                        data-id="4">
-
-                        Add to Cart
-
-                    </button>
-
-                </div>
-
-
-                <!-- MOUSE -->
-
-                <div class="product"
-                     data-name="Titan Gaming Mouse"
-                     data-category="gaming"
-                     data-price="1499">
-
-                    <span class="badge">
-                        Gaming
-                    </span>
-
-                    <button
-                        class="heart"
-                        data-id="5">
-                        ♡
-                    </button>
-
-                    <div class="image-box">
-
-                        <img
-                            src="images/mouse.jpg"
-                            alt="Gaming Mouse"
-                        >
-
-                    </div>
-
-                    <h3>Titan Gaming Mouse</h3>
-
-                    <p>Precision RGB gaming mouse</p>
-
-                    <div class="rating">
-                        ★★★★★
-                        <span>(164)</span>
-                    </div>
-
-                    <h4>₹1,499</h4>
-
-                    <small class="stock">
-                        ✓ In Stock
-                    </small>
-
-                    <button
-                        class="add-cart"
-                        data-id="5">
-
-                        Add to Cart
-
-                    </button>
-
-                </div>
-
-
-                <!-- KEYBOARD -->
-
-                <div class="product"
-                     data-name="Elite Mechanical Keyboard"
-                     data-category="gaming"
-                     data-price="2499">
-
-                    <span class="badge">
-                        Popular
-                    </span>
-
-                    <button
-                        class="heart"
-                        data-id="6">
-                        ♡
-                    </button>
-
-                    <div class="image-box">
-
-                        <img
-                            src="images/keyboard.jpg"
-                            alt="Keyboard"
-                        >
-
-                    </div>
-
-                    <h3>Elite Mechanical Keyboard</h3>
-
-                    <p>RGB mechanical keyboard</p>
-
-                    <div class="rating">
-                        ★★★★★
-                        <span>(143)</span>
-                    </div>
-
-                    <h4>₹2,499</h4>
-
-                    <small class="stock">
-                        ✓ In Stock
-                    </small>
-
-                    <button
-                        class="add-cart"
-                        data-id="6">
-
-                        Add to Cart
-
-                    </button>
-
-                </div>
-
-
-                <!-- SPEAKER -->
-
-                <div class="product"
-                     data-name="BassBoom Speaker"
-                     data-category="audio"
-                     data-price="2199">
-
-                    <span class="badge new">
-                        New
-                    </span>
-
-                    <button
-                        class="heart"
-                        data-id="7">
-                        ♡
-                    </button>
-
-                    <div class="image-box">
-
-                        <img
-                            src="images/speaker.jpg"
-                            alt="Speaker"
-                        >
-
-                    </div>
-
-                    <h3>BassBoom Speaker</h3>
-
-                    <p>Portable powerful speaker</p>
-
-                    <div class="rating">
-                        ★★★★☆
-                        <span>(88)</span>
-                    </div>
-
-                    <h4>₹2,199</h4>
-
-                    <small class="stock">
-                        ✓ In Stock
-                    </small>
-
-                    <button
-                        class="add-cart"
-                        data-id="7">
-
-                        Add to Cart
-
-                    </button>
-
-                </div>
-
-
-                <!-- POWERBANK -->
-
-                <div class="product"
-                     data-name="Nova Power Bank 20K"
-                     data-category="power"
-                     data-price="1299">
-
-                    <span class="badge">
-                        Value Pick
-                    </span>
-
-                    <button
-                        class="heart"
-                        data-id="8">
-                        ♡
-                    </button>
-
-                    <div class="image-box">
-
-                        <img
-                            src="images/powerbank.jpg"
-                            alt="Power Bank"
-                        >
-
-                    </div>
-
-                    <h3>Nova Power Bank 20K</h3>
-
-                    <p>Fast charging power bank</p>
-
-                    <div class="rating">
-                        ★★★★☆
-                        <span>(112)</span>
-                    </div>
-
-                    <h4>₹1,299</h4>
-
-                    <small class="stock">
-                        ✓ In Stock
-                    </small>
-
-                    <button
-                        class="add-cart"
-                        data-id="8">
-
-                        Add to Cart
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- RECOMMENDATIONS -->
-
-        <section class="section-box">
-
-            <div class="section-title">
-
-                <div>
-                    <h2>Recommended For You</h2>
-                    <p>Smart recommendations based on your cart</p>
-                </div>
-
-            </div>
-
-            <div
-                id="recommendations"
-                class="recommendations">
-            </div>
-
-        </section>
-
-
-        <!-- DSA -->
-
-        <section class="dsa-section">
-
-            <h2>⚡ Powered by Data Structures & Algorithms</h2>
-
-            <div class="dsa-grid">
-
-                <div>
-                    🔎
-                    <h3>Searching</h3>
-                    <p>Fast product searching.</p>
-                </div>
-
-                <div>
-                    ↕️
-                    <h3>Sorting</h3>
-                    <p>Price and name sorting.</p>
-                </div>
-
-                <div>
-                    🛒
-                    <h3>Arrays</h3>
-                    <p>Cart and wishlist management.</p>
-                </div>
-
-                <div>
-                    🌳
-                    <h3>Binary Search Tree</h3>
-                    <p>Product price searching.</p>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- BST -->
-
-        <section class="section-box">
-
-            <h2>🌳 Binary Search Tree</h2>
-
-            <p>
-                Search a product price using BST.
-            </p>
-
-            <div class="bst-controls">
-
-                <input
-                    type="number"
-                    id="bstInput"
-                    placeholder="Enter price"
-                >
-
-                <button
-                    id="bstSearch">
-
-                    Search BST
-
-                </button>
-
-                <button
-                    id="bstShow">
-
-                    Show BST
-
-                </button>
-
-            </div>
-
-            <div
-                id="bstResult"
-                class="bst-result">
-
-                Enter a price.
-
-            </div>
-
-        </section>
-
-
-        <!-- WISHLIST -->
-
-        <section
-            class="section-box"
-            id="wishlist">
-
-            <div class="section-title">
-
-                <div>
-                    <h2>❤️ Wishlist</h2>
-                    <p>Your saved products</p>
-                </div>
-
-                <span id="wishlistCount">
-                    0 ITEMS
-                </span>
-
-            </div>
-
-            <div
-                id="wishlistContainer"
-                class="wishlist-grid">
-
-            </div>
-
-        </section>
-
-
-        <!-- ORDERS -->
-
-        <section
-            class="section-box"
-            id="orders">
-
-            <div class="section-title">
-
-                <div>
-                    <h2>📦 Orders</h2>
-                    <p>Your order history</p>
-                </div>
-
-            </div>
-
-            <div id="ordersContainer">
-            </div>
-
-            <button
-                id="clearOrders"
-                class="danger-button">
-
-                Clear Orders
-
+            <button class="details-button"
+                    onclick="showProductDetails(1)">
+                View Details
             </button>
 
-        </section>
+            <button class="add-cart" data-id="1">
+                Add to Cart
+            </button>
+
+        </div>
 
 
-        <!-- ABOUT -->
+        <div class="product"
+             data-name="Nexa 7 Smartphone"
+             data-category="electronics"
+             data-price="24999">
 
-        <section
-            class="section-box about"
-            id="about">
+            <span class="badge new">New</span>
 
-            <h2>About TechNova</h2>
+            <button class="heart" data-id="2">♡</button>
 
-            <p>
-                TechNova is an E-Commerce Product Management
-                and Recommendation System using Data Structures
-                and Algorithms.
-            </p>
-
-            <div class="tech-stack">
-
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>JavaScript</span>
-                <span>Arrays</span>
-                <span>Searching</span>
-                <span>Sorting</span>
-                <span>BST</span>
-                <span>LocalStorage</span>
-
+            <div class="image-box">
+                <img src="images/smartphone.jpg" alt="Nexa 7 Smartphone">
             </div>
 
-        </section>
+            <h3>Nexa 7 Smartphone</h3>
+            <p>Next-generation smartphone</p>
 
-    </section>
+            <div class="rating">
+                ★★★★★ <span>(95)</span>
+            </div>
+
+            <h4>₹24,999</h4>
+
+            <small class="stock">✓ In Stock</small>
+
+            <button class="details-button"
+                    onclick="showProductDetails(2)">
+                View Details
+            </button>
+
+            <button class="add-cart" data-id="2">
+                Add to Cart
+            </button>
+
+        </div>
+
+
+        <div class="product"
+             data-name="SoundWave Max Headphones"
+             data-category="audio"
+             data-price="2999">
+
+            <span class="badge">Popular</span>
+
+            <button class="heart" data-id="3">♡</button>
+
+            <div class="image-box">
+                <img src="images/headphones.jpg" alt="SoundWave Max Headphones">
+            </div>
+
+            <h3>SoundWave Max Headphones</h3>
+            <p>Immersive wireless audio</p>
+
+            <div class="rating">
+                ★★★★★ <span>(210)</span>
+            </div>
+
+            <h4>₹2,999</h4>
+
+            <small class="stock">✓ In Stock</small>
+
+            <button class="details-button"
+                    onclick="showProductDetails(3)">
+                View Details
+            </button>
+
+            <button class="add-cart" data-id="3">
+                Add to Cart
+            </button>
+
+        </div>
+
+
+        <div class="product"
+             data-name="PulseFit Smart Watch"
+             data-category="wearables"
+             data-price="4999">
+
+            <span class="badge">Trending</span>
+
+            <button class="heart" data-id="4">♡</button>
+
+            <div class="image-box">
+                <img src="images/smartwatch.jpg" alt="PulseFit Smart Watch">
+            </div>
+
+            <h3>PulseFit Smart Watch</h3>
+            <p>Smart fitness companion</p>
+
+            <div class="rating">
+                ★★★★☆ <span>(76)</span>
+            </div>
+
+            <h4>₹4,999</h4>
+
+            <small class="stock">✓ In Stock</small>
+
+            <button class="details-button"
+                    onclick="showProductDetails(4)">
+                View Details
+            </button>
+
+            <button class="add-cart" data-id="4">
+                Add to Cart
+            </button>
+
+        </div>
+
+
+        <div class="product"
+             data-name="Titan Gaming Mouse"
+             data-category="gaming"
+             data-price="1499">
+
+            <span class="badge">Gaming</span>
+
+            <button class="heart" data-id="5">♡</button>
+
+            <div class="image-box">
+                <img src="images/mouse.jpg" alt="Titan Gaming Mouse">
+            </div>
+
+            <h3>Titan Gaming Mouse</h3>
+            <p>Precision RGB gaming mouse</p>
+
+            <div class="rating">
+                ★★★★★ <span>(164)</span>
+            </div>
+
+            <h4>₹1,499</h4>
+
+            <small class="stock">✓ In Stock</small>
+
+            <button class="details-button"
+                    onclick="showProductDetails(5)">
+                View Details
+            </button>
+
+            <button class="add-cart" data-id="5">
+                Add to Cart
+            </button>
+
+        </div>
+
+
+        <div class="product"
+             data-name="Elite Mechanical Keyboard"
+             data-category="gaming"
+             data-price="2499">
+
+            <span class="badge">Popular</span>
+
+            <button class="heart" data-id="6">♡</button>
+
+            <div class="image-box">
+                <img src="images/keyboard.jpg" alt="Elite Mechanical Keyboard">
+            </div>
+
+            <h3>Elite Mechanical Keyboard</h3>
+            <p>RGB mechanical keyboard</p>
+
+            <div class="rating">
+                ★★★★★ <span>(143)</span>
+            </div>
+
+            <h4>₹2,499</h4>
+
+            <small class="stock">✓ In Stock</small>
+
+            <button class="details-button"
+                    onclick="showProductDetails(6)">
+                View Details
+            </button>
+
+            <button class="add-cart" data-id="6">
+                Add to Cart
+            </button>
+
+        </div>
+
+
+        <div class="product"
+             data-name="BassBoom Speaker"
+             data-category="audio"
+             data-price="2199">
+
+            <span class="badge new">New</span>
+
+            <button class="heart" data-id="7">♡</button>
+
+            <div class="image-box">
+                <img src="images/speaker.jpg" alt="BassBoom Speaker">
+            </div>
+
+            <h3>BassBoom Speaker</h3>
+            <p>Portable powerful speaker</p>
+
+            <div class="rating">
+                ★★★★☆ <span>(88)</span>
+            </div>
+
+            <h4>₹2,199</h4>
+
+            <small class="stock">✓ In Stock</small>
+
+            <button class="details-button"
+                    onclick="showProductDetails(7)">
+                View Details
+            </button>
+
+            <button class="add-cart" data-id="7">
+                Add to Cart
+            </button>
+
+        </div>
+
+
+        <div class="product"
+             data-name="Nova Power Bank 20K"
+             data-category="power"
+             data-price="1299">
+
+            <span class="badge">Value Pick</span>
+
+            <button class="heart" data-id="8">♡</button>
+
+            <div class="image-box">
+                <img src="images/powerbank.jpg" alt="Nova Power Bank 20K">
+            </div>
+
+            <h3>Nova Power Bank 20K</h3>
+            <p>Fast charging power bank</p>
+
+            <div class="rating">
+                ★★★★☆ <span>(112)</span>
+            </div>
+
+            <h4>₹1,299</h4>
+
+            <small class="stock">✓ In Stock</small>
+
+            <button class="details-button"
+                    onclick="showProductDetails(8)">
+                View Details
+            </button>
+
+            <button class="add-cart" data-id="8">
+                Add to Cart
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section-box">
+
+    <div class="section-title">
+
+        <div>
+            <h2>Recommended For You</h2>
+            <p>Smart recommendations based on your cart</p>
+        </div>
+
+    </div>
+
+    <div id="recommendations" class="recommendations"></div>
+
+</section>
+
+
+<section class="dsa-section">
+
+    <h2>⚡ Powered by Data Structures & Algorithms</h2>
+
+    <div class="dsa-grid">
+
+        <div>
+            🔎
+            <h3>Searching</h3>
+            <p>Fast product searching.</p>
+        </div>
+
+        <div>
+            ↕️
+            <h3>Sorting</h3>
+            <p>Price and name sorting.</p>
+        </div>
+
+        <div>
+            🛒
+            <h3>Arrays</h3>
+            <p>Cart and wishlist management.</p>
+        </div>
+
+        <div>
+            🌳
+            <h3>Binary Search Tree</h3>
+            <p>Product price searching.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section-box">
+
+    <h2>🌳 Binary Search Tree</h2>
+
+    <p>Search a product price using BST.</p>
+
+    <div class="bst-controls">
+
+        <input
+            type="number"
+            id="bstInput"
+            placeholder="Enter price"
+        >
+
+        <button id="bstSearch">
+            Search BST
+        </button>
+
+        <button id="bstShow">
+            Show BST
+        </button>
+
+    </div>
+
+    <div id="bstResult" class="bst-result">
+        Enter a price.
+    </div>
+
+</section>
+
+
+<section class="section-box" id="wishlist">
+
+    <div class="section-title">
+
+        <div>
+            <h2>❤️ Wishlist</h2>
+            <p>Your saved products</p>
+        </div>
+
+        <span id="wishlistCount">0 ITEMS</span>
+
+    </div>
+
+    <div id="wishlistContainer" class="wishlist-grid"></div>
+
+</section>
+
+
+<section class="section-box" id="orders">
+
+    <div class="section-title">
+
+        <div>
+            <h2>📦 Orders</h2>
+            <p>Your order history</p>
+        </div>
+
+    </div>
+
+    <div id="ordersContainer"></div>
+
+    <button id="clearOrders" class="danger-button">
+        Clear Orders
+    </button>
+
+</section>
+
+
+<section class="section-box about" id="about">
+
+    <h2>About TechNova</h2>
+
+    <p>
+        TechNova is an E-Commerce Product Management
+        and Recommendation System using Data Structures
+        and Algorithms.
+    </p>
+
+    <div class="tech-stack">
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JavaScript</span>
+        <span>Arrays</span>
+        <span>Searching</span>
+        <span>Sorting</span>
+        <span>BST</span>
+        <span>LocalStorage</span>
+    </div>
+
+</section>
+
+</section>
 
 </main>
 
 
-<!-- CART MODAL -->
+<!-- =====================================================
+     CART MODAL
+===================================================== -->
 
-<div
-    id="cartModal"
-    class="modal">
+<div id="cartModal" class="modal">
 
     <div class="cart-box">
 
@@ -923,33 +653,23 @@
 
             <h2>🛒 Shopping Cart</h2>
 
-            <button
-                id="closeCart">
-
-                ✕
-
-            </button>
+            <button id="closeCart">✕</button>
 
         </div>
 
-        <div id="cartItems">
-        </div>
+        <div id="cartItems"></div>
 
         <div class="cart-footer">
 
             <h3>
                 Total:
-                <span id="cartTotal">
-                    ₹0
-                </span>
+                <span id="cartTotal">₹0</span>
             </h3>
 
             <button
                 id="checkout"
                 class="checkout-button">
-
                 Checkout
-
             </button>
 
         </div>
@@ -959,13 +679,228 @@
 </div>
 
 
-<!-- TOAST -->
+<!-- =====================================================
+     CHECKOUT MODAL
+===================================================== -->
 
-<div
-    id="toast"
-    class="toast">
+<div id="checkoutModal" class="modal">
+
+    <div class="checkout-box">
+
+        <button
+            class="details-close"
+            onclick="closeCheckout()">
+            ✕
+        </button>
+
+        <h2>🛍️ Secure Checkout</h2>
+
+        <p class="checkout-subtitle">
+            Complete your order securely
+        </p>
+
+
+        <div class="checkout-section">
+
+            <h3>📍 Delivery Details</h3>
+
+            <input
+                type="text"
+                id="checkoutName"
+                placeholder="Full Name"
+            >
+
+            <input
+                type="tel"
+                id="checkoutPhone"
+                placeholder="Mobile Number"
+            >
+
+            <textarea
+                id="checkoutAddress"
+                placeholder="Full Delivery Address"
+                rows="4"></textarea>
+
+            <div class="checkout-row">
+
+                <input
+                    type="text"
+                    id="checkoutCity"
+                    placeholder="City"
+                >
+
+                <input
+                    type="text"
+                    id="checkoutPincode"
+                    placeholder="PIN Code"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="checkout-section">
+
+            <h3>💳 Payment Method</h3>
+
+            <label class="payment-option">
+
+                <input
+                    type="radio"
+                    name="payment"
+                    value="cod"
+                    checked
+                >
+
+                <span>💵 Cash on Delivery</span>
+
+            </label>
+
+            <label class="payment-option">
+
+                <input
+                    type="radio"
+                    name="payment"
+                    value="upi"
+                >
+
+                <span>📱 UPI</span>
+
+            </label>
+
+            <label class="payment-option">
+
+                <input
+                    type="radio"
+                    name="payment"
+                    value="card"
+                >
+
+                <span>💳 Credit / Debit Card</span>
+
+            </label>
+
+        </div>
+
+
+        <div class="checkout-section">
+
+            <h3>🧾 Order Summary</h3>
+
+            <div id="checkoutItems"></div>
+
+            <div class="checkout-total">
+
+                <span>Total</span>
+
+                <strong id="checkoutTotal">
+                    ₹0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <button
+            id="placeOrder"
+            class="place-order-button">
+
+            ✅ Place Order
+
+        </button>
+
+    </div>
 
 </div>
+
+
+<!-- =====================================================
+     PRODUCT DETAILS MODAL
+===================================================== -->
+
+<div id="productDetailsModal" class="modal">
+
+    <div class="product-details-box">
+
+        <button
+            class="details-close"
+            onclick="closeProductDetails()">
+            ✕
+        </button>
+
+        <div id="productDetailsContent"></div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     LOGIN / SIGNUP
+===================================================== -->
+
+<div id="authModal" class="modal">
+
+    <div class="auth-box">
+
+        <button
+            class="details-close"
+            onclick="closeAuth()">
+            ✕
+        </button>
+
+        <h2 id="authTitle">
+            Welcome to TechNova 👋
+        </h2>
+
+        <p id="authSubtitle">
+            Login to continue shopping
+        </p>
+
+        <input
+            type="text"
+            id="authName"
+            placeholder="Full Name"
+        >
+
+        <input
+            type="email"
+            id="authEmail"
+            placeholder="Email Address"
+        >
+
+        <input
+            type="password"
+            id="authPassword"
+            placeholder="Password"
+        >
+
+        <button
+            id="authSubmit"
+            class="details-add-cart">
+            Login
+        </button>
+
+        <p class="auth-switch">
+
+            Don't have an account?
+
+            <button
+                onclick="toggleAuthMode()"
+                id="authToggle">
+                Create Account
+            </button>
+
+        </p>
+
+    </div>
+
+</div>
+
+
+<div id="toast" class="toast"></div>
 
 
 <footer>
