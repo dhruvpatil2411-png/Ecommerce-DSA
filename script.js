@@ -1,12 +1,6 @@
-/* =========================================================
-   TECHNOVA - COMPLETE JAVASCRIPT
-   DSA E-COMMERCE PROJECT
-========================================================= */
-
-
-/* =========================================================
-   PRODUCT DATA
-========================================================= */
+/* =====================================================
+   TECHNOVA FINAL JAVASCRIPT
+===================================================== */
 
 const products = [
     {
@@ -14,161 +8,108 @@ const products = [
         name: "Zenith Pro Laptop",
         price: 54990,
         category: "laptop",
-        description: "Ultra-performance laptop",
-        icon: "💻",
-        rating: 5
+        icon: "💻"
     },
-
     {
         id: 2,
         name: "Nexa 7 Smartphone",
         price: 24999,
         category: "electronics",
-        description: "Next-generation smartphone",
-        icon: "📱",
-        rating: 5
+        icon: "📱"
     },
-
     {
         id: 3,
         name: "SoundWave Max Headphones",
         price: 2999,
         category: "audio",
-        description: "Immersive wireless audio",
-        icon: "🎧",
-        rating: 5
+        icon: "🎧"
     },
-
     {
         id: 4,
         name: "PulseFit Smart Watch",
         price: 4999,
         category: "wearables",
-        description: "Smart fitness companion",
-        icon: "⌚",
-        rating: 4
+        icon: "⌚"
     },
-
     {
         id: 5,
         name: "Titan Gaming Mouse",
         price: 1499,
         category: "gaming",
-        description: "Precision RGB gaming mouse",
-        icon: "🖱️",
-        rating: 5
+        icon: "🖱️"
     },
-
     {
         id: 6,
         name: "Elite Mechanical Keyboard",
         price: 2499,
         category: "gaming",
-        description: "RGB mechanical keyboard",
-        icon: "⌨️",
-        rating: 5
+        icon: "⌨️"
     },
-
     {
         id: 7,
         name: "BassBoom Speaker",
         price: 2199,
         category: "audio",
-        description: "Portable powerful speaker",
-        icon: "🔊",
-        rating: 4
+        icon: "🔊"
     },
-
     {
         id: 8,
         name: "Nova Power Bank 20K",
         price: 1299,
         category: "power",
-        description: "Fast charging power bank",
-        icon: "🔋",
-        rating: 4
+        icon: "🔋"
     }
 ];
 
 
-/* =========================================================
-   CART
-========================================================= */
+/* =====================================================
+   LOCAL STORAGE
+===================================================== */
 
-let cart = JSON.parse(
-    localStorage.getItem("technovaCart")
-) || [];
+let cart =
+    JSON.parse(
+        localStorage.getItem("technovaCart")
+    ) || [];
 
+let wishlist =
+    JSON.parse(
+        localStorage.getItem("technovaWishlist")
+    ) || [];
 
-/* =========================================================
-   WISHLIST
-========================================================= */
-
-let wishlist = JSON.parse(
-    localStorage.getItem("technovaWishlist")
-) || [];
-
-
-/* =========================================================
-   ORDERS
-========================================================= */
-
-let orders = JSON.parse(
-    localStorage.getItem("technovaOrders")
-) || [];
+let orders =
+    JSON.parse(
+        localStorage.getItem("technovaOrders")
+    ) || [];
 
 
-/* =========================================================
-   CURRENT FILTER
-========================================================= */
-
-let selectedCategory = "all";
-
-
-/* =========================================================
+/* =====================================================
    FORMAT PRICE
-========================================================= */
+===================================================== */
 
-function formatPrice(price) {
+function price(value) {
 
-    return "₹" + Number(price).toLocaleString("en-IN");
+    return "₹" +
+        Number(value)
+            .toLocaleString("en-IN");
 
 }
 
 
-/* =========================================================
-   SAVE CART
-========================================================= */
+/* =====================================================
+   SAVE DATA
+===================================================== */
 
-function saveCart() {
+function saveData() {
 
     localStorage.setItem(
         "technovaCart",
         JSON.stringify(cart)
     );
 
-}
-
-
-/* =========================================================
-   SAVE WISHLIST
-========================================================= */
-
-function saveWishlist() {
-
     localStorage.setItem(
         "technovaWishlist",
         JSON.stringify(wishlist)
     );
-
-}
-
-
-/* =========================================================
-   SAVE ORDERS
-========================================================= */
-
-function saveOrders() {
 
     localStorage.setItem(
         "technovaOrders",
@@ -178,46 +119,46 @@ function saveOrders() {
 }
 
 
-/* =========================================================
-   TOAST MESSAGE
-========================================================= */
+/* =====================================================
+   TOAST
+===================================================== */
 
-function showToast(message) {
+function toast(message) {
 
-    const toast =
+    const box =
         document.getElementById("toast");
 
-    if (!toast) return;
+    box.textContent = message;
 
-    toast.textContent = message;
-
-    toast.classList.add("show");
+    box.classList.add("show");
 
     setTimeout(() => {
 
-        toast.classList.remove("show");
+        box.classList.remove("show");
 
-    }, 2500);
+    }, 2200);
 
 }
 
 
-/* =========================================================
-   ADD TO CART
-========================================================= */
+/* =====================================================
+   CART
+===================================================== */
 
-function addToCart(productName) {
+function addToCart(name) {
 
-    const product = products.find(
-        p => p.name === productName
-    );
+    const product =
+        products.find(
+            p => p.name === name
+        );
 
     if (!product) return;
 
 
-    const existing = cart.find(
-        item => item.id === product.id
-    );
+    const existing =
+        cart.find(
+            item => item.id === product.id
+        );
 
 
     if (existing) {
@@ -241,47 +182,26 @@ function addToCart(productName) {
     }
 
 
-    saveCart();
+    saveData();
 
-    updateCartUI();
+    updateCart();
 
     updateRecommendations();
 
-    showToast(
-        `${product.name} added to cart 🛒`
+    toast(
+        product.name +
+        " added to cart 🛒"
     );
 
 }
 
-
-/* =========================================================
-   REMOVE FROM CART
-========================================================= */
-
-function removeFromCart(id) {
-
-    cart = cart.filter(
-        item => item.id !== id
-    );
-
-    saveCart();
-
-    updateCartUI();
-
-    updateRecommendations();
-
-}
-
-
-/* =========================================================
-   CHANGE QUANTITY
-========================================================= */
 
 function changeQuantity(id, amount) {
 
-    const item = cart.find(
-        product => product.id === id
-    );
+    const item =
+        cart.find(
+            product => product.id === id
+        );
 
     if (!item) return;
 
@@ -291,216 +211,80 @@ function changeQuantity(id, amount) {
 
     if (item.quantity <= 0) {
 
-        cart = cart.filter(
-            product => product.id !== id
-        );
+        cart =
+            cart.filter(
+                product =>
+                    product.id !== id
+            );
 
     }
 
 
-    saveCart();
+    saveData();
 
-    updateCartUI();
+    updateCart();
 
     updateRecommendations();
 
 }
 
 
-/* =========================================================
-   CART TOTAL
-========================================================= */
+function removeFromCart(id) {
 
-function getCartTotal() {
+    cart =
+        cart.filter(
+            item => item.id !== id
+        );
+
+    saveData();
+
+    updateCart();
+
+    updateRecommendations();
+
+}
+
+
+function cartCount() {
 
     return cart.reduce(
-        (total, item) =>
-            total + item.price * item.quantity,
+        (sum, item) =>
+            sum + item.quantity,
         0
     );
 
 }
 
 
-/* =========================================================
-   CART COUNT
-========================================================= */
-
-function getCartCount() {
+function cartTotal() {
 
     return cart.reduce(
-        (total, item) =>
-            total + item.quantity,
+        (sum, item) =>
+            sum +
+            item.price *
+            item.quantity,
         0
     );
 
 }
 
 
-/* =========================================================
-   UPDATE CART UI
-========================================================= */
+/* =====================================================
+   UPDATE CART
+===================================================== */
 
-function updateCartUI() {
+function updateCart() {
 
-    const count =
-        getCartCount();
+    document.getElementById(
+        "cartCount"
+    ).textContent =
+        cartCount();
 
-    const total =
-        getCartTotal();
-
-
-    const cartCount =
-        document.getElementById("cartCount");
-
-    if (cartCount) {
-
-        cartCount.textContent =
-            count;
-
-    }
-
-
-    const cartLabel =
-        document.getElementById(
-            "cartItemLabel"
-        );
-
-    if (cartLabel) {
-
-        cartLabel.textContent =
-            `${count} ITEMS`;
-
-    }
-
-
-    const cartTotal =
-        document.getElementById(
-            "cartTotal"
-        );
-
-    if (cartTotal) {
-
-        cartTotal.textContent =
-            formatPrice(total);
-
-    }
-
-
-    renderCartItems();
-
-    renderModalCart();
-
-}
-
-
-/* =========================================================
-   RENDER CART
-========================================================= */
-
-function renderCartItems() {
-
-    const container =
-        document.getElementById(
-            "cartItems"
-        );
-
-    if (!container) return;
-
-
-    if (cart.length === 0) {
-
-        container.innerHTML =
-            `<p class="empty-cart">
-                Your cart is empty.
-            </p>`;
-
-        return;
-
-    }
-
-
-    container.innerHTML = "";
-
-
-    cart.forEach(item => {
-
-        const div =
-            document.createElement("div");
-
-        div.className =
-            "cart-item";
-
-
-        div.innerHTML = `
-
-            <h3>${item.name}</h3>
-
-            <p>
-                ${formatPrice(item.price)}
-            </p>
-
-            <div class="quantity-control">
-
-                <button
-                    onclick="changeQuantity(
-                        ${item.id}, -1
-                    )"
-                >
-                    −
-                </button>
-
-                <strong>
-                    ${item.quantity}
-                </strong>
-
-                <button
-                    onclick="changeQuantity(
-                        ${item.id}, 1
-                    )"
-                >
-                    +
-                </button>
-
-            </div>
-
-            <button
-                class="remove-btn"
-                onclick="removeFromCart(
-                    ${item.id}
-                )"
-            >
-                Remove
-            </button>
-
-        `;
-
-
-        container.appendChild(div);
-
-    });
-
-}
-
-
-/* =========================================================
-   MODAL CART
-========================================================= */
-
-function renderModalCart() {
 
     const container =
         document.getElementById(
             "modalCartItems"
         );
-
-    const total =
-        document.getElementById(
-            "modalCartTotal"
-        );
-
-
-    if (!container) return;
 
 
     if (cart.length === 0) {
@@ -518,9 +302,7 @@ function renderModalCart() {
         cart.forEach(item => {
 
             const div =
-                document.createElement(
-                    "div"
-                );
+                document.createElement("div");
 
             div.className =
                 "cart-item";
@@ -533,17 +315,20 @@ function renderModalCart() {
                 </h3>
 
                 <p>
-                    ${formatPrice(item.price)}
+                    ${price(item.price)}
                 </p>
 
                 <div class="quantity-control">
 
                     <button
-                        onclick="changeQuantity(
-                            ${item.id}, -1
-                        )"
-                    >
+                        onclick="
+                        changeQuantity(
+                            ${item.id},
+                            -1
+                        )">
+
                         −
+
                     </button>
 
                     <strong>
@@ -551,22 +336,27 @@ function renderModalCart() {
                     </strong>
 
                     <button
-                        onclick="changeQuantity(
-                            ${item.id}, 1
-                        )"
-                    >
+                        onclick="
+                        changeQuantity(
+                            ${item.id},
+                            1
+                        )">
+
                         +
+
                     </button>
 
                 </div>
 
                 <button
                     class="remove-btn"
-                    onclick="removeFromCart(
+                    onclick="
+                    removeFromCart(
                         ${item.id}
-                    )"
-                >
+                    )">
+
                     Remove
+
                 </button>
 
             `;
@@ -579,97 +369,92 @@ function renderModalCart() {
     }
 
 
-    if (total) {
-
-        total.textContent =
-            formatPrice(
-                getCartTotal()
-            );
-
-    }
+    document.getElementById(
+        "modalCartTotal"
+    ).textContent =
+        price(cartTotal());
 
 }
 
 
-/* =========================================================
-   OPEN CART
-========================================================= */
+/* =====================================================
+   CART MODAL
+===================================================== */
 
 function openCart() {
 
-    const modal =
-        document.getElementById(
-            "cartPanel"
-        );
+    document
+        .getElementById("cartPanel")
+        .classList.add("active");
 
-    if (modal) {
-
-        modal.classList.add("active");
-
-    }
+    updateCart();
 
 }
 
-
-/* =========================================================
-   CLOSE CART
-========================================================= */
 
 function closeCart() {
 
-    const modal =
-        document.getElementById(
-            "cartPanel"
-        );
-
-    if (modal) {
-
-        modal.classList.remove(
-            "active"
-        );
-
-    }
+    document
+        .getElementById("cartPanel")
+        .classList.remove("active");
 
 }
 
 
-/* =========================================================
+document
+    .getElementById("cartPanel")
+    .addEventListener(
+        "click",
+        function(e) {
+
+            if (
+                e.target === this
+            ) {
+
+                closeCart();
+
+            }
+
+        }
+    );
+
+
+/* =====================================================
    WISHLIST
-========================================================= */
+===================================================== */
 
 function toggleWishlist(
     button,
-    productName
+    name
 ) {
 
     const product =
         products.find(
-            p => p.name === productName
+            p => p.name === name
         );
 
     if (!product) return;
 
 
-    const exists =
+    if (
         wishlist.includes(
             product.id
-        );
-
-
-    if (exists) {
+        )
+    ) {
 
         wishlist =
             wishlist.filter(
-                id => id !== product.id
+                id =>
+                    id !== product.id
             );
+
+        button.textContent = "♡";
 
         button.classList.remove(
             "active"
         );
 
-        button.textContent = "♡";
-
-        showToast(
+        toast(
             "Removed from wishlist"
         );
 
@@ -679,29 +464,25 @@ function toggleWishlist(
             product.id
         );
 
+        button.textContent = "♥";
+
         button.classList.add(
             "active"
         );
 
-        button.textContent = "♥";
-
-        showToast(
+        toast(
             "Added to wishlist ❤️"
         );
 
     }
 
 
-    saveWishlist();
+    saveData();
 
     renderWishlist();
 
 }
 
-
-/* =========================================================
-   RENDER WISHLIST
-========================================================= */
 
 function renderWishlist() {
 
@@ -710,175 +491,89 @@ function renderWishlist() {
             "wishlistContainer"
         );
 
-    const preview =
-        document.getElementById(
-            "wishlistPreview"
-        );
 
-    const count =
-        document.getElementById(
-            "wishlistCount"
-        );
+    document.getElementById(
+        "wishlistCount"
+    ).textContent =
+        wishlist.length +
+        " ITEMS";
 
 
-    if (count) {
+    if (wishlist.length === 0) {
 
-        count.textContent =
-            `${wishlist.length} ITEMS`;
+        container.innerHTML =
+            `<div class="empty-orders">
+                Your wishlist is empty.
+            </div>`;
 
-    }
-
-
-    if (container) {
-
-        if (wishlist.length === 0) {
-
-            container.innerHTML =
-                `<p class="empty-orders">
-                    Your wishlist is empty.
-                </p>`;
-
-        } else {
-
-            container.innerHTML = "";
-
-
-            wishlist.forEach(id => {
-
-                const product =
-                    products.find(
-                        p => p.id === id
-                    );
-
-                if (!product) return;
-
-
-                const card =
-                    document.createElement(
-                        "div"
-                    );
-
-                card.className =
-                    "wishlist-item";
-
-
-                card.innerHTML = `
-
-                    <div
-                        class="recommendation-icon"
-                    >
-                        ${product.icon}
-                    </div>
-
-                    <h3>
-                        ${product.name}
-                    </h3>
-
-                    <p>
-                        ${formatPrice(
-                            product.price
-                        )}
-                    </p>
-
-                    <button
-                        onclick="
-                            removeWishlist(
-                                ${product.id}
-                            )
-                        "
-                    >
-                        Remove
-                    </button>
-
-                    <button
-                        onclick="
-                            addToCart(
-                                '${product.name}'
-                            )
-                        "
-                    >
-                        Add to Cart
-                    </button>
-
-                `;
-
-
-                container.appendChild(card);
-
-            });
-
-        }
+        return;
 
     }
 
 
-    if (preview) {
-
-        if (wishlist.length === 0) {
-
-            preview.innerHTML =
-                `<p>
-                    No wishlist items.
-                </p>`;
-
-        } else {
-
-            preview.innerHTML = "";
+    container.innerHTML = "";
 
 
-            wishlist.slice(0, 3)
-                .forEach(id => {
+    wishlist.forEach(id => {
 
-                    const product =
-                        products.find(
-                            p => p.id === id
-                        );
+        const product =
+            products.find(
+                p => p.id === id
+            );
 
-                    if (!product) return;
-
-
-                    const div =
-                        document.createElement(
-                            "div"
-                        );
-
-                    div.className =
-                        "wishlist-item";
+        if (!product) return;
 
 
-                    div.innerHTML = `
+        const div =
+            document.createElement("div");
 
-                        <h3>
-                            ${product.icon}
-                            ${product.name}
-                        </h3>
-
-                        <p>
-                            ${formatPrice(
-                                product.price
-                            )}
-                        </p>
-
-                    `;
+        div.className =
+            "wishlist-item";
 
 
-                    preview.appendChild(div);
+        div.innerHTML = `
 
-                });
+            <div class="recommendation-icon">
+                ${product.icon}
+            </div>
 
-        }
+            <h3>
+                ${product.name}
+            </h3>
 
-    }
+            <p>
+                ${price(product.price)}
+            </p>
+
+            <button
+                onclick="
+                addToCart(
+                    '${product.name}'
+                )">
+
+                Add to Cart
+
+            </button>
+
+            <button
+                onclick="
+                removeWishlist(
+                    ${product.id}
+                )">
+
+                Remove
+
+            </button>
+
+        `;
 
 
-    updateWishlistButtons();
+        container.appendChild(div);
+
+    });
 
 }
 
-
-/* =========================================================
-   REMOVE WISHLIST
-========================================================= */
 
 function removeWishlist(id) {
 
@@ -887,20 +582,18 @@ function removeWishlist(id) {
             item => item !== id
         );
 
-    saveWishlist();
+    saveData();
 
     renderWishlist();
 
-    showToast(
-        "Removed from wishlist"
-    );
+    updateWishlistButtons();
 
 }
 
 
-/* =========================================================
-   UPDATE WISHLIST BUTTONS
-========================================================= */
+/* =====================================================
+   UPDATE HEARTS
+===================================================== */
 
 function updateWishlistButtons() {
 
@@ -923,6 +616,7 @@ function updateWishlistButtons() {
                     ".wishlist-btn"
                 );
 
+
             if (!product || !button)
                 return;
 
@@ -933,21 +627,19 @@ function updateWishlistButtons() {
                 )
             ) {
 
+                button.textContent = "♥";
+
                 button.classList.add(
                     "active"
                 );
 
-                button.textContent =
-                    "♥";
-
             } else {
+
+                button.textContent = "♡";
 
                 button.classList.remove(
                     "active"
                 );
-
-                button.textContent =
-                    "♡";
 
             }
 
@@ -956,27 +648,34 @@ function updateWishlistButtons() {
 }
 
 
-/* =========================================================
+/* =====================================================
    SEARCH
-========================================================= */
+===================================================== */
 
 function syncSearch() {
 
-    const input =
-        document.getElementById(
-            "productSearch"
-        );
-
-    const topInput =
+    const top =
         document.getElementById(
             "searchInput"
         );
 
+    const product =
+        document.getElementById(
+            "productSearch"
+        );
 
-    if (input && topInput) {
 
-        topInput.value =
-            input.value;
+    if (
+        document.activeElement === top
+    ) {
+
+        product.value =
+            top.value;
+
+    } else {
+
+        top.value =
+            product.value;
 
     }
 
@@ -986,41 +685,110 @@ function syncSearch() {
 }
 
 
-/* =========================================================
-   APPLY FILTERS
-========================================================= */
+/* =====================================================
+   CATEGORY
+===================================================== */
+
+function selectCategory(category) {
+
+    document.getElementById(
+        "categoryFilter"
+    ).value = category;
+
+
+    document
+        .querySelectorAll(
+            ".category-option"
+        )
+        .forEach(button =>
+            button.classList.remove(
+                "active"
+            )
+        );
+
+
+    event.currentTarget
+        .classList.add("active");
+
+
+    applyFilters();
+
+}
+
+
+function changeCategoryFromSelect() {
+
+    const category =
+        document.getElementById(
+            "categoryFilter"
+        ).value;
+
+
+    document
+        .querySelectorAll(
+            ".category-option"
+        )
+        .forEach(button =>
+            button.classList.remove(
+                "active"
+            )
+        );
+
+
+    applyFilters();
+
+}
+
+
+/* =====================================================
+   PRICE FILTER
+===================================================== */
+
+function filterByPrice() {
+
+    const value =
+        document.getElementById(
+            "priceFilter"
+        ).value;
+
+
+    document.getElementById(
+        "priceValue"
+    ).textContent =
+        "Up to " +
+        price(value);
+
+
+    applyFilters();
+
+}
+
+
+/* =====================================================
+   FILTER
+===================================================== */
 
 function applyFilters() {
 
     const search =
-        (
-            document.getElementById(
-                "productSearch"
-            )?.value ||
-
-            document.getElementById(
-                "searchInput"
-            )?.value ||
-
-            ""
-        )
-        .toLowerCase()
-        .trim();
+        document.getElementById(
+            "productSearch"
+        ).value
+            .toLowerCase()
+            .trim();
 
 
     const category =
         document.getElementById(
             "categoryFilter"
-        )?.value ||
-        selectedCategory;
+        ).value;
 
 
     const maxPrice =
         Number(
             document.getElementById(
                 "priceFilter"
-            )?.value ||
-            60000
+            ).value
         );
 
 
@@ -1042,33 +810,32 @@ function applyFilters() {
         const cardCategory =
             card.dataset.category;
 
-        const price =
+        const cardPrice =
             Number(
                 card.dataset.price
             );
 
 
-        const matchesSearch =
+        const searchMatch =
             name.includes(search);
 
 
-        const matchesCategory =
+        const categoryMatch =
             category === "all" ||
             cardCategory === category;
 
 
-        const matchesPrice =
-            price <= maxPrice;
+        const priceMatch =
+            cardPrice <= maxPrice;
 
 
         if (
-            matchesSearch &&
-            matchesCategory &&
-            matchesPrice
+            searchMatch &&
+            categoryMatch &&
+            priceMatch
         ) {
 
-            card.style.display =
-                "";
+            card.style.display = "";
 
             visible++;
 
@@ -1082,128 +849,30 @@ function applyFilters() {
     });
 
 
-    const result =
-        document.getElementById(
-            "resultCount"
-        );
-
-    if (result) {
-
-        result.textContent =
-            `Showing ${visible} products`;
-
-    }
+    document.getElementById(
+        "resultCount"
+    ).textContent =
+        `Showing ${visible} products`;
 
 }
 
 
-/* =========================================================
-   CATEGORY
-========================================================= */
-
-function selectCategory(category) {
-
-    selectedCategory =
-        category;
-
-
-    const select =
-        document.getElementById(
-            "categoryFilter"
-        );
-
-
-    if (select) {
-
-        select.value =
-            category;
-
-    }
-
-
-    document
-        .querySelectorAll(
-            ".category-option"
-        )
-        .forEach(button => {
-
-            button.classList.remove(
-                "active"
-            );
-
-        });
-
-
-    event?.currentTarget
-        ?.classList
-        .add("active");
-
-
-    applyFilters();
-
-}
-
-
-/* =========================================================
-   PRICE FILTER
-========================================================= */
-
-function filterByPrice() {
-
-    const slider =
-        document.getElementById(
-            "priceFilter"
-        );
-
-    const label =
-        document.getElementById(
-            "priceValue"
-        );
-
-
-    if (!slider) return;
-
-
-    const value =
-        Number(
-            slider.value
-        );
-
-
-    if (label) {
-
-        label.textContent =
-            `Up to ${formatPrice(
-                value
-            )}`;
-
-    }
-
-
-    applyFilters();
-
-}
-
-
-/* =========================================================
-   SORT PRODUCTS
-========================================================= */
+/* =====================================================
+   SORT
+===================================================== */
 
 function sortProducts() {
 
-    const value =
+    const type =
         document.getElementById(
             "sortSelect"
-        )?.value;
+        ).value;
 
 
     const container =
         document.getElementById(
             "productContainer"
         );
-
-
-    if (!container) return;
 
 
     const cards =
@@ -1214,60 +883,63 @@ function sortProducts() {
         );
 
 
-    cards.sort((a, b) => {
+    cards.sort(
+        (a,b) => {
 
-        const priceA =
-            Number(
-                a.dataset.price
+            if (type === "low") {
+
+                return (
+                    Number(
+                        a.dataset.price
+                    ) -
+                    Number(
+                        b.dataset.price
+                    )
+                );
+
+            }
+
+
+            if (type === "high") {
+
+                return (
+                    Number(
+                        b.dataset.price
+                    ) -
+                    Number(
+                        a.dataset.price
+                    )
+                );
+
+            }
+
+
+            if (type === "name") {
+
+                return a.dataset.name
+                    .localeCompare(
+                        b.dataset.name
+                    );
+
+            }
+
+
+            return (
+                Number(
+                    a.dataset.name
+                ) -
+                Number(
+                    b.dataset.name
+                )
             );
 
-        const priceB =
-            Number(
-                b.dataset.price
-            );
-
-        const nameA =
-            a.dataset.name;
-
-        const nameB =
-            b.dataset.name;
-
-
-        if (value === "low") {
-
-            return priceA - priceB;
-
         }
+    );
 
 
-        if (value === "high") {
-
-            return priceB - priceA;
-
-        }
-
-
-        if (value === "name") {
-
-            return nameA.localeCompare(
-                nameB
-            );
-
-        }
-
-
-        return 0;
-
-    });
-
-
-    cards.forEach(card => {
-
-        container.appendChild(
-            card
-        );
-
-    });
+    cards.forEach(card =>
+        container.appendChild(card)
+    );
 
 
     applyFilters();
@@ -1275,9 +947,9 @@ function sortProducts() {
 }
 
 
-/* =========================================================
-   RECOMMENDATION SYSTEM
-========================================================= */
+/* =====================================================
+   RECOMMENDATION
+===================================================== */
 
 function updateRecommendations() {
 
@@ -1286,36 +958,28 @@ function updateRecommendations() {
             "recommendationContainer"
         );
 
-    const side =
-        document.getElementById(
-            "sideRecommendations"
-        );
 
-    const text =
-        document.getElementById(
-            "recommendationText"
-        );
-
-
-    let recommendations = [];
+    let recommended = [];
 
 
     if (cart.length > 0) {
 
-        const categories =
+        const cartCategories =
             cart.map(item => {
 
                 const product =
                     products.find(
-                        p => p.id === item.id
+                        p =>
+                            p.id ===
+                            item.id
                     );
 
-                return product?.category;
+                return product.category;
 
             });
 
 
-        recommendations =
+        recommended =
             products.filter(
                 product =>
 
@@ -1325,7 +989,7 @@ function updateRecommendations() {
                             product.id
                     ) &&
 
-                    categories.includes(
+                    cartCategories.includes(
                         product.category
                     )
             );
@@ -1334,143 +998,73 @@ function updateRecommendations() {
 
 
     if (
-        recommendations.length === 0
+        recommended.length === 0
     ) {
 
-        recommendations =
-            products.slice(0, 3);
+        recommended =
+            products.slice(0,3);
 
     }
 
 
-    recommendations =
-        recommendations.slice(
-            0,
-            3
-        );
+    container.innerHTML = "";
 
 
-    if (text) {
+    recommended
+        .slice(0,3)
+        .forEach(product => {
 
-        text.textContent =
-            cart.length > 0
-
-                ? "Based on products in your cart."
-
-                : "Popular products you may like.";
-
-    }
-
-
-    if (container) {
-
-        container.innerHTML = "";
-
-
-        recommendations.forEach(
-            product => {
-
-                const card =
-                    document.createElement(
-                        "div"
-                    );
-
-                card.className =
-                    "recommendation-card";
-
-
-                card.innerHTML = `
-
-                    <div
-                        class="recommendation-icon"
-                    >
-                        ${product.icon}
-                    </div>
-
-                    <h3>
-                        ${product.name}
-                    </h3>
-
-                    <p>
-                        ${formatPrice(
-                            product.price
-                        )}
-                    </p>
-
-                    <button
-                        class="add-btn"
-                        onclick="
-                            addToCart(
-                                '${product.name}'
-                            )
-                        "
-                    >
-                        Add to Cart
-                    </button>
-
-                `;
-
-
-                container.appendChild(
-                    card
+            const div =
+                document.createElement(
+                    "div"
                 );
 
-            }
-        );
-
-    }
+            div.className =
+                "recommendation-card";
 
 
-    if (side) {
+            div.innerHTML = `
 
-        side.innerHTML = "";
+                <div class="
+                    recommendation-icon
+                ">
+                    ${product.icon}
+                </div>
 
+                <h3>
+                    ${product.name}
+                </h3>
 
-        recommendations
-            .slice(0, 2)
-            .forEach(product => {
+                <p>
+                    ${price(product.price)}
+                </p>
 
-                const div =
-                    document.createElement(
-                        "div"
-                    );
+                <button
+                    class="add-btn"
+                    onclick="
+                    addToCart(
+                        '${product.name}'
+                    )">
 
-                div.className =
-                    "wishlist-item";
+                    Add to Cart
 
+                </button>
 
-                div.innerHTML = `
-
-                    <h3>
-                        ${product.icon}
-                        ${product.name}
-                    </h3>
-
-                    <p>
-                        ${formatPrice(
-                            product.price
-                        )}
-                    </p>
-
-                `;
+            `;
 
 
-                side.appendChild(
-                    div
-                );
+            container.appendChild(div);
 
-            });
-
-    }
+        });
 
 }
 
 
-/* =========================================================
+/* =====================================================
    BINARY SEARCH TREE
-========================================================= */
+===================================================== */
 
-class BSTNode {
+class Node {
 
     constructor(value) {
 
@@ -1485,7 +1079,7 @@ class BSTNode {
 }
 
 
-class BinarySearchTree {
+class BST {
 
     constructor() {
 
@@ -1497,7 +1091,7 @@ class BinarySearchTree {
     insert(value) {
 
         const node =
-            new BSTNode(value);
+            new Node(value);
 
 
         if (!this.root) {
@@ -1516,10 +1110,13 @@ class BinarySearchTree {
         while (true) {
 
             if (
-                value < current.value
+                value <
+                current.value
             ) {
 
-                if (!current.left) {
+                if (
+                    current.left === null
+                ) {
 
                     current.left =
                         node;
@@ -1533,7 +1130,9 @@ class BinarySearchTree {
 
             } else {
 
-                if (!current.right) {
+                if (
+                    current.right === null
+                ) {
 
                     current.right =
                         node;
@@ -1571,7 +1170,8 @@ class BinarySearchTree {
 
 
             if (
-                value < current.value
+                value <
+                current.value
             ) {
 
                 current =
@@ -1592,9 +1192,13 @@ class BinarySearchTree {
     }
 
 
-    inorder(node, result = []) {
+    inorder(
+        node,
+        result = []
+    ) {
 
-        if (!node) return result;
+        if (!node)
+            return result;
 
 
         this.inorder(
@@ -1621,34 +1225,29 @@ class BinarySearchTree {
 }
 
 
-/* =========================================================
-   CREATE BST
-========================================================= */
-
-const priceBST =
-    new BinarySearchTree();
+const priceTree =
+    new BST();
 
 
 products.forEach(
-    product => {
-
-        priceBST.insert(
+    product =>
+        priceTree.insert(
             product.price
-        );
-
-    }
+        )
 );
 
 
-/* =========================================================
+/* =====================================================
    BST SEARCH
-========================================================= */
+===================================================== */
 
 function searchBST() {
 
     const input =
-        document.getElementById(
-            "bstSearchInput"
+        Number(
+            document.getElementById(
+                "bstSearchInput"
+            ).value
         );
 
 
@@ -1658,19 +1257,9 @@ function searchBST() {
         );
 
 
-    if (!input || !result)
-        return;
+    if (!input) {
 
-
-    const price =
-        Number(
-            input.value
-        );
-
-
-    if (!price) {
-
-        result.textContent =
+        result.innerHTML =
             "Please enter a price.";
 
         return;
@@ -1678,39 +1267,45 @@ function searchBST() {
     }
 
 
-    const found =
-        priceBST.search(
-            price
-        );
-
-
-    if (found) {
+    if (
+        priceTree.search(input)
+    ) {
 
         const product =
             products.find(
-                p => p.price === price
+                p =>
+                    p.price ===
+                    input
             );
 
 
         result.innerHTML = `
-            ✅ Price found in BST.
-            <br>
+
+            ✅ Price found!
+
+            <br><br>
+
             Product:
             <strong>
-                ${product?.name || "Product"}
+                ${product.name}
             </strong>
+
             <br>
+
             Price:
-            ${formatPrice(price)}
+            <strong>
+                ${price(input)}
+            </strong>
+
         `;
 
     } else {
 
         result.innerHTML = `
-            ❌ Price ${formatPrice(
-                price
-            )}
+
+            ❌ ${price(input)}
             was not found in BST.
+
         `;
 
     }
@@ -1718,9 +1313,9 @@ function searchBST() {
 }
 
 
-/* =========================================================
-   SHOW BST DATA
-========================================================= */
+/* =====================================================
+   SHOW BST
+===================================================== */
 
 function showBSTData() {
 
@@ -1730,44 +1325,43 @@ function showBSTData() {
         );
 
 
-    if (!result) return;
-
-
     const values =
-        priceBST.inorder(
-            priceBST.root
+        priceTree.inorder(
+            priceTree.root
         );
 
 
     result.innerHTML = `
 
         <strong>
-            BST Inorder Traversal:
+            BST Inorder Traversal
         </strong>
 
         <br><br>
 
-        ${values
-            .map(
-                value =>
-                    formatPrice(value)
-            )
-            .join(" → ")}
+        ${
+            values
+                .map(
+                    value =>
+                        price(value)
+                )
+                .join(" → ")
+        }
 
     `;
 
 }
 
 
-/* =========================================================
+/* =====================================================
    CHECKOUT
-========================================================= */
+===================================================== */
 
 function checkout() {
 
     if (cart.length === 0) {
 
-        showToast(
+        toast(
             "Your cart is empty ❌"
         );
 
@@ -1798,7 +1392,7 @@ function checkout() {
             ),
 
         total:
-            getCartTotal(),
+            cartTotal(),
 
         status:
             "Confirmed"
@@ -1806,21 +1400,14 @@ function checkout() {
     };
 
 
-    orders.unshift(
-        order
-    );
-
-
-    saveOrders();
-
+    orders.unshift(order);
 
     cart = [];
 
 
-    saveCart();
+    saveData();
 
-
-    updateCartUI();
+    updateCart();
 
     renderOrders();
 
@@ -1829,25 +1416,23 @@ function checkout() {
     closeCart();
 
 
-    showToast(
-        `Order ${order.id} placed successfully 🎉`
+    toast(
+        "Order placed successfully 🎉"
     );
 
 
     document
-        .getElementById(
-            "orders"
-        )
-        ?.scrollIntoView({
+        .getElementById("orders")
+        .scrollIntoView({
             behavior: "smooth"
         });
 
 }
 
 
-/* =========================================================
-   RENDER ORDERS
-========================================================= */
+/* =====================================================
+   ORDERS
+===================================================== */
 
 function renderOrders() {
 
@@ -1856,41 +1441,33 @@ function renderOrders() {
             "orderContainer"
         );
 
+
     const message =
         document.getElementById(
             "orderMessage"
         );
 
 
-    if (!container) return;
-
-
     if (orders.length === 0) {
 
         container.innerHTML = `
+
             <div class="empty-orders">
                 No orders yet.
             </div>
+
         `;
 
-        if (message) {
-
-            message.textContent =
-                "Your previous orders will appear here.";
-
-        }
+        message.textContent =
+            "Your previous orders will appear here.";
 
         return;
 
     }
 
 
-    if (message) {
-
-        message.textContent =
-            `${orders.length} order(s) found.`;
-
-    }
+    message.textContent =
+        `${orders.length} order(s) found.`;
 
 
     container.innerHTML = "";
@@ -1907,12 +1484,12 @@ function renderOrders() {
             "order-card";
 
 
-        let productsHTML = "";
+        let itemHTML = "";
 
 
         order.items.forEach(item => {
 
-            productsHTML += `
+            itemHTML += `
 
                 <div class="order-product">
 
@@ -1922,7 +1499,7 @@ function renderOrders() {
                     </span>
 
                     <strong>
-                        ${formatPrice(
+                        ${price(
                             item.price *
                             item.quantity
                         )}
@@ -1962,44 +1539,38 @@ function renderOrders() {
 
             </div>
 
-
-            <div class="order-products">
-
-                ${productsHTML}
-
+            <div>
+                ${itemHTML}
             </div>
-
 
             <div class="order-total">
 
                 Total:
-                ${formatPrice(
-                    order.total
-                )}
+                ${price(order.total)}
 
             </div>
 
         `;
 
 
-        container.appendChild(
-            card
-        );
+        container.appendChild(card);
 
     });
 
 }
 
 
-/* =========================================================
+/* =====================================================
    CLEAR ORDERS
-========================================================= */
+===================================================== */
 
 function clearOrderHistory() {
 
-    if (orders.length === 0) {
+    if (
+        orders.length === 0
+    ) {
 
-        showToast(
+        toast(
             "No orders to clear."
         );
 
@@ -2008,77 +1579,64 @@ function clearOrderHistory() {
     }
 
 
-    const confirmDelete =
-        confirm(
+    if (
+        !confirm(
             "Clear all order history?"
-        );
+        )
+    ) {
 
-
-    if (!confirmDelete)
         return;
+
+    }
 
 
     orders = [];
 
-
-    saveOrders();
+    saveData();
 
     renderOrders();
 
-
-    showToast(
+    toast(
         "Order history cleared."
     );
 
 }
 
 
-/* =========================================================
-   CLOSE MODAL WHEN CLICK OUTSIDE
-========================================================= */
+/* =====================================================
+   SHOP NOW
+===================================================== */
 
-document.addEventListener(
-    "click",
-    function(event) {
+function scrollToProducts() {
 
-        const modal =
-            document.getElementById(
-                "cartPanel"
-            );
+    document
+        .getElementById("products")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
 
-
-        if (
-            modal &&
-            event.target === modal
-        ) {
-
-            closeCart();
-
-        }
-
-    }
-);
+}
 
 
-/* =========================================================
+/* =====================================================
    INITIALIZE
-========================================================= */
+===================================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
     function() {
 
-        updateCartUI();
+        updateCart();
 
         renderWishlist();
+
+        updateWishlistButtons();
 
         renderOrders();
 
         updateRecommendations();
 
         filterByPrice();
-
-        updateWishlistButtons();
 
     }
 );
