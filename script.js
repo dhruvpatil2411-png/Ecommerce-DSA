@@ -1,6 +1,12 @@
 // ============================================
-// SHOPSMART - FINAL DSA JAVASCRIPT
-// ACTUAL LINKED LIST SHOPPING CART
+// SHOPSMART
+// E-COMMERCE DSA MINI PROJECT
+//
+// DSA USED:
+// 1. Linked List
+// 2. Binary Search Tree
+// 3. Searching
+// 4. Sorting
 // ============================================
 
 
@@ -59,7 +65,11 @@ const products = {
 
 class CartNode {
 
-    constructor(name, price, quantity = 1) {
+    constructor(
+        name,
+        price,
+        quantity = 1
+    ) {
 
         this.name = name;
 
@@ -75,7 +85,7 @@ class CartNode {
 
 
 // ============================================
-// LINKED LIST
+// SHOPPING CART LINKED LIST
 // ============================================
 
 class ShoppingCart {
@@ -88,19 +98,24 @@ class ShoppingCart {
 
 
     // ========================================
-    // INSERT NODE
+    // INSERT
     // ========================================
 
     add(name, price) {
 
-        let current = this.head;
+        let current =
+            this.head;
 
 
-        // Product already exists
+        // If product already exists
 
-        while (current !== null) {
+        while (
+            current !== null
+        ) {
 
-            if (current.name === name) {
+            if (
+                current.name === name
+            ) {
 
                 current.quantity++;
 
@@ -108,7 +123,9 @@ class ShoppingCart {
 
             }
 
-            current = current.next;
+
+            current =
+                current.next;
 
         }
 
@@ -118,56 +135,66 @@ class ShoppingCart {
         const newNode =
             new CartNode(
                 name,
-                price,
-                1
+                price
             );
 
 
         // Empty list
 
-        if (this.head === null) {
+        if (
+            this.head === null
+        ) {
 
-            this.head = newNode;
+            this.head =
+                newNode;
 
             return;
 
         }
 
 
-        // Traverse to last node
+        // Go to last node
 
-        current = this.head;
+        current =
+            this.head;
 
-        while (current.next !== null) {
 
-            current = current.next;
+        while (
+            current.next !== null
+        ) {
+
+            current =
+                current.next;
 
         }
 
 
-        // Add at end
-
-        current.next = newNode;
+        current.next =
+            newNode;
 
     }
 
 
     // ========================================
-    // DELETE NODE
+    // DELETE
     // ========================================
 
     remove(name) {
 
-        if (this.head === null) {
+        if (
+            this.head === null
+        ) {
 
             return false;
 
         }
 
 
-        // Delete head
+        // Delete first node
 
-        if (this.head.name === name) {
+        if (
+            this.head.name === name
+        ) {
 
             this.head =
                 this.head.next;
@@ -177,7 +204,8 @@ class ShoppingCart {
         }
 
 
-        let current = this.head;
+        let current =
+            this.head;
 
 
         while (
@@ -196,7 +224,8 @@ class ShoppingCart {
             }
 
 
-            current = current.next;
+            current =
+                current.next;
 
         }
 
@@ -212,18 +241,25 @@ class ShoppingCart {
 
     find(name) {
 
-        let current = this.head;
+        let current =
+            this.head;
 
 
-        while (current !== null) {
+        while (
+            current !== null
+        ) {
 
-            if (current.name === name) {
+            if (
+                current.name === name
+            ) {
 
                 return current;
 
             }
 
-            current = current.next;
+
+            current =
+                current.next;
 
         }
 
@@ -237,25 +273,31 @@ class ShoppingCart {
     // CHANGE QUANTITY
     // ========================================
 
-    changeQuantity(name, change) {
+    changeQuantity(
+        name,
+        change
+    ) {
 
         const node =
             this.find(name);
 
 
-        if (node === null) {
+        if (
+            node === null
+        ) {
 
             return;
 
         }
 
 
-        node.quantity += change;
+        node.quantity +=
+            change;
 
 
-        // Delete if quantity becomes zero
-
-        if (node.quantity <= 0) {
+        if (
+            node.quantity <= 0
+        ) {
 
             this.remove(name);
 
@@ -265,7 +307,7 @@ class ShoppingCart {
 
 
     // ========================================
-    // CLEAR LIST
+    // CLEAR
     // ========================================
 
     clear() {
@@ -283,23 +325,30 @@ class ShoppingCart {
 
         const items = [];
 
-        let current = this.head;
+        let current =
+            this.head;
 
 
-        while (current !== null) {
+        while (
+            current !== null
+        ) {
 
             items.push({
 
-                name: current.name,
+                name:
+                    current.name,
 
-                price: current.price,
+                price:
+                    current.price,
 
-                quantity: current.quantity
+                quantity:
+                    current.quantity
 
             });
 
 
-            current = current.next;
+            current =
+                current.next;
 
         }
 
@@ -310,24 +359,28 @@ class ShoppingCart {
 
 
     // ========================================
-    // TOTAL PRICE
+    // TOTAL
     // ========================================
 
     getTotal() {
 
         let total = 0;
 
-        let current = this.head;
+        let current =
+            this.head;
 
 
-        while (current !== null) {
+        while (
+            current !== null
+        ) {
 
             total +=
                 current.price *
                 current.quantity;
 
 
-            current = current.next;
+            current =
+                current.next;
 
         }
 
@@ -345,16 +398,20 @@ class ShoppingCart {
 
         let total = 0;
 
-        let current = this.head;
+        let current =
+            this.head;
 
 
-        while (current !== null) {
+        while (
+            current !== null
+        ) {
 
             total +=
                 current.quantity;
 
 
-            current = current.next;
+            current =
+                current.next;
 
         }
 
@@ -444,28 +501,38 @@ const recommendations = {
 
 
 // ============================================
-// LOCAL STORAGE
+// SAVE CART
 // ============================================
 
 function saveCart() {
 
     localStorage.setItem(
+
         "shopSmartCart",
+
         JSON.stringify(
             shoppingCart.toArray()
         )
+
     );
 
 }
 
 
+// ============================================
+// SAVE WISHLIST
+// ============================================
+
 function saveWishlist() {
 
     localStorage.setItem(
+
         "shopSmartWishlist",
+
         JSON.stringify(
             wishlist
         )
+
     );
 
 }
@@ -532,13 +599,6 @@ function showToast(message) {
         );
 
 
-    if (!toast) {
-
-        return;
-
-    }
-
-
     toast.textContent =
         message;
 
@@ -566,9 +626,13 @@ function showToast(message) {
 // ADD TO CART
 // ============================================
 
-function addToCart(productName) {
+function addToCart(
+    productName
+) {
 
-    if (!products[productName]) {
+    if (
+        !products[productName]
+    ) {
 
         return;
 
@@ -576,8 +640,13 @@ function addToCart(productName) {
 
 
     shoppingCart.add(
+
         productName,
-        products[productName].price
+
+        products[
+            productName
+        ].price
+
     );
 
 
@@ -591,9 +660,11 @@ function addToCart(productName) {
 
 
     showToast(
+
         "✅ " +
         productName +
         " added to cart"
+
     );
 
 }
@@ -623,26 +694,24 @@ function updateCart() {
         );
 
 
-    if (!cartItems) {
-
-        return;
-
-    }
-
-
-    cartItems.innerHTML = "";
+    cartItems.innerHTML =
+        "";
 
 
     const items =
         shoppingCart.toArray();
 
 
-    if (items.length === 0) {
+    if (
+        items.length === 0
+    ) {
 
         cartItems.innerHTML = `
 
             <p class="empty-cart">
+
                 Your cart is empty.
+
             </p>
 
         `;
@@ -662,23 +731,28 @@ function updateCart() {
 
 
     items.forEach(
-        function(item, index) {
+        function(
+            item,
+            index
+        ) {
 
-            const itemElement =
+
+            const element =
                 document.createElement(
                     "div"
                 );
 
 
-            itemElement.className =
+            element.className =
                 "cart-item";
 
 
-            itemElement.innerHTML = `
+            element.innerHTML = `
 
                 <h3>
                     ${item.name}
                 </h3>
+
 
                 <p>
                     Price:
@@ -691,10 +765,12 @@ function updateCart() {
                 >
 
                     <button
-                        onclick="changeQuantityByIndex(
-                            ${index},
-                            -1
-                        )"
+                        onclick="
+                            changeQuantityByIndex(
+                                ${index},
+                                -1
+                            )
+                        "
                     >
                         −
                     </button>
@@ -706,10 +782,12 @@ function updateCart() {
 
 
                     <button
-                        onclick="changeQuantityByIndex(
-                            ${index},
-                            1
-                        )"
+                        onclick="
+                            changeQuantityByIndex(
+                                ${index},
+                                1
+                            )
+                        "
                     >
                         +
                     </button>
@@ -718,19 +796,23 @@ function updateCart() {
 
 
                 <p>
+
                     Subtotal:
                     ₹${(
                         item.price *
                         item.quantity
                     ).toLocaleString()}
+
                 </p>
 
 
                 <button
                     class="remove-btn"
-                    onclick="removeCartItem(
-                        '${item.name}'
-                    )"
+                    onclick="
+                        removeCartItem(
+                            '${item.name}'
+                        )
+                    "
                 >
                     ❌ Remove
                 </button>
@@ -739,7 +821,7 @@ function updateCart() {
 
 
             cartItems.appendChild(
-                itemElement
+                element
             );
 
         }
@@ -747,7 +829,8 @@ function updateCart() {
 
 
     cartCount.textContent =
-        shoppingCart.getTotalQuantity();
+        shoppingCart
+            .getTotalQuantity();
 
 
     cartTotal.textContent =
@@ -772,7 +855,9 @@ function changeQuantityByIndex(
         shoppingCart.toArray();
 
 
-    if (!items[index]) {
+    if (
+        !items[index]
+    ) {
 
         return;
 
@@ -780,8 +865,11 @@ function changeQuantityByIndex(
 
 
     shoppingCart.changeQuantity(
+
         items[index].name,
+
         change
+
     );
 
 
@@ -796,7 +884,9 @@ function changeQuantityByIndex(
 // REMOVE CART ITEM
 // ============================================
 
-function removeCartItem(name) {
+function removeCartItem(
+    name
+) {
 
     shoppingCart.remove(
         name
@@ -809,9 +899,11 @@ function removeCartItem(name) {
 
 
     showToast(
+
         "❌ " +
         name +
         " removed"
+
     );
 
 }
@@ -823,52 +915,11 @@ function removeCartItem(name) {
 
 function clearCart() {
 
-    if (
-        shoppingCart.head === null
-    ) {
-
-        showToast(
-            "Cart is already empty"
-        );
-
-        return;
-
-    }
-
-
     shoppingCart.clear();
 
     saveCart();
 
     updateCart();
-
-
-    const recommendationContainer =
-        document.getElementById(
-            "recommendationContainer"
-        );
-
-
-    const recommendationText =
-        document.getElementById(
-            "recommendationText"
-        );
-
-
-    if (recommendationContainer) {
-
-        recommendationContainer.innerHTML =
-            "";
-
-    }
-
-
-    if (recommendationText) {
-
-        recommendationText.textContent =
-            "Add a product to your cart to get recommendations.";
-
-    }
 
 
     showToast(
@@ -962,12 +1013,34 @@ function checkout() {
 
 
 // ============================================
-// SEARCH
+// SEARCH PRODUCTS
 // ============================================
 
 function searchProducts() {
 
-    const text =
+    applyFilters();
+
+}
+
+
+// ============================================
+// FILTER PRODUCTS
+// ============================================
+
+function filterProducts() {
+
+    applyFilters();
+
+}
+
+
+// ============================================
+// APPLY SEARCH + CATEGORY
+// ============================================
+
+function applyFilters() {
+
+    const search =
         document
             .getElementById(
                 "searchInput"
@@ -976,63 +1049,6 @@ function searchProducts() {
             .toLowerCase()
             .trim();
 
-
-    const cards =
-        document.querySelectorAll(
-            ".product-card"
-        );
-
-
-    let visible = 0;
-
-
-    cards.forEach(
-        function(card) {
-
-            const name =
-                card
-                    .dataset
-                    .name
-                    .toLowerCase();
-
-
-            if (
-                name.includes(text)
-            ) {
-
-                card.style.display =
-                    "";
-
-                visible++;
-
-            } else {
-
-                card.style.display =
-                    "none";
-
-            }
-
-        }
-    );
-
-
-    document
-        .getElementById(
-            "resultCount"
-        )
-        .textContent =
-            "Showing " +
-            visible +
-            " products";
-
-}
-
-
-// ============================================
-// CATEGORY FILTER
-// ============================================
-
-function filterProducts() {
 
     const category =
         document
@@ -1042,59 +1058,54 @@ function filterProducts() {
             .value;
 
 
-    const searchText =
-        document
-            .getElementById(
-                "searchInput"
-            )
-            .value
-            .toLowerCase()
-            .trim();
-
-
     const cards =
         document.querySelectorAll(
             ".product-card"
         );
 
 
-    let visible = 0;
+    let count = 0;
 
 
     cards.forEach(
         function(card) {
 
-            const cardCategory =
-                card.dataset.category;
-
-
-            const productName =
+            const name =
                 card.dataset.name
                     .toLowerCase();
 
 
-            const categoryMatch =
-                category === "all" ||
-                cardCategory === category;
+            const cardCategory =
+                card.dataset.category;
 
 
             const searchMatch =
-                productName.includes(
-                    searchText
+                name.includes(
+                    search
                 );
 
 
+            const categoryMatch =
+
+                category === "all" ||
+
+                cardCategory ===
+                    category;
+
+
             if (
-                categoryMatch &&
-                searchMatch
+                searchMatch &&
+                categoryMatch
             ) {
 
                 card.style.display =
                     "";
 
-                visible++;
+                count++;
 
-            } else {
+            }
+
+            else {
 
                 card.style.display =
                     "none";
@@ -1110,9 +1121,10 @@ function filterProducts() {
             "resultCount"
         )
         .textContent =
-            "Showing " +
-            visible +
-            " products";
+
+        "Showing " +
+        count +
+        " products";
 
 }
 
@@ -1153,12 +1165,17 @@ function sortProducts() {
             function(a, b) {
 
                 return (
+
                     Number(
                         a.dataset.price
-                    ) -
+                    )
+
+                    -
+
                     Number(
                         b.dataset.price
                     )
+
                 );
 
             }
@@ -1167,7 +1184,7 @@ function sortProducts() {
     }
 
 
-    if (
+    else if (
         option === "high"
     ) {
 
@@ -1175,12 +1192,17 @@ function sortProducts() {
             function(a, b) {
 
                 return (
+
                     Number(
                         b.dataset.price
-                    ) -
+                    )
+
+                    -
+
                     Number(
                         a.dataset.price
                     )
+
                 );
 
             }
@@ -1189,17 +1211,21 @@ function sortProducts() {
     }
 
 
-    if (
+    else if (
         option === "name"
     ) {
 
         cards.sort(
             function(a, b) {
 
-                return a.dataset.name
-                    .localeCompare(
-                        b.dataset.name
-                    );
+                return (
+
+                    a.dataset.name
+                        .localeCompare(
+                            b.dataset.name
+                        )
+
+                );
 
             }
         );
@@ -1217,11 +1243,14 @@ function sortProducts() {
         }
     );
 
+
+    applyFilters();
+
 }
 
 
 // ============================================
-// RECOMMENDATION
+// RECOMMENDATION SYSTEM
 // ============================================
 
 function showRecommendations(
@@ -1240,18 +1269,12 @@ function showRecommendations(
         );
 
 
-    if (!container || !text) {
-
-        return;
-
-    }
-
-
     container.innerHTML =
         "";
 
 
     text.textContent =
+
         "Because you selected " +
         productName +
         ":";
@@ -1307,9 +1330,11 @@ function showRecommendations(
 
                 <button
                     class="add-btn"
-                    onclick="addToCart(
-                        '${name}'
-                    )"
+                    onclick="
+                        addToCart(
+                            '${name}'
+                        )
+                    "
                 >
                     Add to Cart
                 </button>
@@ -1342,7 +1367,9 @@ function toggleWishlist(
         );
 
 
-    if (index === -1) {
+    if (
+        index === -1
+    ) {
 
         wishlist.push(
             productName
@@ -1362,7 +1389,10 @@ function toggleWishlist(
             "❤️ Added to wishlist"
         );
 
-    } else {
+    }
+
+
+    else {
 
         wishlist.splice(
             index,
@@ -1411,13 +1441,6 @@ function displayWishlist() {
         );
 
 
-    if (!container || !text) {
-
-        return;
-
-    }
-
-
     container.innerHTML =
         "";
 
@@ -1435,6 +1458,7 @@ function displayWishlist() {
 
 
     text.textContent =
+
         wishlist.length +
         " product(s) in your wishlist.";
 
@@ -1472,9 +1496,11 @@ function displayWishlist() {
 
 
                 <button
-                    onclick="removeFromWishlist(
-                        '${name}'
-                    )"
+                    onclick="
+                        removeFromWishlist(
+                            '${name}'
+                        )
+                    "
                 >
                     Remove
                 </button>
@@ -1506,7 +1532,9 @@ function removeFromWishlist(
         );
 
 
-    if (index !== -1) {
+    if (
+        index !== -1
+    ) {
 
         wishlist.splice(
             index,
@@ -1545,13 +1573,13 @@ function restoreWishlistButtons() {
     buttons.forEach(
         function(button) {
 
-            const onclickText =
+            const onclick =
                 button.getAttribute(
                     "onclick"
                 );
 
 
-            if (!onclickText) {
+            if (!onclick) {
 
                 return;
 
@@ -1559,7 +1587,7 @@ function restoreWishlistButtons() {
 
 
             const match =
-                onclickText.match(
+                onclick.match(
                     /'([^']+)'/
                 );
 
@@ -1598,7 +1626,545 @@ function restoreWishlistButtons() {
 
 
 // ============================================
-// DSA DEBUG / DEMO
+// BST NODE
+// ============================================
+
+class BSTNode {
+
+    constructor(
+        price,
+        productName
+    ) {
+
+        this.price =
+            price;
+
+        this.productName =
+            productName;
+
+        this.left =
+            null;
+
+        this.right =
+            null;
+
+    }
+
+}
+
+
+// ============================================
+// BINARY SEARCH TREE
+// ============================================
+
+class ProductBST {
+
+    constructor() {
+
+        this.root =
+            null;
+
+    }
+
+
+    // ========================================
+    // INSERT
+    // ========================================
+
+    insert(
+        price,
+        productName
+    ) {
+
+        const newNode =
+            new BSTNode(
+                price,
+                productName
+            );
+
+
+        if (
+            this.root === null
+        ) {
+
+            this.root =
+                newNode;
+
+            return;
+
+        }
+
+
+        let current =
+            this.root;
+
+
+        while (true) {
+
+            if (
+                price <
+                current.price
+            ) {
+
+                if (
+                    current.left === null
+                ) {
+
+                    current.left =
+                        newNode;
+
+                    return;
+
+                }
+
+
+                current =
+                    current.left;
+
+            }
+
+
+            else {
+
+                if (
+                    current.right === null
+                ) {
+
+                    current.right =
+                        newNode;
+
+                    return;
+
+                }
+
+
+                current =
+                    current.right;
+
+            }
+
+        }
+
+    }
+
+
+    // ========================================
+    // SEARCH
+    // ========================================
+
+    search(price) {
+
+        let current =
+            this.root;
+
+
+        while (
+            current !== null
+        ) {
+
+            if (
+                price ===
+                current.price
+            ) {
+
+                return current;
+
+            }
+
+
+            if (
+                price <
+                current.price
+            ) {
+
+                current =
+                    current.left;
+
+            }
+
+
+            else {
+
+                current =
+                    current.right;
+
+            }
+
+        }
+
+
+        return null;
+
+    }
+
+
+    // ========================================
+    // INORDER
+    // ========================================
+
+    inorder(
+        node = this.root,
+        result = []
+    ) {
+
+        if (
+            node === null
+        ) {
+
+            return result;
+
+        }
+
+
+        this.inorder(
+            node.left,
+            result
+        );
+
+
+        result.push({
+
+            price:
+                node.price,
+
+            product:
+                node.productName
+
+        });
+
+
+        this.inorder(
+            node.right,
+            result
+        );
+
+
+        return result;
+
+    }
+
+
+    // ========================================
+    // MINIMUM
+    // ========================================
+
+    getMinimum() {
+
+        if (
+            this.root === null
+        ) {
+
+            return null;
+
+        }
+
+
+        let current =
+            this.root;
+
+
+        while (
+            current.left !== null
+        ) {
+
+            current =
+                current.left;
+
+        }
+
+
+        return current;
+
+    }
+
+
+    // ========================================
+    // MAXIMUM
+    // ========================================
+
+    getMaximum() {
+
+        if (
+            this.root === null
+        ) {
+
+            return null;
+
+        }
+
+
+        let current =
+            this.root;
+
+
+        while (
+            current.right !== null
+        ) {
+
+            current =
+                current.right;
+
+        }
+
+
+        return current;
+
+    }
+
+}
+
+
+// ============================================
+// CREATE BST
+// ============================================
+
+const productBST =
+    new ProductBST();
+
+
+// ============================================
+// INSERT PRODUCTS INTO BST
+// ============================================
+
+Object.keys(products).forEach(
+    function(productName) {
+
+        productBST.insert(
+
+            products[
+                productName
+            ].price,
+
+            productName
+
+        );
+
+    }
+);
+
+
+// ============================================
+// SEARCH BST
+// ============================================
+
+function searchBST() {
+
+    const input =
+        document.getElementById(
+            "bstSearchInput"
+        );
+
+
+    const result =
+        document.getElementById(
+            "bstResult"
+        );
+
+
+    const price =
+        Number(
+            input.value
+        );
+
+
+    if (
+        !price
+    ) {
+
+        result.innerHTML = `
+
+            ⚠️ Please enter
+            a valid price.
+
+        `;
+
+        return;
+
+    }
+
+
+    const node =
+        productBST.search(
+            price
+        );
+
+
+    if (node) {
+
+        result.innerHTML = `
+
+            <h3>
+                ✅ Product Found
+            </h3>
+
+
+            <p>
+
+                Product:
+                <strong>
+                    ${node.productName}
+                </strong>
+
+            </p>
+
+
+            <p>
+
+                Price:
+                <strong>
+                    ₹${node.price.toLocaleString()}
+                </strong>
+
+            </p>
+
+        `;
+
+    }
+
+
+    else {
+
+        result.innerHTML = `
+
+            <h3>
+                ❌ Product Not Found
+            </h3>
+
+
+            <p>
+
+                No product exists
+                with price
+                ₹${price.toLocaleString()}.
+
+            </p>
+
+        `;
+
+    }
+
+}
+
+
+// ============================================
+// BST INFORMATION
+// ============================================
+
+function showBSTData() {
+
+    const result =
+        document.getElementById(
+            "bstResult"
+        );
+
+
+    const sorted =
+        productBST.inorder();
+
+
+    const minimum =
+        productBST.getMinimum();
+
+
+    const maximum =
+        productBST.getMaximum();
+
+
+    let html = `
+
+        <h3>
+            🌳 BST Information
+        </h3>
+
+
+        <p>
+            <strong>
+                Inorder Traversal:
+            </strong>
+        </p>
+
+
+        <p>
+
+    `;
+
+
+    sorted.forEach(
+        function(
+            item,
+            index
+        ) {
+
+            html +=
+
+                "₹" +
+                item.price.toLocaleString() +
+                " - " +
+                item.product;
+
+
+            if (
+                index <
+                sorted.length - 1
+            ) {
+
+                html +=
+                    " → ";
+
+            }
+
+        }
+    );
+
+
+    html += `
+
+        </p>
+
+
+        <hr>
+
+
+        <p>
+
+            💰 Minimum Price:
+
+            <strong>
+
+                ${minimum.productName}
+                -
+                ₹${minimum.price.toLocaleString()}
+
+            </strong>
+
+        </p>
+
+
+        <p>
+
+            💎 Maximum Price:
+
+            <strong>
+
+                ${maximum.productName}
+                -
+                ₹${maximum.price.toLocaleString()}
+
+            </strong>
+
+        </p>
+
+    `;
+
+
+    result.innerHTML =
+        html;
+
+}
+
+
+// ============================================
+// LINKED LIST CONSOLE DISPLAY
 // ============================================
 
 function displayLinkedList() {
@@ -1607,7 +2173,7 @@ function displayLinkedList() {
         shoppingCart.head;
 
 
-    let result = [];
+    const result = [];
 
 
     while (
@@ -1626,18 +2192,22 @@ function displayLinkedList() {
 
 
     console.log(
-        "Linked List:",
-        result.join(
-            " -> "
-        ),
-        "-> NULL"
+
+        "Shopping Cart Linked List:",
+
+        result.length
+            ? result.join(
+                " -> "
+            ) + " -> NULL"
+            : "NULL"
+
     );
 
 }
 
 
 // ============================================
-// INITIALIZE PROJECT
+// INITIALIZE
 // ============================================
 
 document.addEventListener(

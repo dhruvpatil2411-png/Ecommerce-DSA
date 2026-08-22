@@ -1,15 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ShopSmart | E-Commerce DSA Project</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="style.css">
+    <title>
+        ShopSmart | E-Commerce DSA Project
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
 
 <body>
+
 
 <!-- ================= NAVBAR ================= -->
 
@@ -20,16 +33,40 @@
     </div>
 
     <nav>
+
         <a href="#home">Home</a>
+
         <a href="#products">Products</a>
-        <a href="#recommendations">Recommendations</a>
-        <a href="#dsa">DSA</a>
-        <a href="#about">About</a>
+
+        <a href="#recommendations">
+            Recommendations
+        </a>
+
+        <a href="#bst">
+            BST
+        </a>
+
+        <a href="#dsa">
+            DSA
+        </a>
+
+        <a href="#about">
+            About
+        </a>
+
     </nav>
 
-    <button class="cart-btn" onclick="openCart()">
+    <button
+        class="cart-btn"
+        onclick="openCart()"
+    >
+
         🛒 Cart
-        <span id="cartCount">0</span>
+
+        <span id="cartCount">
+            0
+        </span>
+
     </button>
 
 </header>
@@ -37,7 +74,10 @@
 
 <!-- ================= HERO ================= -->
 
-<section id="home" class="hero">
+<section
+    id="home"
+    class="hero"
+>
 
     <div class="hero-content">
 
@@ -48,20 +88,30 @@
         <h1>
             Shop Smarter.
             <br>
-            <span>Live Better.</span>
+
+            <span>
+                Live Better.
+            </span>
         </h1>
 
         <p>
-            A smart E-Commerce Product Management
-            and Recommendation System using
-            Data Structures and Algorithms.
+
+            A smart E-Commerce Product
+            Management and Recommendation
+            System using Data Structures
+            and Algorithms.
+
         </p>
 
-        <a href="#products" class="shop-btn">
+        <a
+            href="#products"
+            class="shop-btn"
+        >
             Explore Products →
         </a>
 
     </div>
+
 
     <div class="hero-image">
         🛍️
@@ -74,32 +124,71 @@
 
 <section class="categories">
 
-    <h2>Shop by Category</h2>
+    <h2>
+        Shop by Category
+    </h2>
+
 
     <div class="category-container">
 
+
         <div class="category">
+
             📱
-            <h3>Electronics</h3>
-            <p>Smart devices</p>
+
+            <h3>
+                Electronics
+            </h3>
+
+            <p>
+                Smart devices
+            </p>
+
         </div>
 
+
         <div class="category">
+
             💻
-            <h3>Laptops</h3>
-            <p>Powerful laptops</p>
+
+            <h3>
+                Laptops
+            </h3>
+
+            <p>
+                Powerful laptops
+            </p>
+
         </div>
 
+
         <div class="category">
+
             🎧
-            <h3>Accessories</h3>
-            <p>Useful accessories</p>
+
+            <h3>
+                Accessories
+            </h3>
+
+            <p>
+                Useful accessories
+            </p>
+
         </div>
 
+
         <div class="category">
+
             🎮
-            <h3>Gaming</h3>
-            <p>Gaming products</p>
+
+            <h3>
+                Gaming
+            </h3>
+
+            <p>
+                Gaming products
+            </p>
+
         </div>
 
     </div>
@@ -111,20 +200,25 @@
 
 <section class="tools">
 
-    <h2>Find Your Product 🔍</h2>
+    <h2>
+        Find Your Product 🔍
+    </h2>
+
 
     <div class="search-box">
+
 
         <input
             type="text"
             id="searchInput"
             placeholder="Search products..."
-            oninput="searchProducts()"
+            oninput="applyFilters()"
         >
+
 
         <select
             id="categoryFilter"
-            onchange="filterProducts()"
+            onchange="applyFilters()"
         >
 
             <option value="all">
@@ -148,6 +242,7 @@
             </option>
 
         </select>
+
 
         <select
             id="sortSelect"
@@ -174,7 +269,11 @@
 
     </div>
 
-    <p id="resultCount" class="result-count">
+
+    <p
+        id="resultCount"
+        class="result-count"
+    >
         Showing 8 products
     </p>
 
@@ -183,14 +282,21 @@
 
 <!-- ================= PRODUCTS ================= -->
 
-<section id="products" class="products">
+<section
+    id="products"
+    class="products"
+>
 
-    <h2>Popular Products 🛍️</h2>
+    <h2>
+        Popular Products 🛍️
+    </h2>
+
 
     <div
         class="product-container"
         id="productContainer"
     >
+
 
         <!-- PRODUCT 1 -->
 
@@ -208,25 +314,36 @@
                 ♡
             </button>
 
+
             <div class="product-icon">
                 💻
             </div>
+
 
             <span class="badge">
                 Popular
             </span>
 
-            <h3>Smart Laptop</h3>
+
+            <h3>
+                Smart Laptop
+            </h3>
+
 
             <p>
                 Powerful performance laptop
             </p>
 
+
             <div class="rating">
                 ⭐⭐⭐⭐⭐
             </div>
 
-            <h4>₹55,000</h4>
+
+            <h4>
+                ₹55,000
+            </h4>
+
 
             <button
                 class="add-btn"
@@ -254,25 +371,36 @@
                 ♡
             </button>
 
+
             <div class="product-icon">
                 📱
             </div>
+
 
             <span class="badge">
                 New
             </span>
 
-            <h3>Smartphone</h3>
+
+            <h3>
+                Smartphone
+            </h3>
+
 
             <p>
                 Latest generation smartphone
             </p>
 
+
             <div class="rating">
                 ⭐⭐⭐⭐☆
             </div>
 
-            <h4>₹25,000</h4>
+
+            <h4>
+                ₹25,000
+            </h4>
+
 
             <button
                 class="add-btn"
@@ -300,25 +428,36 @@
                 ♡
             </button>
 
+
             <div class="product-icon">
                 🎧
             </div>
+
 
             <span class="badge">
                 Best Seller
             </span>
 
-            <h3>Wireless Headphones</h3>
+
+            <h3>
+                Wireless Headphones
+            </h3>
+
 
             <p>
                 Premium sound experience
             </p>
 
+
             <div class="rating">
                 ⭐⭐⭐⭐⭐
             </div>
 
-            <h4>₹2,999</h4>
+
+            <h4>
+                ₹2,999
+            </h4>
+
 
             <button
                 class="add-btn"
@@ -346,25 +485,36 @@
                 ♡
             </button>
 
+
             <div class="product-icon">
                 ⌚
             </div>
+
 
             <span class="badge">
                 Trending
             </span>
 
-            <h3>Smart Watch</h3>
+
+            <h3>
+                Smart Watch
+            </h3>
+
 
             <p>
                 Track your daily activities
             </p>
 
+
             <div class="rating">
                 ⭐⭐⭐⭐☆
             </div>
 
-            <h4>₹4,999</h4>
+
+            <h4>
+                ₹4,999
+            </h4>
+
 
             <button
                 class="add-btn"
@@ -392,25 +542,36 @@
                 ♡
             </button>
 
+
             <div class="product-icon">
                 🖱️
             </div>
+
 
             <span class="badge">
                 Gaming
             </span>
 
-            <h3>Gaming Mouse</h3>
+
+            <h3>
+                Gaming Mouse
+            </h3>
+
 
             <p>
                 High precision gaming mouse
             </p>
 
+
             <div class="rating">
                 ⭐⭐⭐⭐⭐
             </div>
 
-            <h4>₹1,499</h4>
+
+            <h4>
+                ₹1,499
+            </h4>
+
 
             <button
                 class="add-btn"
@@ -438,25 +599,36 @@
                 ♡
             </button>
 
+
             <div class="product-icon">
                 🔊
             </div>
+
 
             <span class="badge">
                 Popular
             </span>
 
-            <h3>Bluetooth Speaker</h3>
+
+            <h3>
+                Bluetooth Speaker
+            </h3>
+
 
             <p>
                 Portable wireless speaker
             </p>
 
+
             <div class="rating">
                 ⭐⭐⭐⭐☆
             </div>
 
-            <h4>₹2,999</h4>
+
+            <h4>
+                ₹2,999
+            </h4>
+
 
             <button
                 class="add-btn"
@@ -484,25 +656,36 @@
                 ♡
             </button>
 
+
             <div class="product-icon">
                 ⌨️
             </div>
+
 
             <span class="badge">
                 Gaming
             </span>
 
-            <h3>Gaming Keyboard</h3>
+
+            <h3>
+                Gaming Keyboard
+            </h3>
+
 
             <p>
                 Mechanical gaming keyboard
             </p>
 
+
             <div class="rating">
                 ⭐⭐⭐⭐⭐
             </div>
 
-            <h4>₹2,499</h4>
+
+            <h4>
+                ₹2,499
+            </h4>
+
 
             <button
                 class="add-btn"
@@ -530,25 +713,36 @@
                 ♡
             </button>
 
+
             <div class="product-icon">
                 🔋
             </div>
+
 
             <span class="badge">
                 Value
             </span>
 
-            <h3>Power Bank</h3>
+
+            <h3>
+                Power Bank
+            </h3>
+
 
             <p>
                 Fast charging power bank
             </p>
 
+
             <div class="rating">
                 ⭐⭐⭐⭐☆
             </div>
 
-            <h4>₹1,299</h4>
+
+            <h4>
+                ₹1,299
+            </h4>
+
 
             <button
                 class="add-btn"
@@ -575,10 +769,14 @@
         ⭐ Recommended For You
     </h2>
 
+
     <p id="recommendationText">
+
         Add a product to your cart
         to get recommendations.
+
     </p>
+
 
     <div
         id="recommendationContainer"
@@ -597,14 +795,68 @@
         ❤️ Your Wishlist
     </h2>
 
+
     <p id="wishlistText">
         No products added to wishlist.
     </p>
+
 
     <div
         id="wishlistContainer"
         class="wishlist-container"
     >
+    </div>
+
+</section>
+
+
+<!-- ================= BST ================= -->
+
+<section
+    id="bst"
+    class="bst-section"
+>
+
+    <h2>
+        🌳 Product Price BST
+    </h2>
+
+
+    <p>
+        Binary Search Tree used for
+        product price searching.
+    </p>
+
+
+    <div class="bst-controls">
+
+
+        <input
+            type="number"
+            id="bstSearchInput"
+            placeholder="Enter product price..."
+        >
+
+
+        <button onclick="searchBST()">
+            🔍 Search Price
+        </button>
+
+
+        <button onclick="showBSTData()">
+            📊 BST Information
+        </button>
+
+    </div>
+
+
+    <div
+        id="bstResult"
+        class="bst-result"
+    >
+
+        BST is ready.
+
     </div>
 
 </section>
@@ -621,54 +873,87 @@
         🧠 Data Structures & Algorithms
     </h2>
 
+
     <div class="dsa-container">
 
+
         <div class="dsa-card">
+
             🔍
-            <h3>Searching</h3>
+
+            <h3>
+                Searching
+            </h3>
+
             <p>
                 Product search using
-                linear search concept.
+                searching algorithms.
             </p>
+
             <strong>
                 O(n)
             </strong>
+
         </div>
 
+
         <div class="dsa-card">
+
             🔃
-            <h3>Sorting</h3>
+
+            <h3>
+                Sorting
+            </h3>
+
             <p>
-                Product price sorting
-                using comparison sorting.
+                Products sorted according
+                to price and name.
             </p>
+
             <strong>
                 O(n log n)
             </strong>
+
         </div>
 
-        <div class="dsa-card">
-            🛒
-            <h3>Linked List</h3>
-            <p>
-                Cart items are managed
-                as dynamic collection nodes.
-            </p>
-            <strong>
-                Dynamic
-            </strong>
-        </div>
 
         <div class="dsa-card">
-            ⭐
-            <h3>Recommendation</h3>
+
+            🔗
+
+            <h3>
+                Linked List
+            </h3>
+
             <p>
-                Product relationships are
-                used for recommendations.
+                Shopping cart implemented
+                using actual linked list.
             </p>
+
             <strong>
-                Graph / Tree Concept
+                Node → Node → NULL
             </strong>
+
+        </div>
+
+
+        <div class="dsa-card">
+
+            🌳
+
+            <h3>
+                Binary Search Tree
+            </h3>
+
+            <p>
+                Product prices stored
+                using BST.
+            </p>
+
+            <strong>
+                O(log n) Average
+            </strong>
+
         </div>
 
     </div>
@@ -687,33 +972,79 @@
         About ShopSmart
     </h2>
 
+
     <p>
+
         ShopSmart is an E-Commerce Product
         Management and Recommendation System
         developed as a Data Structures and
         Algorithms mini project.
+
     </p>
+
+
+    <p>
+
+        The project demonstrates Searching,
+        Sorting, Linked List, Binary Search Tree,
+        Wishlist and Recommendation concepts.
+
+    </p>
+
 
     <div class="project-info">
 
-        <div>
-            <strong>Frontend</strong>
-            <span>HTML, CSS, JavaScript</span>
-        </div>
 
         <div>
-            <strong>DSA</strong>
-            <span>Searching, Sorting, Linked List</span>
+
+            <strong>
+                Frontend
+            </strong>
+
+            <span>
+                HTML, CSS, JavaScript
+            </span>
+
         </div>
 
-        <div>
-            <strong>Platform</strong>
-            <span>GitHub Pages</span>
-        </div>
 
         <div>
-            <strong>Project Type</strong>
-            <span>DSA Mini Project</span>
+
+            <strong>
+                DSA
+            </strong>
+
+            <span>
+                Searching, Sorting,
+                Linked List, BST
+            </span>
+
+        </div>
+
+
+        <div>
+
+            <strong>
+                Storage
+            </strong>
+
+            <span>
+                Browser LocalStorage
+            </span>
+
+        </div>
+
+
+        <div>
+
+            <strong>
+                Project Type
+            </strong>
+
+            <span>
+                DSA Mini Project
+            </span>
+
         </div>
 
     </div>
@@ -729,30 +1060,38 @@
         🛒 ShopSmart
     </h2>
 
-    <p>
-        E-Commerce Product Management &
-        Recommendation System
-    </p>
 
     <p>
+
+        E-Commerce Product Management &
+        Recommendation System
+
+    </p>
+
+
+    <p>
+
         DSA Mini Project | 2026
+
     </p>
 
 </footer>
 
 
-<!-- ================= CART PANEL ================= -->
+<!-- ================= CART ================= -->
 
 <div
     id="cartPanel"
     class="cart-panel"
 >
 
+
     <div class="cart-header">
 
         <h2>
             🛒 Your Cart
         </h2>
+
 
         <button
             onclick="closeCart()"
@@ -778,13 +1117,19 @@
 
     <div class="cart-footer">
 
+
         <div class="total-row">
-            <span>Total</span>
+
+            <span>
+                Total
+            </span>
 
             <strong id="cartTotal">
                 ₹0
             </strong>
+
         </div>
+
 
         <button
             class="checkout-btn"
@@ -792,6 +1137,7 @@
         >
             💳 Checkout
         </button>
+
 
         <button
             onclick="clearCart()"
@@ -817,4 +1163,5 @@
 <script src="script.js"></script>
 
 </body>
+
 </html>
