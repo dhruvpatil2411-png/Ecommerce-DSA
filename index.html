@@ -1,584 +1,820 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ShopSmart - E-Commerce DSA</title>
+    <title>ShopSmart | E-Commerce DSA Project</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- ================= NAVBAR ================= -->
+<!-- ================= NAVBAR ================= -->
 
-    <header>
+<header class="navbar">
 
-        <div class="logo">
-            🛒 ShopSmart
+    <div class="logo">
+        🛒 ShopSmart
+    </div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#products">Products</a>
+        <a href="#recommendations">Recommendations</a>
+        <a href="#dsa">DSA</a>
+        <a href="#about">About</a>
+    </nav>
+
+    <button class="cart-btn" onclick="openCart()">
+        🛒 Cart
+        <span id="cartCount">0</span>
+    </button>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section id="home" class="hero">
+
+    <div class="hero-content">
+
+        <p class="small-title">
+            DSA MINI PROJECT
+        </p>
+
+        <h1>
+            Shop Smarter.
+            <br>
+            <span>Live Better.</span>
+        </h1>
+
+        <p>
+            A smart E-Commerce Product Management
+            and Recommendation System using
+            Data Structures and Algorithms.
+        </p>
+
+        <a href="#products" class="shop-btn">
+            Explore Products →
+        </a>
+
+    </div>
+
+    <div class="hero-image">
+        🛍️
+    </div>
+
+</section>
+
+
+<!-- ================= CATEGORIES ================= -->
+
+<section class="categories">
+
+    <h2>Shop by Category</h2>
+
+    <div class="category-container">
+
+        <div class="category">
+            📱
+            <h3>Electronics</h3>
+            <p>Smart devices</p>
         </div>
 
-        <nav>
-            <a href="#">Home</a>
-            <a href="#products">Products</a>
-            <a href="#dsa">DSA</a>
-            <a href="#about">About</a>
-        </nav>
-
-        <button class="cart-btn" onclick="openCart()">
-            🛍️ Cart
-            <span id="cartCount">0</span>
-        </button>
-
-    </header>
-
-
-    <!-- ================= HERO ================= -->
-
-    <section class="hero">
-
-        <div class="hero-content">
-
-            <p class="small-title">
-                SMART SHOPPING PLATFORM
-            </p>
-
-            <h1>
-                Shop Smarter.
-                <br>
-                <span>Live Better.</span>
-            </h1>
-
-            <p>
-                E-Commerce Product Management and
-                Recommendation System using
-                Data Structures and Algorithms.
-            </p>
-
-            <a href="#products" class="shop-btn">
-                Explore Products →
-            </a>
-
+        <div class="category">
+            💻
+            <h3>Laptops</h3>
+            <p>Powerful laptops</p>
         </div>
 
-        <div class="hero-image">
-            🛒
+        <div class="category">
+            🎧
+            <h3>Accessories</h3>
+            <p>Useful accessories</p>
         </div>
 
-    </section>
-
-
-    <!-- ================= CATEGORIES ================= -->
-
-    <section class="categories">
-
-        <h2>
-            Shop by Category
-        </h2>
-
-        <div class="category-container">
-
-            <div class="category">
-                📱
-                <h3>
-                    Electronics
-                </h3>
-
-                <p>
-                    Latest gadgets
-                </p>
-            </div>
-
-
-            <div class="category">
-                💻
-
-                <h3>
-                    Laptops
-                </h3>
-
-                <p>
-                    Powerful laptops
-                </p>
-            </div>
-
-
-            <div class="category">
-                🎧
-
-                <h3>
-                    Accessories
-                </h3>
-
-                <p>
-                    Best accessories
-                </p>
-            </div>
-
-
-            <div class="category">
-                👕
-                
-                <h3>
-                    Fashion
-                </h3>
-
-                <p>
-                    Trendy collection
-                </p>
-            </div>
-
+        <div class="category">
+            🎮
+            <h3>Gaming</h3>
+            <p>Gaming products</p>
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 
-    <!-- ================= SEARCH & SORT ================= -->
+<!-- ================= SEARCH / SORT ================= -->
 
-    <section class="tools">
+<section class="tools">
 
-        <h2>
-            Find Your Product 🔍
-        </h2>
+    <h2>Find Your Product 🔍</h2>
 
-        <div class="search-box">
+    <div class="search-box">
 
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Search product..."
-                onkeyup="searchProducts()"
-            >
-
-
-            <select
-                id="sortSelect"
-                onchange="sortProducts()"
-            >
-
-                <option value="">
-                    Sort Products
-                </option>
-
-                <option value="low">
-                    Price: Low to High
-                </option>
-
-                <option value="high">
-                    Price: High to Low
-                </option>
-
-            </select>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= PRODUCTS ================= -->
-
-    <section
-        id="products"
-        class="products"
-    >
-
-        <h2>
-            Popular Products 🛍️
-        </h2>
-
-
-        <div
-            class="product-container"
-            id="productContainer"
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search products..."
+            oninput="searchProducts()"
         >
 
+        <select
+            id="categoryFilter"
+            onchange="filterProducts()"
+        >
 
-            <!-- LAPTOP -->
+            <option value="all">
+                All Categories
+            </option>
 
-            <div
-                class="product-card"
-                data-name="Smart Laptop"
-                data-price="55000"
-            >
+            <option value="electronics">
+                Electronics
+            </option>
 
-                <div class="product-icon">
-                    💻
-                </div>
+            <option value="laptop">
+                Laptops
+            </option>
 
-                <h3>
-                    Smart Laptop
-                </h3>
+            <option value="accessories">
+                Accessories
+            </option>
 
-                <p>
-                    Powerful performance laptop
-                </p>
+            <option value="gaming">
+                Gaming
+            </option>
 
-                <h4>
-                    ₹55,000
-                </h4>
+        </select>
 
-                <button
-                    onclick="addToCart('Smart Laptop')"
-                >
-                    Add to Cart
-                </button>
+        <select
+            id="sortSelect"
+            onchange="sortProducts()"
+        >
 
-            </div>
+            <option value="">
+                Sort Products
+            </option>
 
+            <option value="low">
+                Price: Low → High
+            </option>
 
-            <!-- SMARTPHONE -->
+            <option value="high">
+                Price: High → Low
+            </option>
 
-            <div
-                class="product-card"
-                data-name="Smartphone"
-                data-price="25000"
-            >
+            <option value="name">
+                Name: A → Z
+            </option>
 
-                <div class="product-icon">
-                    📱
-                </div>
+        </select>
 
-                <h3>
-                    Smartphone
-                </h3>
+    </div>
 
-                <p>
-                    Latest generation smartphone
-                </p>
+    <p id="resultCount" class="result-count">
+        Showing 8 products
+    </p>
 
-                <h4>
-                    ₹25,000
-                </h4>
+</section>
 
-                <button
-                    onclick="addToCart('Smartphone')"
-                >
-                    Add to Cart
-                </button>
 
-            </div>
+<!-- ================= PRODUCTS ================= -->
 
+<section id="products" class="products">
 
-            <!-- HEADPHONES -->
-
-            <div
-                class="product-card"
-                data-name="Wireless Headphones"
-                data-price="2999"
-            >
-
-                <div class="product-icon">
-                    🎧
-                </div>
-
-                <h3>
-                    Wireless Headphones
-                </h3>
-
-                <p>
-                    Premium sound experience
-                </p>
-
-                <h4>
-                    ₹2,999
-                </h4>
-
-                <button
-                    onclick="addToCart('Wireless Headphones')"
-                >
-                    Add to Cart
-                </button>
-
-            </div>
-
-
-            <!-- SMART WATCH -->
-
-            <div
-                class="product-card"
-                data-name="Smart Watch"
-                data-price="4999"
-            >
-
-                <div class="product-icon">
-                    ⌚
-                </div>
-
-                <h3>
-                    Smart Watch
-                </h3>
-
-                <p>
-                    Track your daily activities
-                </p>
-
-                <h4>
-                    ₹4,999
-                </h4>
-
-                <button
-                    onclick="addToCart('Smart Watch')"
-                >
-                    Add to Cart
-                </button>
-
-            </div>
-
-
-            <!-- GAMING MOUSE -->
-
-            <div
-                class="product-card"
-                data-name="Gaming Mouse"
-                data-price="1499"
-            >
-
-                <div class="product-icon">
-                    🖱️
-                </div>
-
-                <h3>
-                    Gaming Mouse
-                </h3>
-
-                <p>
-                    High precision gaming mouse
-                </p>
-
-                <h4>
-                    ₹1,499
-                </h4>
-
-                <button
-                    onclick="addToCart('Gaming Mouse')"
-                >
-                    Add to Cart
-                </button>
-
-            </div>
-
-
-            <!-- SPEAKER -->
-
-            <div
-                class="product-card"
-                data-name="Bluetooth Speaker"
-                data-price="2999"
-            >
-
-                <div class="product-icon">
-                    🔊
-                </div>
-
-                <h3>
-                    Bluetooth Speaker
-                </h3>
-
-                <p>
-                    Portable wireless speaker
-                </p>
-
-                <h4>
-                    ₹2,999
-                </h4>
-
-                <button
-                    onclick="addToCart('Bluetooth Speaker')"
-                >
-                    Add to Cart
-                </button>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= DSA ================= -->
-
-    <section
-        id="dsa"
-        class="dsa-section"
-    >
-
-        <h2>
-            Our DSA Features 🧠
-        </h2>
-
-        <div class="dsa-container">
-
-            <div>
-
-                🔍
-
-                <h3>
-                    Searching
-                </h3>
-
-                <p>
-                    Find products quickly.
-                </p>
-
-            </div>
-
-
-            <div>
-
-                🔃
-
-                <h3>
-                    Sorting
-                </h3>
-
-                <p>
-                    Sort products by price.
-                </p>
-
-            </div>
-
-
-            <div>
-
-                🛒
-
-                <h3>
-                    Linked List
-                </h3>
-
-                <p>
-                    Manage shopping cart.
-                </p>
-
-            </div>
-
-
-            <div>
-
-                ⭐
-
-                <h3>
-                    Recommendation
-                </h3>
-
-                <p>
-                    Suggest related products.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= ABOUT ================= -->
-
-    <section
-        id="about"
-        class="about"
-    >
-
-        <h2>
-            About ShopSmart
-        </h2>
-
-        <p>
-            ShopSmart is an E-Commerce Product
-            Management and Recommendation System
-            developed as a Data Structures and
-            Algorithms mini project.
-        </p>
-
-        <p>
-            The project demonstrates searching,
-            sorting, linked lists and recommendation
-            techniques.
-        </p>
-
-    </section>
-
-
-    <!-- ================= FOOTER ================= -->
-
-    <footer>
-
-        <h2>
-            🛒 ShopSmart
-        </h2>
-
-        <p>
-            E-Commerce Product Management &
-            Recommendation System
-        </p>
-
-        <p>
-            © 2026 ShopSmart | DSA Mini Project
-        </p>
-
-    </footer>
-
-
-    <!-- ================= CART PANEL ================= -->
+    <h2>Popular Products 🛍️</h2>
 
     <div
-        id="cartPanel"
-        class="cart-panel"
+        class="product-container"
+        id="productContainer"
     >
 
-        <div class="cart-header">
+        <!-- PRODUCT 1 -->
 
-            <h2>
-                🛒 Your Cart
-            </h2>
+        <div
+            class="product-card"
+            data-name="Smart Laptop"
+            data-price="55000"
+            data-category="laptop"
+        >
 
             <button
-                onclick="closeCart()"
-                class="close-btn"
+                class="wishlist-btn"
+                onclick="toggleWishlist(this,'Smart Laptop')"
             >
-                ✕
+                ♡
+            </button>
+
+            <div class="product-icon">
+                💻
+            </div>
+
+            <span class="badge">
+                Popular
+            </span>
+
+            <h3>Smart Laptop</h3>
+
+            <p>
+                Powerful performance laptop
+            </p>
+
+            <div class="rating">
+                ⭐⭐⭐⭐⭐
+            </div>
+
+            <h4>₹55,000</h4>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Smart Laptop')"
+            >
+                Add to Cart
             </button>
 
         </div>
 
 
+        <!-- PRODUCT 2 -->
+
         <div
-            id="cartItems"
-            class="cart-items"
+            class="product-card"
+            data-name="Smartphone"
+            data-price="25000"
+            data-category="electronics"
         >
 
-            <p class="empty-cart">
-                Your cart is empty.
+            <button
+                class="wishlist-btn"
+                onclick="toggleWishlist(this,'Smartphone')"
+            >
+                ♡
+            </button>
+
+            <div class="product-icon">
+                📱
+            </div>
+
+            <span class="badge">
+                New
+            </span>
+
+            <h3>Smartphone</h3>
+
+            <p>
+                Latest generation smartphone
             </p>
+
+            <div class="rating">
+                ⭐⭐⭐⭐☆
+            </div>
+
+            <h4>₹25,000</h4>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Smartphone')"
+            >
+                Add to Cart
+            </button>
 
         </div>
 
 
-        <div class="cart-footer">
+        <!-- PRODUCT 3 -->
 
-            <h3>
-                Total:
-                <span id="cartTotal">
-                    ₹0
-                </span>
-            </h3>
+        <div
+            class="product-card"
+            data-name="Wireless Headphones"
+            data-price="2999"
+            data-category="accessories"
+        >
 
             <button
-                onclick="clearCart()"
-                class="clear-cart"
+                class="wishlist-btn"
+                onclick="toggleWishlist(this,'Wireless Headphones')"
             >
-                Clear Cart
+                ♡
+            </button>
+
+            <div class="product-icon">
+                🎧
+            </div>
+
+            <span class="badge">
+                Best Seller
+            </span>
+
+            <h3>Wireless Headphones</h3>
+
+            <p>
+                Premium sound experience
+            </p>
+
+            <div class="rating">
+                ⭐⭐⭐⭐⭐
+            </div>
+
+            <h4>₹2,999</h4>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Wireless Headphones')"
+            >
+                Add to Cart
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 4 -->
+
+        <div
+            class="product-card"
+            data-name="Smart Watch"
+            data-price="4999"
+            data-category="electronics"
+        >
+
+            <button
+                class="wishlist-btn"
+                onclick="toggleWishlist(this,'Smart Watch')"
+            >
+                ♡
+            </button>
+
+            <div class="product-icon">
+                ⌚
+            </div>
+
+            <span class="badge">
+                Trending
+            </span>
+
+            <h3>Smart Watch</h3>
+
+            <p>
+                Track your daily activities
+            </p>
+
+            <div class="rating">
+                ⭐⭐⭐⭐☆
+            </div>
+
+            <h4>₹4,999</h4>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Smart Watch')"
+            >
+                Add to Cart
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 5 -->
+
+        <div
+            class="product-card"
+            data-name="Gaming Mouse"
+            data-price="1499"
+            data-category="gaming"
+        >
+
+            <button
+                class="wishlist-btn"
+                onclick="toggleWishlist(this,'Gaming Mouse')"
+            >
+                ♡
+            </button>
+
+            <div class="product-icon">
+                🖱️
+            </div>
+
+            <span class="badge">
+                Gaming
+            </span>
+
+            <h3>Gaming Mouse</h3>
+
+            <p>
+                High precision gaming mouse
+            </p>
+
+            <div class="rating">
+                ⭐⭐⭐⭐⭐
+            </div>
+
+            <h4>₹1,499</h4>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Gaming Mouse')"
+            >
+                Add to Cart
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 6 -->
+
+        <div
+            class="product-card"
+            data-name="Bluetooth Speaker"
+            data-price="2999"
+            data-category="accessories"
+        >
+
+            <button
+                class="wishlist-btn"
+                onclick="toggleWishlist(this,'Bluetooth Speaker')"
+            >
+                ♡
+            </button>
+
+            <div class="product-icon">
+                🔊
+            </div>
+
+            <span class="badge">
+                Popular
+            </span>
+
+            <h3>Bluetooth Speaker</h3>
+
+            <p>
+                Portable wireless speaker
+            </p>
+
+            <div class="rating">
+                ⭐⭐⭐⭐☆
+            </div>
+
+            <h4>₹2,999</h4>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Bluetooth Speaker')"
+            >
+                Add to Cart
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 7 -->
+
+        <div
+            class="product-card"
+            data-name="Gaming Keyboard"
+            data-price="2499"
+            data-category="gaming"
+        >
+
+            <button
+                class="wishlist-btn"
+                onclick="toggleWishlist(this,'Gaming Keyboard')"
+            >
+                ♡
+            </button>
+
+            <div class="product-icon">
+                ⌨️
+            </div>
+
+            <span class="badge">
+                Gaming
+            </span>
+
+            <h3>Gaming Keyboard</h3>
+
+            <p>
+                Mechanical gaming keyboard
+            </p>
+
+            <div class="rating">
+                ⭐⭐⭐⭐⭐
+            </div>
+
+            <h4>₹2,499</h4>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Gaming Keyboard')"
+            >
+                Add to Cart
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 8 -->
+
+        <div
+            class="product-card"
+            data-name="Power Bank"
+            data-price="1299"
+            data-category="electronics"
+        >
+
+            <button
+                class="wishlist-btn"
+                onclick="toggleWishlist(this,'Power Bank')"
+            >
+                ♡
+            </button>
+
+            <div class="product-icon">
+                🔋
+            </div>
+
+            <span class="badge">
+                Value
+            </span>
+
+            <h3>Power Bank</h3>
+
+            <p>
+                Fast charging power bank
+            </p>
+
+            <div class="rating">
+                ⭐⭐⭐⭐☆
+            </div>
+
+            <h4>₹1,299</h4>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Power Bank')"
+            >
+                Add to Cart
             </button>
 
         </div>
 
     </div>
 
+</section>
 
-    <script src="script.js"></script>
+
+<!-- ================= RECOMMENDATION ================= -->
+
+<section
+    id="recommendations"
+    class="recommendation"
+>
+
+    <h2>
+        ⭐ Recommended For You
+    </h2>
+
+    <p id="recommendationText">
+        Add a product to your cart
+        to get recommendations.
+    </p>
+
+    <div
+        id="recommendationContainer"
+        class="recommendation-container"
+    >
+    </div>
+
+</section>
+
+
+<!-- ================= WISHLIST ================= -->
+
+<section class="wishlist-section">
+
+    <h2>
+        ❤️ Your Wishlist
+    </h2>
+
+    <p id="wishlistText">
+        No products added to wishlist.
+    </p>
+
+    <div
+        id="wishlistContainer"
+        class="wishlist-container"
+    >
+    </div>
+
+</section>
+
+
+<!-- ================= DSA ================= -->
+
+<section
+    id="dsa"
+    class="dsa-section"
+>
+
+    <h2>
+        🧠 Data Structures & Algorithms
+    </h2>
+
+    <div class="dsa-container">
+
+        <div class="dsa-card">
+            🔍
+            <h3>Searching</h3>
+            <p>
+                Product search using
+                linear search concept.
+            </p>
+            <strong>
+                O(n)
+            </strong>
+        </div>
+
+        <div class="dsa-card">
+            🔃
+            <h3>Sorting</h3>
+            <p>
+                Product price sorting
+                using comparison sorting.
+            </p>
+            <strong>
+                O(n log n)
+            </strong>
+        </div>
+
+        <div class="dsa-card">
+            🛒
+            <h3>Linked List</h3>
+            <p>
+                Cart items are managed
+                as dynamic collection nodes.
+            </p>
+            <strong>
+                Dynamic
+            </strong>
+        </div>
+
+        <div class="dsa-card">
+            ⭐
+            <h3>Recommendation</h3>
+            <p>
+                Product relationships are
+                used for recommendations.
+            </p>
+            <strong>
+                Graph / Tree Concept
+            </strong>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section
+    id="about"
+    class="about"
+>
+
+    <h2>
+        About ShopSmart
+    </h2>
+
+    <p>
+        ShopSmart is an E-Commerce Product
+        Management and Recommendation System
+        developed as a Data Structures and
+        Algorithms mini project.
+    </p>
+
+    <div class="project-info">
+
+        <div>
+            <strong>Frontend</strong>
+            <span>HTML, CSS, JavaScript</span>
+        </div>
+
+        <div>
+            <strong>DSA</strong>
+            <span>Searching, Sorting, Linked List</span>
+        </div>
+
+        <div>
+            <strong>Platform</strong>
+            <span>GitHub Pages</span>
+        </div>
+
+        <div>
+            <strong>Project Type</strong>
+            <span>DSA Mini Project</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <h2>
+        🛒 ShopSmart
+    </h2>
+
+    <p>
+        E-Commerce Product Management &
+        Recommendation System
+    </p>
+
+    <p>
+        DSA Mini Project | 2026
+    </p>
+
+</footer>
+
+
+<!-- ================= CART PANEL ================= -->
+
+<div
+    id="cartPanel"
+    class="cart-panel"
+>
+
+    <div class="cart-header">
+
+        <h2>
+            🛒 Your Cart
+        </h2>
+
+        <button
+            onclick="closeCart()"
+            class="close-btn"
+        >
+            ✕
+        </button>
+
+    </div>
+
+
+    <div
+        id="cartItems"
+        class="cart-items"
+    >
+
+        <p class="empty-cart">
+            Your cart is empty.
+        </p>
+
+    </div>
+
+
+    <div class="cart-footer">
+
+        <div class="total-row">
+            <span>Total</span>
+
+            <strong id="cartTotal">
+                ₹0
+            </strong>
+        </div>
+
+        <button
+            class="checkout-btn"
+            onclick="checkout()"
+        >
+            💳 Checkout
+        </button>
+
+        <button
+            onclick="clearCart()"
+            class="clear-cart"
+        >
+            🗑️ Clear Cart
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= TOAST ================= -->
+
+<div
+    id="toast"
+    class="toast"
+>
+</div>
+
+
+<script src="script.js"></script>
 
 </body>
-
 </html>
