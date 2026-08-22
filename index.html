@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopSmart - E-Commerce DSA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🛒 ShopSmart</div>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#products">Products</a>
+        <a href="#dsa">DSA</a>
+        <a href="#about">About</a>
+    </nav>
+
+    <button class="cart-btn">
+        🛍️ Cart <span id="cartCount">0</span>
+    </button>
+</header>
+
+
+<section class="hero">
+    <div class="hero-content">
+        <p class="small-title">SMART SHOPPING PLATFORM</p>
+
+        <h1>
+            Shop Smarter.<br>
+            <span>Live Better.</span>
+        </h1>
+
+        <p>
+            E-Commerce Product Management and
+            Recommendation System using Data Structures.
+        </p>
+
+        <a href="#products" class="shop-btn">
+            Explore Products →
+        </a>
+    </div>
+
+    <div class="hero-image">🛒</div>
+</section>
+
+
+<section class="categories">
+    <h2>Shop by Category</h2>
+
+    <div class="category-container">
+
+        <div class="category">
+            📱
+            <h3>Electronics</h3>
+            <p>Latest gadgets</p>
+        </div>
+
+        <div class="category">
+            💻
+            <h3>Laptops</h3>
+            <p>Powerful laptops</p>
+        </div>
+
+        <div class="category">
+            🎧
+            <h3>Accessories</h3>
+            <p>Best accessories</p>
+        </div>
+
+        <div class="category">
+            👕
+            <h3>Fashion</h3>
+            <p>Trendy collection</p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- SEARCH -->
+<section class="tools">
+
+    <h2>Find Your Product 🔍</h2>
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search product..."
+            onkeyup="searchProducts()"
+        >
+
+        <select id="sortSelect" onchange="sortProducts()">
+
+            <option value="">
+                Sort Products
+            </option>
+
+            <option value="low">
+                Price: Low to High
+            </option>
+
+            <option value="high">
+                Price: High to Low
+            </option>
+
+        </select>
+
+    </div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+<section id="products" class="products">
+
+    <h2>Popular Products 🛍️</h2>
+
+    <div class="product-container" id="productContainer">
+
+
+        <div
+            class="product-card"
+            data-name="Smart Laptop"
+            data-price="55000"
+        >
+
+            <div class="product-icon">💻</div>
+
+            <h3>Smart Laptop</h3>
+
+            <p>Powerful performance laptop</p>
+
+            <h4>₹55,000</h4>
+
+            <button onclick="addToCart('Smart Laptop')">
+                Add to Cart
+            </button>
+
+        </div>
+
+
+        <div
+            class="product-card"
+            data-name="Smartphone"
+            data-price="25000"
+        >
+
+            <div class="product-icon">📱</div>
+
+            <h3>Smartphone</h3>
+
+            <p>Latest generation smartphone</p>
+
+            <h4>₹25,000</h4>
+
+            <button onclick="addToCart('Smartphone')">
+                Add to Cart
+            </button>
+
+        </div>
+
+
+        <div
+            class="product-card"
+            data-name="Wireless Headphones"
+            data-price="2999"
+        >
+
+            <div class="product-icon">🎧</div>
+
+            <h3>Wireless Headphones</h3>
+
+            <p>Premium sound experience</p>
+
+            <h4>₹2,999</h4>
+
+            <button onclick="addToCart('Wireless Headphones')">
+                Add to Cart
+            </button>
+
+        </div>
+
+
+        <div
+            class="product-card"
+            data-name="Smart Watch"
+            data-price="4999"
+        >
+
+            <div class="product-icon">⌚</div>
+
+            <h3>Smart Watch</h3>
+
+            <p>Track your daily activities</p>
+
+            <h4>₹4,999</h4>
+
+            <button onclick="addToCart('Smart Watch')">
+                Add to Cart
+            </button>
+
+        </div>
+
+
+        <div
+            class="product-card"
+            data-name="Gaming Mouse"
+            data-price="1499"
+        >
+
+            <div class="product-icon">🖱️</div>
+
+            <h3>Gaming Mouse</h3>
+
+            <p>High precision gaming mouse</p>
+
+            <h4>₹1,499</h4>
+
+            <button onclick="addToCart('Gaming Mouse')">
+                Add to Cart
+            </button>
+
+        </div>
+
+
+        <div
+            class="product-card"
+            data-name="Bluetooth Speaker"
+            data-price="2999"
+        >
+
+            <div class="product-icon">🔊</div>
+
+            <h3>Bluetooth Speaker</h3>
+
+            <p>Portable wireless speaker</p>
+
+            <h4>₹2,999</h4>
+
+            <button onclick="addToCart('Bluetooth Speaker')">
+                Add to Cart
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- DSA -->
+<section id="dsa" class="dsa-section">
+
+    <h2>Our DSA Features 🧠</h2>
+
+    <div class="dsa-container">
+
+        <div>
+            🔍
+            <h3>Searching</h3>
+            <p>Find products quickly.</p>
+        </div>
+
+        <div>
+            🔃
+            <h3>Sorting</h3>
+            <p>Sort products by price.</p>
+        </div>
+
+        <div>
+            🛒
+            <h3>Linked List</h3>
+            <p>Manage shopping cart.</p>
+        </div>
+
+        <div>
+            ⭐
+            <h3>Recommendation</h3>
+            <p>Suggest related products.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ABOUT -->
+<section id="about" class="about">
+
+    <h2>About ShopSmart</h2>
+
+    <p>
+        ShopSmart is an E-Commerce Product Management
+        and Recommendation System developed as a
+        Data Structures and Algorithms mini project.
+    </p>
+
+    <p>
+        The project demonstrates searching, sorting,
+        linked lists and recommendation techniques.
+    </p>
+
+</section>
+
+
+<footer>
+
+    <h2>🛒 ShopSmart</h2>
+
+    <p>
+        E-Commerce Product Management &
+        Recommendation System
+    </p>
+
+    <p>
+        © 2026 ShopSmart | DSA Mini Project
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
