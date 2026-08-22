@@ -1,21 +1,13 @@
-// ============================================
-// SHOPSMART
+// =====================================================
+// SHOPSMART - FINAL SCRIPT
 // E-COMMERCE DSA MINI PROJECT
-//
-// DSA USED:
-// 1. Linked List
-// 2. Binary Search Tree
-// 3. Searching
-// 4. Sorting
-// ============================================
+// =====================================================
 
-
-// ============================================
+// =====================================================
 // PRODUCT DATA
-// ============================================
+// =====================================================
 
 const products = {
-
     "Smart Laptop": {
         price: 55000,
         icon: "💻"
@@ -55,38 +47,50 @@ const products = {
         price: 1299,
         icon: "🔋"
     }
-
 };
 
 
-// ============================================
+// =====================================================
+// STOCK
+// =====================================================
+
+const defaultStock = {
+    "Smart Laptop": 10,
+    "Smartphone": 15,
+    "Wireless Headphones": 20,
+    "Smart Watch": 12,
+    "Gaming Mouse": 25,
+    "Bluetooth Speaker": 18,
+    "Gaming Keyboard": 15,
+    "Power Bank": 30
+};
+
+let stock =
+    JSON.parse(
+        localStorage.getItem("shopSmartStock")
+    ) || { ...defaultStock };
+
+
+// =====================================================
 // LINKED LIST NODE
-// ============================================
+// =====================================================
 
 class CartNode {
 
-    constructor(
-        name,
-        price,
-        quantity = 1
-    ) {
+    constructor(name, price, quantity = 1) {
 
         this.name = name;
-
         this.price = price;
-
         this.quantity = quantity;
-
         this.next = null;
 
     }
-
 }
 
 
-// ============================================
-// SHOPPING CART LINKED LIST
-// ============================================
+// =====================================================
+// LINKED LIST SHOPPING CART
+// =====================================================
 
 class ShoppingCart {
 
@@ -97,124 +101,66 @@ class ShoppingCart {
     }
 
 
-    // ========================================
     // INSERT
-    // ========================================
-
     add(name, price) {
 
-        let current =
-            this.head;
+        let current = this.head;
 
+        while (current !== null) {
 
-        // If product already exists
-
-        while (
-            current !== null
-        ) {
-
-            if (
-                current.name === name
-            ) {
+            if (current.name === name) {
 
                 current.quantity++;
-
                 return;
 
             }
 
-
-            current =
-                current.next;
+            current = current.next;
 
         }
 
-
-        // Create new node
-
         const newNode =
-            new CartNode(
-                name,
-                price
-            );
+            new CartNode(name, price);
 
+        if (this.head === null) {
 
-        // Empty list
-
-        if (
-            this.head === null
-        ) {
-
-            this.head =
-                newNode;
-
+            this.head = newNode;
             return;
 
         }
 
+        current = this.head;
 
-        // Go to last node
+        while (current.next !== null) {
 
-        current =
-            this.head;
-
-
-        while (
-            current.next !== null
-        ) {
-
-            current =
-                current.next;
+            current = current.next;
 
         }
 
-
-        current.next =
-            newNode;
+        current.next = newNode;
 
     }
 
 
-    // ========================================
     // DELETE
-    // ========================================
-
     remove(name) {
 
-        if (
-            this.head === null
-        ) {
-
+        if (this.head === null) {
             return false;
-
         }
 
+        if (this.head.name === name) {
 
-        // Delete first node
-
-        if (
-            this.head.name === name
-        ) {
-
-            this.head =
-                this.head.next;
-
+            this.head = this.head.next;
             return true;
 
         }
 
+        let current = this.head;
 
-        let current =
-            this.head;
+        while (current.next !== null) {
 
-
-        while (
-            current.next !== null
-        ) {
-
-            if (
-                current.next.name === name
-            ) {
+            if (current.next.name === name) {
 
                 current.next =
                     current.next.next;
@@ -223,81 +169,49 @@ class ShoppingCart {
 
             }
 
-
-            current =
-                current.next;
+            current = current.next;
 
         }
-
 
         return false;
 
     }
 
 
-    // ========================================
-    // SEARCH NODE
-    // ========================================
-
+    // SEARCH
     find(name) {
 
-        let current =
-            this.head;
+        let current = this.head;
 
+        while (current !== null) {
 
-        while (
-            current !== null
-        ) {
-
-            if (
-                current.name === name
-            ) {
+            if (current.name === name) {
 
                 return current;
 
             }
 
-
-            current =
-                current.next;
+            current = current.next;
 
         }
-
 
         return null;
 
     }
 
 
-    // ========================================
-    // CHANGE QUANTITY
-    // ========================================
+    // QUANTITY
+    changeQuantity(name, change) {
 
-    changeQuantity(
-        name,
-        change
-    ) {
+        const node = this.find(name);
 
-        const node =
-            this.find(name);
-
-
-        if (
-            node === null
-        ) {
-
+        if (node === null) {
             return;
-
         }
 
+        node.quantity += change;
 
-        node.quantity +=
-            change;
-
-
-        if (
-            node.quantity <= 0
-        ) {
+        if (node.quantity <= 0) {
 
             this.remove(name);
 
@@ -306,134 +220,93 @@ class ShoppingCart {
     }
 
 
-    // ========================================
-    // CLEAR
-    // ========================================
-
-    clear() {
-
-        this.head = null;
-
-    }
-
-
-    // ========================================
     // TRAVERSAL
-    // ========================================
-
     toArray() {
 
         const items = [];
 
-        let current =
-            this.head;
+        let current = this.head;
 
-
-        while (
-            current !== null
-        ) {
+        while (current !== null) {
 
             items.push({
-
-                name:
-                    current.name,
-
-                price:
-                    current.price,
-
-                quantity:
-                    current.quantity
-
+                name: current.name,
+                price: current.price,
+                quantity: current.quantity
             });
 
-
-            current =
-                current.next;
+            current = current.next;
 
         }
-
 
         return items;
 
     }
 
 
-    // ========================================
     // TOTAL
-    // ========================================
-
     getTotal() {
 
         let total = 0;
 
-        let current =
-            this.head;
+        let current = this.head;
 
-
-        while (
-            current !== null
-        ) {
+        while (current !== null) {
 
             total +=
                 current.price *
                 current.quantity;
 
-
-            current =
-                current.next;
+            current = current.next;
 
         }
-
 
         return total;
 
     }
 
 
-    // ========================================
     // TOTAL QUANTITY
-    // ========================================
-
     getTotalQuantity() {
 
         let total = 0;
 
-        let current =
-            this.head;
+        let current = this.head;
 
+        while (current !== null) {
 
-        while (
-            current !== null
-        ) {
+            total += current.quantity;
 
-            total +=
-                current.quantity;
-
-
-            current =
-                current.next;
+            current = current.next;
 
         }
 
-
         return total;
+
+    }
+
+
+    // CLEAR
+    clear() {
+
+        this.head = null;
 
     }
 
 }
 
 
-// ============================================
+// =====================================================
 // CREATE CART
-// ============================================
+// =====================================================
 
 const shoppingCart =
     new ShoppingCart();
 
 
-// ============================================
+// =====================================================
 // WISHLIST
-// ============================================
+// =====================================================
 
 let wishlist =
     JSON.parse(
@@ -443,9 +316,21 @@ let wishlist =
     ) || [];
 
 
-// ============================================
+// =====================================================
+// ORDERS
+// =====================================================
+
+let orders =
+    JSON.parse(
+        localStorage.getItem(
+            "shopSmartOrders"
+        )
+    ) || [];
+
+
+// =====================================================
 // RECOMMENDATIONS
-// ============================================
+// =====================================================
 
 const recommendations = {
 
@@ -500,47 +385,55 @@ const recommendations = {
 };
 
 
-// ============================================
-// SAVE CART
-// ============================================
+// =====================================================
+// LOCAL STORAGE
+// =====================================================
 
 function saveCart() {
 
     localStorage.setItem(
-
         "shopSmartCart",
-
         JSON.stringify(
             shoppingCart.toArray()
         )
-
     );
 
 }
 
-
-// ============================================
-// SAVE WISHLIST
-// ============================================
 
 function saveWishlist() {
 
     localStorage.setItem(
-
         "shopSmartWishlist",
-
-        JSON.stringify(
-            wishlist
-        )
-
+        JSON.stringify(wishlist)
     );
 
 }
 
 
-// ============================================
+function saveOrders() {
+
+    localStorage.setItem(
+        "shopSmartOrders",
+        JSON.stringify(orders)
+    );
+
+}
+
+
+function saveStock() {
+
+    localStorage.setItem(
+        "shopSmartStock",
+        JSON.stringify(stock)
+    );
+
+}
+
+
+// =====================================================
 // RESTORE CART
-// ============================================
+// =====================================================
 
 function restoreCart() {
 
@@ -551,45 +444,51 @@ function restoreCart() {
             )
         );
 
-
     if (!savedCart) {
-
         return;
-
     }
 
+    savedCart.forEach(item => {
 
-    savedCart.forEach(
-        function(item) {
-
-            shoppingCart.add(
+        const node =
+            new CartNode(
                 item.name,
-                item.price
+                item.price,
+                item.quantity
             );
 
+        if (
+            shoppingCart.head === null
+        ) {
 
-            const node =
-                shoppingCart.find(
-                    item.name
-                );
+            shoppingCart.head = node;
 
+        } else {
 
-            if (node) {
+            let current =
+                shoppingCart.head;
 
-                node.quantity =
-                    item.quantity;
+            while (
+                current.next !== null
+            ) {
+
+                current =
+                    current.next;
 
             }
 
+            current.next = node;
+
         }
-    );
+
+    });
 
 }
 
 
-// ============================================
+// =====================================================
 // TOAST
-// ============================================
+// =====================================================
 
 function showToast(message) {
 
@@ -598,81 +497,80 @@ function showToast(message) {
             "toast"
         );
 
+    if (!toast) {
+        return;
+    }
 
-    toast.textContent =
-        message;
+    toast.textContent = message;
 
+    toast.classList.add("show");
 
-    toast.classList.add(
-        "show"
-    );
+    setTimeout(() => {
 
+        toast.classList.remove("show");
 
-    setTimeout(
-        function() {
-
-            toast.classList.remove(
-                "show"
-            );
-
-        },
-        2000
-    );
+    }, 2000);
 
 }
 
 
-// ============================================
+// =====================================================
 // ADD TO CART
-// ============================================
+// =====================================================
 
-function addToCart(
-    productName
-) {
+function addToCart(productName) {
+
+    if (!products[productName]) {
+        return;
+    }
+
+    const currentCartItem =
+        shoppingCart.find(productName);
+
+    const currentQuantity =
+        currentCartItem
+            ? currentCartItem.quantity
+            : 0;
 
     if (
-        !products[productName]
+        currentQuantity >=
+        stock[productName]
     ) {
+
+        showToast(
+            "❌ No more stock available"
+        );
 
         return;
 
     }
 
-
     shoppingCart.add(
 
         productName,
 
-        products[
-            productName
-        ].price
+        products[productName].price
 
     );
-
 
     saveCart();
 
     updateCart();
 
-    showRecommendations(
-        productName
-    );
-
+    showRecommendations(productName);
 
     showToast(
-
         "✅ " +
         productName +
         " added to cart"
-
     );
 
 }
 
 
-// ============================================
-// UPDATE CART UI
-// ============================================
+// =====================================================
+// UPDATE CART
+// =====================================================
 
 function updateCart() {
 
@@ -681,71 +579,57 @@ function updateCart() {
             "cartItems"
         );
 
-
     const cartCount =
         document.getElementById(
             "cartCount"
         );
-
 
     const cartTotal =
         document.getElementById(
             "cartTotal"
         );
 
+    if (
+        !cartItems ||
+        !cartCount ||
+        !cartTotal
+    ) {
+        return;
+    }
 
-    cartItems.innerHTML =
-        "";
-
+    cartItems.innerHTML = "";
 
     const items =
         shoppingCart.toArray();
 
-
-    if (
-        items.length === 0
-    ) {
+    if (items.length === 0) {
 
         cartItems.innerHTML = `
 
             <p class="empty-cart">
-
                 Your cart is empty.
-
             </p>
 
         `;
 
+        cartCount.textContent = "0";
 
-        cartCount.textContent =
-            "0";
-
-
-        cartTotal.textContent =
-            "₹0";
-
+        cartTotal.textContent = "₹0";
 
         return;
 
     }
 
-
     items.forEach(
-        function(
-            item,
-            index
-        ) {
-
+        (item, index) => {
 
             const element =
                 document.createElement(
                     "div"
                 );
 
-
             element.className =
                 "cart-item";
-
 
             element.innerHTML = `
 
@@ -753,12 +637,15 @@ function updateCart() {
                     ${item.name}
                 </h3>
 
-
                 <p>
                     Price:
                     ₹${item.price.toLocaleString()}
                 </p>
 
+                <p>
+                    Available Stock:
+                    ${stock[item.name]}
+                </p>
 
                 <div
                     class="quantity-control"
@@ -775,11 +662,9 @@ function updateCart() {
                         −
                     </button>
 
-
                     <strong>
                         ${item.quantity}
                     </strong>
-
 
                     <button
                         onclick="
@@ -794,17 +679,13 @@ function updateCart() {
 
                 </div>
 
-
                 <p>
-
                     Subtotal:
                     ₹${(
                         item.price *
                         item.quantity
                     ).toLocaleString()}
-
                 </p>
-
 
                 <button
                     class="remove-btn"
@@ -819,19 +700,13 @@ function updateCart() {
 
             `;
 
-
-            cartItems.appendChild(
-                element
-            );
+            cartItems.appendChild(element);
 
         }
     );
 
-
     cartCount.textContent =
-        shoppingCart
-            .getTotalQuantity();
-
+        shoppingCart.getTotalQuantity();
 
     cartTotal.textContent =
         "₹" +
@@ -842,9 +717,9 @@ function updateCart() {
 }
 
 
-// ============================================
+// =====================================================
 // CHANGE QUANTITY
-// ============================================
+// =====================================================
 
 function changeQuantityByIndex(
     index,
@@ -854,24 +729,31 @@ function changeQuantityByIndex(
     const items =
         shoppingCart.toArray();
 
+    if (!items[index]) {
+        return;
+    }
+
+    const item =
+        items[index];
 
     if (
-        !items[index]
+        change > 0 &&
+        item.quantity >=
+        stock[item.name]
     ) {
+
+        showToast(
+            "❌ Maximum stock reached"
+        );
 
         return;
 
     }
 
-
     shoppingCart.changeQuantity(
-
-        items[index].name,
-
+        item.name,
         change
-
     );
-
 
     saveCart();
 
@@ -880,47 +762,50 @@ function changeQuantityByIndex(
 }
 
 
-// ============================================
+// =====================================================
 // REMOVE CART ITEM
-// ============================================
+// =====================================================
 
-function removeCartItem(
-    name
-) {
+function removeCartItem(name) {
 
-    shoppingCart.remove(
-        name
-    );
-
+    shoppingCart.remove(name);
 
     saveCart();
 
     updateCart();
 
-
     showToast(
-
         "❌ " +
         name +
         " removed"
-
     );
 
 }
 
 
-// ============================================
+// =====================================================
 // CLEAR CART
-// ============================================
+// =====================================================
 
 function clearCart() {
+
+    if (
+        shoppingCart.head === null
+    ) {
+
+        showToast(
+            "Cart is already empty"
+        );
+
+        return;
+
+    }
 
     shoppingCart.clear();
 
     saveCart();
 
     updateCart();
-
 
     showToast(
         "🗑️ Cart cleared"
@@ -929,45 +814,106 @@ function clearCart() {
 }
 
 
-// ============================================
+// =====================================================
 // OPEN CART
-// ============================================
+// =====================================================
 
 function openCart() {
 
-    document
-        .getElementById(
+    const panel =
+        document.getElementById(
             "cartPanel"
-        )
-        .classList
-        .add(
+        );
+
+    if (panel) {
+
+        panel.classList.add(
             "active"
         );
+
+    }
 
 }
 
 
-// ============================================
+// =====================================================
 // CLOSE CART
-// ============================================
+// =====================================================
 
 function closeCart() {
 
-    document
-        .getElementById(
+    const panel =
+        document.getElementById(
             "cartPanel"
-        )
-        .classList
-        .remove(
+        );
+
+    if (panel) {
+
+        panel.classList.remove(
             "active"
         );
+
+    }
 
 }
 
 
-// ============================================
+// =====================================================
+// GENERATE ORDER ID
+// =====================================================
+
+function generateOrderId() {
+
+    return (
+        "ORD-" +
+        Date.now()
+    );
+
+}
+
+
+// =====================================================
+// CHECK STOCK
+// =====================================================
+
+function checkStock() {
+
+    const items =
+        shoppingCart.toArray();
+
+    for (const item of items) {
+
+        if (
+            stock[item.name] <
+            item.quantity
+        ) {
+
+            return {
+
+                success: false,
+
+                product:
+                    item.name,
+
+                available:
+                    stock[item.name]
+
+            };
+
+        }
+
+    }
+
+    return {
+        success: true
+    };
+
+}
+
+
+// =====================================================
 // CHECKOUT
-// ============================================
+// =====================================================
 
 function checkout() {
 
@@ -983,25 +929,73 @@ function checkout() {
 
     }
 
+    const stockCheck =
+        checkStock();
+
+    if (
+        !stockCheck.success
+    ) {
+
+        alert(
+
+            "❌ Insufficient Stock\n\n" +
+
+            stockCheck.product +
+
+            "\nAvailable: " +
+
+            stockCheck.available
+
+        );
+
+        return;
+
+    }
+
+    const items =
+        shoppingCart.toArray();
 
     const total =
         shoppingCart.getTotal();
 
+    const order = {
 
-    alert(
+        id:
+            generateOrderId(),
 
-        "🎉 Order placed successfully!\n\n" +
+        date:
+            new Date()
+                .toLocaleString(),
 
-        "Total Amount: ₹" +
+        items:
+            items,
 
-        total.toLocaleString() +
+        total:
+            total,
 
-        "\n\n" +
+        status:
+            "Placed"
 
-        "This is a demo checkout."
+    };
 
-    );
+    // UPDATE STOCK
 
+    items.forEach(item => {
+
+        stock[item.name] -=
+            item.quantity;
+
+    });
+
+    saveStock();
+
+    // SAVE ORDER
+
+    orders.unshift(order);
+
+    saveOrders();
+
+    // CLEAR CART
 
     shoppingCart.clear();
 
@@ -1009,34 +1003,32 @@ function checkout() {
 
     updateCart();
 
-}
+    displayOrderHistory();
 
+    alert(
 
-// ============================================
-// SEARCH PRODUCTS
-// ============================================
+        "🎉 Order Placed Successfully!\n\n" +
 
-function searchProducts() {
+        "Order ID: " +
+        order.id +
 
-    applyFilters();
+        "\n\nTotal: ₹" +
+        total.toLocaleString()
 
-}
+    );
 
-
-// ============================================
-// FILTER PRODUCTS
-// ============================================
-
-function filterProducts() {
-
-    applyFilters();
+    document
+        .getElementById("orders")
+        ?.scrollIntoView({
+            behavior: "smooth"
+        });
 
 }
 
 
-// ============================================
-// APPLY SEARCH + CATEGORY
-// ============================================
+// =====================================================
+// SEARCH / FILTER
+// =====================================================
 
 function applyFilters() {
 
@@ -1049,7 +1041,6 @@ function applyFilters() {
             .toLowerCase()
             .trim();
 
-
     const category =
         document
             .getElementById(
@@ -1057,81 +1048,80 @@ function applyFilters() {
             )
             .value;
 
-
     const cards =
         document.querySelectorAll(
             ".product-card"
         );
 
-
     let count = 0;
 
+    cards.forEach(card => {
 
-    cards.forEach(
-        function(card) {
+        const name =
+            card.dataset.name
+                .toLowerCase();
 
-            const name =
-                card.dataset.name
-                    .toLowerCase();
+        const cardCategory =
+            card.dataset.category;
 
+        const searchMatch =
+            name.includes(search);
 
-            const cardCategory =
-                card.dataset.category;
+        const categoryMatch =
+            category === "all" ||
+            cardCategory === category;
 
+        if (
+            searchMatch &&
+            categoryMatch
+        ) {
 
-            const searchMatch =
-                name.includes(
-                    search
-                );
+            card.style.display = "";
 
+            count++;
 
-            const categoryMatch =
+        } else {
 
-                category === "all" ||
-
-                cardCategory ===
-                    category;
-
-
-            if (
-                searchMatch &&
-                categoryMatch
-            ) {
-
-                card.style.display =
-                    "";
-
-                count++;
-
-            }
-
-            else {
-
-                card.style.display =
-                    "none";
-
-            }
+            card.style.display = "none";
 
         }
-    );
 
+    });
 
-    document
-        .getElementById(
+    const result =
+        document.getElementById(
             "resultCount"
-        )
-        .textContent =
+        );
 
-        "Showing " +
-        count +
-        " products";
+    if (result) {
+
+        result.textContent =
+            "Showing " +
+            count +
+            " products";
+
+    }
 
 }
 
 
-// ============================================
+function searchProducts() {
+
+    applyFilters();
+
+}
+
+
+function filterProducts() {
+
+    applyFilters();
+
+}
+
+
+// =====================================================
 // SORT PRODUCTS
-// ============================================
+// =====================================================
 
 function sortProducts() {
 
@@ -1140,6 +1130,9 @@ function sortProducts() {
             "productContainer"
         );
 
+    if (!container) {
+        return;
+    }
 
     const cards =
         Array.from(
@@ -1148,7 +1141,6 @@ function sortProducts() {
             )
         );
 
-
     const option =
         document
             .getElementById(
@@ -1156,102 +1148,52 @@ function sortProducts() {
             )
             .value;
 
-
-    if (
-        option === "low"
-    ) {
+    if (option === "low") {
 
         cards.sort(
-            function(a, b) {
-
-                return (
-
-                    Number(
-                        a.dataset.price
-                    )
-
-                    -
-
-                    Number(
-                        b.dataset.price
-                    )
-
-                );
-
-            }
+            (a, b) =>
+                Number(a.dataset.price) -
+                Number(b.dataset.price)
         );
 
     }
 
-
-    else if (
-        option === "high"
-    ) {
+    else if (option === "high") {
 
         cards.sort(
-            function(a, b) {
-
-                return (
-
-                    Number(
-                        b.dataset.price
-                    )
-
-                    -
-
-                    Number(
-                        a.dataset.price
-                    )
-
-                );
-
-            }
+            (a, b) =>
+                Number(b.dataset.price) -
+                Number(a.dataset.price)
         );
 
     }
 
-
-    else if (
-        option === "name"
-    ) {
+    else if (option === "name") {
 
         cards.sort(
-            function(a, b) {
-
-                return (
-
-                    a.dataset.name
-                        .localeCompare(
-                            b.dataset.name
-                        )
-
-                );
-
-            }
+            (a, b) =>
+                a.dataset.name
+                    .localeCompare(
+                        b.dataset.name
+                    )
         );
 
     }
 
+    cards.forEach(card => {
 
-    cards.forEach(
-        function(card) {
+        container.appendChild(card);
 
-            container.appendChild(
-                card
-            );
-
-        }
-    );
-
+    });
 
     applyFilters();
 
 }
 
 
-// ============================================
-// RECOMMENDATION SYSTEM
-// ============================================
+// =====================================================
+// RECOMMENDATIONS
+// =====================================================
 
 function showRecommendations(
     productName
@@ -1262,99 +1204,80 @@ function showRecommendations(
             "recommendationContainer"
         );
 
-
     const text =
         document.getElementById(
             "recommendationText"
         );
 
+    if (!container || !text) {
+        return;
+    }
 
-    container.innerHTML =
-        "";
-
+    container.innerHTML = "";
 
     text.textContent =
-
         "Because you selected " +
         productName +
         ":";
 
-
     const list =
-        recommendations[
-            productName
-        ];
-
+        recommendations[productName];
 
     if (!list) {
-
         return;
-
     }
 
+    list.forEach(name => {
 
-    list.forEach(
-        function(name) {
-
-            const card =
-                document.createElement(
-                    "div"
-                );
-
-
-            card.className =
-                "recommendation-card";
-
-
-            card.innerHTML = `
-
-                <div
-                    class="recommendation-icon"
-                >
-                    ${products[name].icon}
-                </div>
-
-
-                <h3>
-                    ${name}
-                </h3>
-
-
-                <p>
-                    ₹${products[name].price.toLocaleString()}
-                </p>
-
-
-                <br>
-
-
-                <button
-                    class="add-btn"
-                    onclick="
-                        addToCart(
-                            '${name}'
-                        )
-                    "
-                >
-                    Add to Cart
-                </button>
-
-            `;
-
-
-            container.appendChild(
-                card
+        const card =
+            document.createElement(
+                "div"
             );
 
-        }
-    );
+        card.className =
+            "recommendation-card";
+
+        card.innerHTML = `
+
+            <div
+                class="recommendation-icon"
+            >
+                ${products[name].icon}
+            </div>
+
+            <h3>
+                ${name}
+            </h3>
+
+            <p>
+                ₹${products[name].price.toLocaleString()}
+            </p>
+
+            <br>
+
+            <button
+                class="add-btn"
+                onclick="
+                    addToCart(
+                        '${name}'
+                    )
+                "
+            >
+                Add to Cart
+            </button>
+
+        `;
+
+        container.appendChild(card);
+
+    });
 
 }
 
 
-// ============================================
+// =====================================================
 // WISHLIST
-// ============================================
+// =====================================================
 
 function toggleWishlist(
     button,
@@ -1366,31 +1289,19 @@ function toggleWishlist(
             productName
         );
 
+    if (index === -1) {
 
-    if (
-        index === -1
-    ) {
+        wishlist.push(productName);
 
-        wishlist.push(
-            productName
-        );
+        button.classList.add("active");
 
-
-        button.classList.add(
-            "active"
-        );
-
-
-        button.textContent =
-            "♥";
-
+        button.textContent = "♥";
 
         showToast(
             "❤️ Added to wishlist"
         );
 
     }
-
 
     else {
 
@@ -1399,22 +1310,17 @@ function toggleWishlist(
             1
         );
 
-
         button.classList.remove(
             "active"
         );
 
-
-        button.textContent =
-            "♡";
-
+        button.textContent = "♡";
 
         showToast(
             "Removed from wishlist"
         );
 
     }
-
 
     saveWishlist();
 
@@ -1423,10 +1329,6 @@ function toggleWishlist(
 }
 
 
-// ============================================
-// DISPLAY WISHLIST
-// ============================================
-
 function displayWishlist() {
 
     const container =
@@ -1434,16 +1336,16 @@ function displayWishlist() {
             "wishlistContainer"
         );
 
-
     const text =
         document.getElementById(
             "wishlistText"
         );
 
+    if (!container || !text) {
+        return;
+    }
 
-    container.innerHTML =
-        "";
-
+    container.innerHTML = "";
 
     if (
         wishlist.length === 0
@@ -1456,85 +1358,61 @@ function displayWishlist() {
 
     }
 
-
     text.textContent =
-
         wishlist.length +
         " product(s) in your wishlist.";
 
+    wishlist.forEach(name => {
 
-    wishlist.forEach(
-        function(name) {
-
-            const item =
-                document.createElement(
-                    "div"
-                );
-
-
-            item.className =
-                "wishlist-item";
-
-
-            item.innerHTML = `
-
-                <div
-                    class="product-icon"
-                >
-                    ${products[name].icon}
-                </div>
-
-
-                <h3>
-                    ${name}
-                </h3>
-
-
-                <p>
-                    ₹${products[name].price.toLocaleString()}
-                </p>
-
-
-                <button
-                    onclick="
-                        removeFromWishlist(
-                            '${name}'
-                        )
-                    "
-                >
-                    Remove
-                </button>
-
-            `;
-
-
-            container.appendChild(
-                item
+        const item =
+            document.createElement(
+                "div"
             );
 
-        }
-    );
+        item.className =
+            "wishlist-item";
+
+        item.innerHTML = `
+
+            <div
+                class="product-icon"
+            >
+                ${products[name].icon}
+            </div>
+
+            <h3>
+                ${name}
+            </h3>
+
+            <p>
+                ₹${products[name].price.toLocaleString()}
+            </p>
+
+            <button
+                onclick="
+                    removeFromWishlist(
+                        '${name}'
+                    )
+                "
+            >
+                Remove
+            </button>
+
+        `;
+
+        container.appendChild(item);
+
+    });
 
 }
 
 
-// ============================================
-// REMOVE WISHLIST
-// ============================================
-
-function removeFromWishlist(
-    name
-) {
+function removeFromWishlist(name) {
 
     const index =
-        wishlist.indexOf(
-            name
-        );
+        wishlist.indexOf(name);
 
-
-    if (
-        index !== -1
-    ) {
+    if (index !== -1) {
 
         wishlist.splice(
             index,
@@ -1543,13 +1421,11 @@ function removeFromWishlist(
 
     }
 
-
     saveWishlist();
 
     displayWishlist();
 
     restoreWishlistButtons();
-
 
     showToast(
         "Removed from wishlist"
@@ -1558,10 +1434,6 @@ function removeFromWishlist(
 }
 
 
-// ============================================
-// RESTORE WISHLIST BUTTONS
-// ============================================
-
 function restoreWishlistButtons() {
 
     const buttons =
@@ -1569,65 +1441,50 @@ function restoreWishlistButtons() {
             ".wishlist-btn"
         );
 
+    buttons.forEach(button => {
 
-    buttons.forEach(
-        function(button) {
+        const onclick =
+            button.getAttribute(
+                "onclick"
+            );
 
-            const onclick =
-                button.getAttribute(
-                    "onclick"
-                );
+        if (!onclick) {
+            return;
+        }
 
+        const match =
+            onclick.match(
+                /'([^']+)'/
+            );
 
-            if (!onclick) {
+        if (!match) {
+            return;
+        }
 
-                return;
+        const name =
+            match[1];
 
-            }
+        if (
+            wishlist.includes(name)
+        ) {
 
+            button.classList.add(
+                "active"
+            );
 
-            const match =
-                onclick.match(
-                    /'([^']+)'/
-                );
-
-
-            if (!match) {
-
-                return;
-
-            }
-
-
-            const name =
-                match[1];
-
-
-            if (
-                wishlist.includes(
-                    name
-                )
-            ) {
-
-                button.classList.add(
-                    "active"
-                );
-
-
-                button.textContent =
-                    "♥";
-
-            }
+            button.textContent =
+                "♥";
 
         }
-    );
+
+    });
 
 }
 
 
-// ============================================
-// BST NODE
-// ============================================
+// =====================================================
+// BINARY SEARCH TREE NODE
+// =====================================================
 
 class BSTNode {
 
@@ -1653,23 +1510,20 @@ class BSTNode {
 }
 
 
-// ============================================
+// =====================================================
 // BINARY SEARCH TREE
-// ============================================
+// =====================================================
 
 class ProductBST {
 
     constructor() {
 
-        this.root =
-            null;
+        this.root = null;
 
     }
 
 
-    // ========================================
     // INSERT
-    // ========================================
 
     insert(
         price,
@@ -1682,7 +1536,6 @@ class ProductBST {
                 productName
             );
 
-
         if (
             this.root === null
         ) {
@@ -1694,10 +1547,8 @@ class ProductBST {
 
         }
 
-
         let current =
             this.root;
-
 
         while (true) {
 
@@ -1717,12 +1568,10 @@ class ProductBST {
 
                 }
 
-
                 current =
                     current.left;
 
             }
-
 
             else {
 
@@ -1737,7 +1586,6 @@ class ProductBST {
 
                 }
 
-
                 current =
                     current.right;
 
@@ -1748,15 +1596,12 @@ class ProductBST {
     }
 
 
-    // ========================================
     // SEARCH
-    // ========================================
 
     search(price) {
 
         let current =
             this.root;
-
 
         while (
             current !== null
@@ -1771,7 +1616,6 @@ class ProductBST {
 
             }
 
-
             if (
                 price <
                 current.price
@@ -1782,7 +1626,6 @@ class ProductBST {
 
             }
 
-
             else {
 
                 current =
@@ -1792,15 +1635,12 @@ class ProductBST {
 
         }
 
-
         return null;
 
     }
 
 
-    // ========================================
     // INORDER
-    // ========================================
 
     inorder(
         node = this.root,
@@ -1815,12 +1655,10 @@ class ProductBST {
 
         }
 
-
         this.inorder(
             node.left,
             result
         );
-
 
         result.push({
 
@@ -1832,21 +1670,17 @@ class ProductBST {
 
         });
 
-
         this.inorder(
             node.right,
             result
         );
-
 
         return result;
 
     }
 
 
-    // ========================================
     // MINIMUM
-    // ========================================
 
     getMinimum() {
 
@@ -1858,10 +1692,8 @@ class ProductBST {
 
         }
 
-
         let current =
             this.root;
-
 
         while (
             current.left !== null
@@ -1872,15 +1704,12 @@ class ProductBST {
 
         }
 
-
         return current;
 
     }
 
 
-    // ========================================
     // MAXIMUM
-    // ========================================
 
     getMaximum() {
 
@@ -1892,10 +1721,8 @@ class ProductBST {
 
         }
 
-
         let current =
             this.root;
-
 
         while (
             current.right !== null
@@ -1906,7 +1733,6 @@ class ProductBST {
 
         }
 
-
         return current;
 
     }
@@ -1914,26 +1740,22 @@ class ProductBST {
 }
 
 
-// ============================================
+// =====================================================
 // CREATE BST
-// ============================================
+// =====================================================
 
 const productBST =
     new ProductBST();
 
 
-// ============================================
-// INSERT PRODUCTS INTO BST
-// ============================================
+// INSERT ALL PRODUCTS
 
 Object.keys(products).forEach(
-    function(productName) {
+    productName => {
 
         productBST.insert(
 
-            products[
-                productName
-            ].price,
+            products[productName].price,
 
             productName
 
@@ -1943,9 +1765,9 @@ Object.keys(products).forEach(
 );
 
 
-// ============================================
+// =====================================================
 // SEARCH BST
-// ============================================
+// =====================================================
 
 function searchBST() {
 
@@ -1954,40 +1776,30 @@ function searchBST() {
             "bstSearchInput"
         );
 
-
     const result =
         document.getElementById(
             "bstResult"
         );
 
+    if (!input || !result) {
+        return;
+    }
 
     const price =
-        Number(
-            input.value
-        );
+        Number(input.value);
 
-
-    if (
-        !price
-    ) {
+    if (!price) {
 
         result.innerHTML = `
-
-            ⚠️ Please enter
-            a valid price.
-
+            ⚠️ Please enter a valid price.
         `;
 
         return;
 
     }
 
-
     const node =
-        productBST.search(
-            price
-        );
-
+        productBST.search(price);
 
     if (node) {
 
@@ -1997,30 +1809,23 @@ function searchBST() {
                 ✅ Product Found
             </h3>
 
-
             <p>
-
                 Product:
                 <strong>
                     ${node.productName}
                 </strong>
-
             </p>
 
-
             <p>
-
                 Price:
                 <strong>
                     ₹${node.price.toLocaleString()}
                 </strong>
-
             </p>
 
         `;
 
     }
-
 
     else {
 
@@ -2030,13 +1835,9 @@ function searchBST() {
                 ❌ Product Not Found
             </h3>
 
-
             <p>
-
-                No product exists
-                with price
-                ₹${price.toLocaleString()}.
-
+                No product exists with
+                price ₹${price.toLocaleString()}.
             </p>
 
         `;
@@ -2046,9 +1847,9 @@ function searchBST() {
 }
 
 
-// ============================================
+// =====================================================
 // BST INFORMATION
-// ============================================
+// =====================================================
 
 function showBSTData() {
 
@@ -2057,18 +1858,18 @@ function showBSTData() {
             "bstResult"
         );
 
+    if (!result) {
+        return;
+    }
 
     const sorted =
         productBST.inorder();
 
-
     const minimum =
         productBST.getMinimum();
 
-
     const maximum =
         productBST.getMaximum();
-
 
     let html = `
 
@@ -2076,86 +1877,62 @@ function showBSTData() {
             🌳 BST Information
         </h3>
 
-
         <p>
             <strong>
                 Inorder Traversal:
             </strong>
         </p>
 
-
         <p>
 
     `;
 
-
     sorted.forEach(
-        function(
-            item,
-            index
-        ) {
+        (item, index) => {
 
             html +=
-
                 "₹" +
                 item.price.toLocaleString() +
                 " - " +
                 item.product;
-
 
             if (
                 index <
                 sorted.length - 1
             ) {
 
-                html +=
-                    " → ";
+                html += " → ";
 
             }
 
         }
     );
 
-
     html += `
 
         </p>
 
-
         <hr>
 
-
         <p>
-
             💰 Minimum Price:
-
             <strong>
-
                 ${minimum.productName}
                 -
                 ₹${minimum.price.toLocaleString()}
-
             </strong>
-
         </p>
 
-
         <p>
-
             💎 Maximum Price:
-
             <strong>
-
                 ${maximum.productName}
                 -
                 ₹${maximum.price.toLocaleString()}
-
             </strong>
-
         </p>
 
     `;
-
 
     result.innerHTML =
         html;
@@ -2163,18 +1940,205 @@ function showBSTData() {
 }
 
 
-// ============================================
-// LINKED LIST CONSOLE DISPLAY
-// ============================================
+// =====================================================
+// ORDER HISTORY
+// =====================================================
+
+function displayOrderHistory() {
+
+    const container =
+        document.getElementById(
+            "orderContainer"
+        );
+
+    const message =
+        document.getElementById(
+            "orderMessage"
+        );
+
+    if (!container || !message) {
+        return;
+    }
+
+    container.innerHTML = "";
+
+    if (
+        orders.length === 0
+    ) {
+
+        message.textContent =
+            "Your previous orders will appear here.";
+
+        container.innerHTML = `
+
+            <div class="empty-orders">
+
+                📦 No orders yet.
+
+                <br><br>
+
+                Place your first order
+                to see it here.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    message.textContent =
+        orders.length +
+        " order(s) found.";
+
+    orders.forEach(order => {
+
+        const card =
+            document.createElement(
+                "div"
+            );
+
+        card.className =
+            "order-card";
+
+        let productsHTML = "";
+
+        order.items.forEach(item => {
+
+            productsHTML += `
+
+                <div
+                    class="order-product"
+                >
+
+                    <span>
+
+                        ${item.name}
+                        ×
+                        ${item.quantity}
+
+                    </span>
+
+                    <strong>
+
+                        ₹${(
+                            item.price *
+                            item.quantity
+                        ).toLocaleString()}
+
+                    </strong>
+
+                </div>
+
+            `;
+
+        });
+
+        card.innerHTML = `
+
+            <div
+                class="order-header"
+            >
+
+                <div>
+
+                    <div
+                        class="order-id"
+                    >
+                        ${order.id}
+                    </div>
+
+                    <small>
+                        ${order.date}
+                    </small>
+
+                </div>
+
+                <span
+                    class="order-status"
+                >
+                    ✅ ${order.status}
+                </span>
+
+            </div>
+
+            <div
+                class="order-products"
+            >
+
+                ${productsHTML}
+
+            </div>
+
+            <div
+                class="order-total"
+            >
+
+                Total:
+                ₹${order.total.toLocaleString()}
+
+            </div>
+
+        `;
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+// =====================================================
+// CLEAR ORDER HISTORY
+// =====================================================
+
+function clearOrderHistory() {
+
+    if (
+        orders.length === 0
+    ) {
+
+        showToast(
+            "No order history"
+        );
+
+        return;
+
+    }
+
+    const confirmDelete =
+        confirm(
+            "Delete all order history?"
+        );
+
+    if (!confirmDelete) {
+        return;
+    }
+
+    orders = [];
+
+    saveOrders();
+
+    displayOrderHistory();
+
+    showToast(
+        "🗑️ Order history cleared"
+    );
+
+}
+
+
+// =====================================================
+// DEBUG: LINKED LIST
+// =====================================================
 
 function displayLinkedList() {
 
     let current =
         shoppingCart.head;
 
-
     const result = [];
-
 
     while (
         current !== null
@@ -2184,31 +2148,37 @@ function displayLinkedList() {
             current.name
         );
 
-
         current =
             current.next;
 
     }
 
-
     console.log(
-
-        "Shopping Cart Linked List:",
-
+        "🛒 Linked List:",
         result.length
             ? result.join(
                 " -> "
             ) + " -> NULL"
             : "NULL"
-
     );
 
 }
 
 
-// ============================================
+// =====================================================
+// DEBUG: STOCK
+// =====================================================
+
+function showStock() {
+
+    console.table(stock);
+
+}
+
+
+// =====================================================
 // INITIALIZE
-// ============================================
+// =====================================================
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -2222,7 +2192,11 @@ document.addEventListener(
 
         restoreWishlistButtons();
 
+        displayOrderHistory();
+
         displayLinkedList();
+
+        applyFilters();
 
     }
 );
