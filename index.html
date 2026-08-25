@@ -19,52 +19,94 @@
 <header class="navbar">
 
     <div class="brand">
+
         <div class="brand-icon">⚡</div>
 
         <div>
             <h1>TechNova</h1>
             <span>Upgrade Your Life</span>
         </div>
+
     </div>
+
 
     <nav>
+
         <a href="#home">Home</a>
-        <a href="#products">Products</a>
-        <a href="#wishlist">Wishlist</a>
-        <a href="#orders">Orders</a>
-        <a href="#about">About</a>
+
+        <a href="#products">
+            Products
+        </a>
+
+        <a href="#wishlist">
+            Wishlist
+        </a>
+
+        <a href="#orders">
+            Orders
+        </a>
+
+        <a href="#about">
+            About
+        </a>
+
     </nav>
 
+
     <div class="header-search">
-        <input id="topSearch"
-               type="text"
-               placeholder="Search products...">
+
+        <input
+            id="topSearch"
+            type="text"
+            placeholder="Search products..."
+        >
+
         <span>🔍</span>
+
     </div>
 
-    <button class="login-button" type="button">
+
+    <button
+        class="login-button"
+        type="button">
+
         👤 Login
+
     </button>
 
-    <button id="themeToggle"
-            class="theme-button"
-            type="button"
-            onclick="toggleTheme()">
+
+    <button
+        id="themeToggle"
+        class="theme-button"
+        type="button"
+        onclick="toggleTheme()">
+
         🌙
+
     </button>
 
-    <button class="admin-button"
-            type="button"
-            onclick="openAdminLogin()">
+
+    <button
+        class="admin-button"
+        type="button"
+        onclick="openAdminLogin()">
+
         ⚙️ Admin
+
     </button>
 
-    <button class="cart-button"
-            type="button"
-            onclick="openCart()">
+
+    <button
+        class="cart-button"
+        type="button"
+        onclick="openCart()">
 
         🛒
-        <span id="cartCount">0</span>
+
+        <span id="cartCount">
+            0
+        </span>
+
         Cart
 
     </button>
@@ -81,109 +123,208 @@
 
     <aside class="sidebar">
 
+
         <div class="side-card">
 
-            <h3>CATEGORIES</h3>
+            <h3>
+                CATEGORIES
+            </h3>
 
-            <button class="category active"
-                    data-category="all">
+
+            <button
+                class="category active"
+                data-category="all">
+
                 🏠 All Categories
+
             </button>
 
-            <button class="category"
-                    data-category="laptop">
+
+            <button
+                class="category"
+                data-category="laptop">
+
                 💻 Laptops
+
             </button>
 
-            <button class="category"
-                    data-category="electronics">
+
+            <button
+                class="category"
+                data-category="electronics">
+
                 📱 Smartphones
+
             </button>
 
-            <button class="category"
-                    data-category="audio">
+
+            <button
+                class="category"
+                data-category="audio">
+
                 🎧 Audio
+
             </button>
 
-            <button class="category"
-                    data-category="wearables">
+
+            <button
+                class="category"
+                data-category="wearables">
+
                 ⌚ Wearables
+
             </button>
 
-            <button class="category"
-                    data-category="gaming">
+
+            <button
+                class="category"
+                data-category="gaming">
+
                 🎮 Gaming
+
             </button>
 
-            <button class="category"
-                    data-category="power">
+
+            <button
+                class="category"
+                data-category="power">
+
                 🔋 Power Solutions
+
             </button>
 
         </div>
 
 
+        <!-- PRICE FILTER -->
+
         <div class="side-card">
 
-            <h3>FILTER BY PRICE</h3>
+            <h3>
+                FILTER BY PRICE
+            </h3>
+
 
             <div class="price-row">
-                <span>₹500</span>
-                <span>₹60,000+</span>
+
+                <span>
+                    ₹500
+                </span>
+
+                <span>
+                    ₹60,000+
+                </span>
+
             </div>
 
-            <input id="priceFilter"
-                   type="range"
-                   min="500"
-                   max="60000"
-                   value="60000">
+
+            <input
+                id="priceFilter"
+                type="range"
+                min="500"
+                max="60000"
+                value="60000"
+            >
+
 
             <p id="priceValue">
                 Up to ₹60,000
             </p>
 
-            <button id="applyPrice"
-                    class="blue-button">
+
+            <button
+                id="applyPrice"
+                class="blue-button">
+
                 Apply Filter
+
             </button>
 
         </div>
 
 
+        <!-- FEATURES -->
+
         <div class="side-card">
 
-            <h3>FEATURES</h3>
+            <h3>
+                FEATURES
+            </h3>
+
 
             <div class="feature">
+
                 🚚
+
                 <div>
-                    <b>Free Shipping</b>
-                    <small>Orders above ₹999</small>
+
+                    <b>
+                        Free Shipping
+                    </b>
+
+                    <small>
+                        Orders above ₹999
+                    </small>
+
                 </div>
+
             </div>
 
+
             <div class="feature">
+
                 🛡️
+
                 <div>
-                    <b>1 Year Warranty</b>
-                    <small>On all products</small>
+
+                    <b>
+                        1 Year Warranty
+                    </b>
+
+                    <small>
+                        On all products
+                    </small>
+
                 </div>
+
             </div>
 
+
             <div class="feature">
+
                 ↩️
+
                 <div>
-                    <b>Easy Returns</b>
-                    <small>Within 7 days</small>
+
+                    <b>
+                        Easy Returns
+                    </b>
+
+                    <small>
+                        Within 7 days
+                    </small>
+
                 </div>
+
             </div>
 
+
             <div class="feature">
+
                 🔒
+
                 <div>
-                    <b>Secure Payments</b>
-                    <small>100% secure checkout</small>
+
+                    <b>
+                        Secure Payments
+                    </b>
+
+                    <small>
+                        100% secure checkout
+                    </small>
+
                 </div>
+
             </div>
 
         </div>
@@ -191,9 +332,11 @@
     </aside>
 
 
-    <!-- CONTENT -->
+    <!-- ================= CONTENT ================= -->
 
-    <section class="content" id="home">
+    <section
+        class="content"
+        id="home">
 
 
         <!-- HERO -->
@@ -206,41 +349,59 @@
                     NEXT-GEN TECHNOLOGY
                 </p>
 
+
                 <h2>
+
                     The Future
+
                     <br>
+
                     Is Now
+
                 </h2>
+
 
                 <p>
                     Discover the latest tech that inspires.
                 </p>
 
-                <button class="hero-button"
-                        onclick="goProducts()">
+
+                <button
+                    class="hero-button"
+                    onclick="goProducts()">
+
                     Shop Now
+
                 </button>
 
             </div>
 
+
             <div class="hero-icons">
+
                 💻 🎧 📱
+
             </div>
 
         </section>
 
 
-        <!-- SEARCH -->
+        <!-- SEARCH & FILTER -->
 
         <section class="tools">
 
+
             <div class="search-box">
 
-                <input id="productSearch"
-                       type="text"
-                       placeholder="Search products...">
+                <input
+                    id="productSearch"
+                    type="text"
+                    placeholder="Search products..."
+                >
 
-                <span>🔍</span>
+                <span>
+                    🔍
+                </span>
 
             </div>
 
@@ -305,15 +466,21 @@
 
         <section id="products">
 
+
             <div class="section-title">
 
                 <div>
-                    <h2>Featured Products</h2>
+
+                    <h2>
+                        Featured Products
+                    </h2>
 
                     <p>
                         Premium technology for everyday life
                     </p>
+
                 </div>
+
 
                 <span id="resultCount">
                     Showing 0 products
@@ -322,8 +489,9 @@
             </div>
 
 
-            <div id="productsGrid"
-                 class="products-grid">
+            <div
+                id="productsGrid"
+                class="products-grid">
             </div>
 
         </section>
@@ -333,20 +501,27 @@
 
         <section class="section-box">
 
+
             <div class="section-title">
 
                 <div>
-                    <h2>Recommended For You</h2>
+
+                    <h2>
+                        Recommended For You
+                    </h2>
 
                     <p>
                         Smart recommendations
                     </p>
+
                 </div>
 
             </div>
 
-            <div id="recommendations"
-                 class="recommendations">
+
+            <div
+                id="recommendations"
+                class="recommendations">
             </div>
 
         </section>
@@ -360,31 +535,69 @@
                 ⚡ Powered by Data Structures & Algorithms
             </h2>
 
+
             <div class="dsa-grid">
 
+
                 <div>
+
                     🔎
-                    <h3>Searching</h3>
-                    <p>Fast product searching.</p>
+
+                    <h3>
+                        Searching
+                    </h3>
+
+                    <p>
+                        Fast product searching.
+                    </p>
+
                 </div>
 
+
                 <div>
+
                     ↕️
-                    <h3>Sorting</h3>
-                    <p>Price and name sorting.</p>
+
+                    <h3>
+                        Sorting
+                    </h3>
+
+                    <p>
+                        Price and name sorting.
+                    </p>
+
                 </div>
 
+
                 <div>
+
                     🛒
-                    <h3>Arrays</h3>
-                    <p>Cart management.</p>
+
+                    <h3>
+                        Arrays
+                    </h3>
+
+                    <p>
+                        Cart management.
+                    </p>
+
                 </div>
 
+
                 <div>
+
                     🌳
-                    <h3>Binary Search Tree</h3>
-                    <p>Product price searching.</p>
+
+                    <h3>
+                        Binary Search Tree
+                    </h3>
+
+                    <p>
+                        Product price searching.
+                    </p>
+
                 </div>
+
 
             </div>
 
@@ -395,21 +608,30 @@
 
         <section class="section-box">
 
-            <h2>🌳 Binary Search Tree</h2>
+
+            <h2>
+                🌳 Binary Search Tree
+            </h2>
+
 
             <p>
                 Search a product price using BST.
             </p>
 
+
             <div class="bst-controls">
 
-                <input id="bstInput"
-                       type="number"
-                       placeholder="Enter price">
+                <input
+                    id="bstInput"
+                    type="number"
+                    placeholder="Enter price"
+                >
+
 
                 <button id="bstSearch">
                     Search BST
                 </button>
+
 
                 <button id="bstShow">
                     Show BST
@@ -417,9 +639,13 @@
 
             </div>
 
-            <div id="bstResult"
-                 class="bst-result">
+
+            <div
+                id="bstResult"
+                class="bst-result">
+
                 Enter a price.
+
             </div>
 
         </section>
@@ -427,18 +653,25 @@
 
         <!-- WISHLIST -->
 
-        <section class="section-box"
-                 id="wishlist">
+        <section
+            class="section-box"
+            id="wishlist">
+
 
             <div class="section-title">
 
                 <div>
-                    <h2>❤️ Wishlist</h2>
+
+                    <h2>
+                        ❤️ Wishlist
+                    </h2>
 
                     <p>
                         Your saved products
                     </p>
+
                 </div>
+
 
                 <span id="wishlistCount">
                     0 ITEMS
@@ -446,8 +679,10 @@
 
             </div>
 
-            <div id="wishlistContainer"
-                 class="wishlist-grid">
+
+            <div
+                id="wishlistContainer"
+                class="wishlist-grid">
             </div>
 
         </section>
@@ -455,24 +690,38 @@
 
         <!-- ORDERS -->
 
-        <section class="section-box"
-                 id="orders">
+        <section
+            class="section-box"
+            id="orders">
+
 
             <div class="section-title">
 
                 <div>
-                    <h2>📦 Orders</h2>
 
-                    <p>Your order history</p>
+                    <h2>
+                        📦 Orders
+                    </h2>
+
+                    <p>
+                        Your order history
+                    </p>
+
                 </div>
 
             </div>
 
-            <div id="ordersContainer"></div>
 
-            <button id="clearOrders"
-                    class="danger-button">
+            <div id="ordersContainer">
+            </div>
+
+
+            <button
+                id="clearOrders"
+                class="danger-button">
+
                 Clear Orders
+
             </button>
 
         </section>
@@ -480,27 +729,58 @@
 
         <!-- ABOUT -->
 
-        <section class="section-box about"
-                 id="about">
+        <section
+            class="section-box about"
+            id="about">
 
-            <h2>About TechNova</h2>
+
+            <h2>
+                About TechNova
+            </h2>
+
 
             <p>
+
                 TechNova is an E-Commerce Product
                 Management and Recommendation System
                 using Data Structures and Algorithms.
+
             </p>
+
 
             <div class="tech-stack">
 
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>JavaScript</span>
-                <span>Arrays</span>
-                <span>Searching</span>
-                <span>Sorting</span>
-                <span>BST</span>
-                <span>LocalStorage</span>
+                <span>
+                    HTML
+                </span>
+
+                <span>
+                    CSS
+                </span>
+
+                <span>
+                    JavaScript
+                </span>
+
+                <span>
+                    Arrays
+                </span>
+
+                <span>
+                    Searching
+                </span>
+
+                <span>
+                    Sorting
+                </span>
+
+                <span>
+                    BST
+                </span>
+
+                <span>
+                    LocalStorage
+                </span>
 
             </div>
 
@@ -513,13 +793,20 @@
 
 <!-- ================= CART MODAL ================= -->
 
-<div id="cartModal" class="modal">
+<div
+    id="cartModal"
+    class="modal">
+
 
     <div class="cart-box">
 
+
         <div class="cart-header">
 
-            <h2>🛒 Shopping Cart</h2>
+            <h2>
+                🛒 Shopping Cart
+            </h2>
+
 
             <button id="closeCart">
                 ✕
@@ -527,18 +814,30 @@
 
         </div>
 
-        <div id="cartItems"></div>
+
+        <div id="cartItems">
+        </div>
+
 
         <div class="cart-footer">
 
             <h3>
+
                 Total:
-                <span id="cartTotal">₹0</span>
+
+                <span id="cartTotal">
+                    ₹0
+                </span>
+
             </h3>
 
-            <button id="checkout"
-                    class="checkout-button">
+
+            <button
+                id="checkout"
+                class="checkout-button">
+
                 Checkout
+
             </button>
 
         </div>
@@ -550,49 +849,79 @@
 
 <!-- ================= CHECKOUT ================= -->
 
-<div id="checkoutModal"
-     class="modal">
+<div
+    id="checkoutModal"
+    class="modal">
+
 
     <div class="checkout-box">
 
-        <button class="details-close"
-                onclick="closeCheckout()">
+
+        <button
+            class="details-close"
+            onclick="closeCheckout()">
+
             ✕
+
         </button>
 
-        <h2>🛍️ Secure Checkout</h2>
+
+        <h2>
+            🛍️ Secure Checkout
+        </h2>
+
 
         <p class="checkout-subtitle">
+
             Complete your order securely
+
         </p>
 
 
         <div class="checkout-section">
 
-            <h3>📍 Delivery Details</h3>
 
-            <input id="checkoutName"
-                   type="text"
-                   placeholder="Full Name">
+            <h3>
+                📍 Delivery Details
+            </h3>
 
-            <input id="checkoutPhone"
-                   type="tel"
-                   placeholder="Mobile Number">
 
-            <textarea id="checkoutAddress"
-                      rows="4"
-                      placeholder="Full Delivery Address">
+            <input
+                id="checkoutName"
+                type="text"
+                placeholder="Full Name"
+            >
+
+
+            <input
+                id="checkoutPhone"
+                type="tel"
+                placeholder="Mobile Number"
+            >
+
+
+            <textarea
+                id="checkoutAddress"
+                rows="4"
+                placeholder="Full Delivery Address">
             </textarea>
+
 
             <div class="checkout-row">
 
-                <input id="checkoutCity"
-                       type="text"
-                       placeholder="City">
 
-                <input id="checkoutPincode"
-                       type="text"
-                       placeholder="PIN Code">
+                <input
+                    id="checkoutCity"
+                    type="text"
+                    placeholder="City"
+                >
+
+
+                <input
+                    id="checkoutPincode"
+                    type="text"
+                    placeholder="PIN Code"
+                >
 
             </div>
 
@@ -601,28 +930,49 @@
 
         <div class="checkout-section">
 
-            <h3>💳 Payment Method</h3>
+
+            <h3>
+                💳 Payment Method
+            </h3>
+
 
             <label class="payment-option">
-                <input type="radio"
-                       name="payment"
-                       value="cod"
-                       checked>
+
+                <input
+                    type="radio"
+                    name="payment"
+                    value="cod"
+                    checked
+                >
+
                 💵 Cash on Delivery
+
             </label>
 
+
             <label class="payment-option">
-                <input type="radio"
-                       name="payment"
-                       value="upi">
+
+                <input
+                    type="radio"
+                    name="payment"
+                    value="upi"
+                >
+
                 📱 UPI
+
             </label>
 
+
             <label class="payment-option">
-                <input type="radio"
-                       name="payment"
-                       value="card">
+
+                <input
+                    type="radio"
+                    name="payment"
+                    value="card"
+                >
+
                 💳 Credit / Debit Card
+
             </label>
 
         </div>
@@ -630,13 +980,22 @@
 
         <div class="checkout-section">
 
-            <h3>🧾 Order Summary</h3>
 
-            <div id="checkoutItems"></div>
+            <h3>
+                🧾 Order Summary
+            </h3>
+
+
+            <div id="checkoutItems">
+            </div>
+
 
             <div class="checkout-total">
 
-                <span>Total</span>
+                <span>
+                    Total
+                </span>
+
 
                 <strong id="checkoutTotal">
                     ₹0
@@ -647,9 +1006,12 @@
         </div>
 
 
-        <button id="placeOrder"
-                class="place-order-button">
+        <button
+            id="placeOrder"
+            class="place-order-button">
+
             ✅ Place Order
+
         </button>
 
     </div>
@@ -659,17 +1021,25 @@
 
 <!-- ================= PRODUCT DETAILS ================= -->
 
-<div id="productDetailsModal"
-     class="modal">
+<div
+    id="productDetailsModal"
+    class="modal">
+
 
     <div class="product-details-box">
 
-        <button class="details-close"
-                onclick="closeProductDetails()">
+
+        <button
+            class="details-close"
+            onclick="closeProductDetails()">
+
             ✕
+
         </button>
 
-        <div id="productDetailsContent"></div>
+
+        <div id="productDetailsContent">
+        </div>
 
     </div>
 
@@ -678,48 +1048,74 @@
 
 <!-- ================= USER AUTH ================= -->
 
-<div id="authModal"
-     class="modal">
+<div
+    id="authModal"
+    class="modal">
+
 
     <div class="auth-box">
 
-        <button class="details-close"
-                onclick="closeAuth()">
+
+        <button
+            class="details-close"
+            onclick="closeAuth()">
+
             ✕
+
         </button>
+
 
         <h2 id="authTitle">
             Welcome to TechNova 👋
         </h2>
 
+
         <p id="authSubtitle">
             Login to continue shopping
         </p>
 
-        <input id="authName"
-               type="text"
-               placeholder="Full Name">
 
-        <input id="authEmail"
-               type="email"
-               placeholder="Email Address">
+        <input
+            id="authName"
+            type="text"
+            placeholder="Full Name"
+        >
 
-        <input id="authPassword"
-               type="password"
-               placeholder="Password">
 
-        <button id="authSubmit"
-                class="details-add-cart">
+        <input
+            id="authEmail"
+            type="email"
+            placeholder="Email Address"
+        >
+
+
+        <input
+            id="authPassword"
+            type="password"
+            placeholder="Password"
+        >
+
+
+        <button
+            id="authSubmit"
+            class="details-add-cart">
+
             Login
+
         </button>
+
 
         <p class="auth-switch">
 
             Don't have an account?
 
-            <button id="authToggle"
-                    onclick="toggleAuthMode()">
+
+            <button
+                id="authToggle"
+                onclick="toggleAuthMode()">
+
                 Create Account
+
             </button>
 
         </p>
@@ -731,38 +1127,55 @@
 
 <!-- ================= ADMIN LOGIN ================= -->
 
-<div id="adminLoginModal"
-     class="modal">
+<div
+    id="adminLoginModal"
+    class="modal">
+
 
     <div class="auth-box">
 
-        <button class="details-close"
-                onclick="closeAdminLogin()">
+
+        <button
+            class="details-close"
+            onclick="closeAdminLogin()">
+
             ✕
+
         </button>
 
-        <h2>⚙️ Admin Login</h2>
+
+        <h2>
+            ⚙️ Admin Login
+        </h2>
+
 
         <p>
             Login to manage TechNova
         </p>
 
-        <input id="adminUsername"
-               type="text"
-               placeholder="Admin Username">
 
-        <input id="adminPassword"
-               type="password"
-               placeholder="Admin Password">
+        <input
+            id="adminUsername"
+            type="text"
+            placeholder="Admin Username"
+        >
 
-        <button class="details-add-cart"
-                onclick="adminLogin()">
+
+        <input
+            id="adminPassword"
+            type="password"
+            placeholder="Admin Password"
+        >
+
+
+        <button
+            class="details-add-cart"
+            onclick="adminLogin()">
+
             🔐 Login as Admin
+
         </button>
 
-        <small class="admin-demo">
-            Demo: admin / admin123
-        </small>
 
     </div>
 
@@ -771,14 +1184,20 @@
 
 <!-- ================= ADMIN DASHBOARD ================= -->
 
-<section id="adminDashboard"
-         class="admin-dashboard">
+<section
+    id="adminDashboard"
+    class="admin-dashboard">
+
 
     <div class="admin-header">
 
+
         <div>
 
-            <h1>⚡ TechNova Admin</h1>
+            <h1>
+                ⚡ TechNova Admin
+            </h1>
+
 
             <p>
                 Product & Order Management
@@ -786,67 +1205,133 @@
 
         </div>
 
-        <button class="admin-logout"
-                onclick="adminLogout()">
+
+        <button
+            class="admin-logout"
+            onclick="adminLogout()">
+
             Logout
+
         </button>
 
     </div>
 
 
-    <!-- STATS -->
+    <!-- ADMIN STATS -->
 
     <div class="admin-stats">
 
+
         <div class="admin-stat">
-            <span>🛍️</span>
+
+            <span>
+                🛍️
+            </span>
+
 
             <div>
-                <small>Total Products</small>
-                <h2 id="adminProductCount">0</h2>
+
+                <small>
+                    Total Products
+                </small>
+
+
+                <h2 id="adminProductCount">
+                    0
+                </h2>
+
             </div>
+
         </div>
 
+
         <div class="admin-stat">
-            <span>📦</span>
+
+            <span>
+                📦
+            </span>
+
 
             <div>
-                <small>Total Orders</small>
-                <h2 id="adminOrderCount">0</h2>
+
+                <small>
+                    Total Orders
+                </small>
+
+
+                <h2 id="adminOrderCount">
+                    0
+                </h2>
+
             </div>
+
         </div>
 
+
         <div class="admin-stat">
-            <span>👥</span>
+
+            <span>
+                👥
+            </span>
+
 
             <div>
-                <small>Total Users</small>
-                <h2 id="adminUserCount">0</h2>
+
+                <small>
+                    Total Users
+                </small>
+
+
+                <h2 id="adminUserCount">
+                    0
+                </h2>
+
             </div>
+
         </div>
 
+
         <div class="admin-stat">
-            <span>💰</span>
+
+            <span>
+                💰
+            </span>
+
 
             <div>
-                <small>Total Sales</small>
-                <h2 id="adminSales">₹0</h2>
+
+                <small>
+                    Total Sales
+                </small>
+
+
+                <h2 id="adminSales">
+                    ₹0
+                </h2>
+
             </div>
+
         </div>
 
     </div>
 
 
-    <!-- LOW STOCK / RECENT ORDERS -->
+    <!-- ADMIN EXTRA -->
 
     <div class="admin-extra-grid">
 
+
         <div class="admin-extra-card">
 
-            <h3>⚠️ Low Stock</h3>
+            <h3>
+                ⚠️ Low Stock
+            </h3>
+
 
             <div id="lowStockList">
+
                 No low stock products.
+
             </div>
 
         </div>
@@ -854,10 +1339,15 @@
 
         <div class="admin-extra-card">
 
-            <h3>📋 Recent Orders</h3>
+            <h3>
+                📋 Recent Orders
+            </h3>
+
 
             <div id="recentOrdersList">
+
                 No orders yet.
+
             </div>
 
         </div>
@@ -869,7 +1359,9 @@
 
     <div class="admin-panel">
 
+
         <div class="admin-panel-header">
+
 
             <div>
 
@@ -877,15 +1369,20 @@
                     📦 Product Management
                 </h2>
 
+
                 <p>
                     Add, edit, delete and manage stock
                 </p>
 
             </div>
 
-            <button class="add-product-button"
-                    onclick="openAddProduct()">
+
+            <button
+                class="add-product-button"
+                onclick="openAddProduct()">
+
                 ➕ Add Product
+
             </button>
 
         </div>
@@ -893,22 +1390,46 @@
 
         <div class="admin-table-wrapper">
 
+
             <table class="admin-table">
+
 
                 <thead>
 
                     <tr>
-                        <th>ID</th>
-                        <th>Product</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Stock</th>
-                        <th>Actions</th>
+
+                        <th>
+                            ID
+                        </th>
+
+                        <th>
+                            Product
+                        </th>
+
+                        <th>
+                            Category
+                        </th>
+
+                        <th>
+                            Price
+                        </th>
+
+                        <th>
+                            Stock
+                        </th>
+
+                        <th>
+                            Actions
+                        </th>
+
                     </tr>
 
                 </thead>
 
-                <tbody id="adminProductTable"></tbody>
+
+                <tbody
+                    id="adminProductTable">
+                </tbody>
 
             </table>
 
@@ -921,19 +1442,29 @@
 
 <!-- ================= ADD / EDIT PRODUCT ================= -->
 
-<div id="productFormModal"
-     class="modal">
+<div
+    id="productFormModal"
+    class="modal">
+
 
     <div class="product-form-box">
 
-        <button class="details-close"
-                onclick="closeProductForm()">
+
+        <button
+            class="details-close"
+            onclick="closeProductForm()">
+
             ✕
+
         </button>
 
+
         <h2 id="productFormTitle">
+
             ➕ Add New Product
+
         </h2>
+
 
         <p>
             Enter product details below.
@@ -942,75 +1473,107 @@
 
         <form id="productForm">
 
-            <input type="hidden"
-                   id="editProductId">
+
+            <input
+                type="hidden"
+                id="editProductId"
+            >
 
 
-            <label>Product Name</label>
-
-            <input id="productName"
-                   type="text"
-                   placeholder="Example: UltraBook Pro"
-                   required>
+            <label>
+                Product Name
+            </label>
 
 
-            <label>Category</label>
+            <input
+                id="productName"
+                type="text"
+                placeholder="Example: UltraBook Pro"
+                required
+            >
 
-            <select id="productCategory"
-                    required>
+
+            <label>
+                Category
+            </label>
+
+
+            <select
+                id="productCategory"
+                required>
+
 
                 <option value="">
                     Select Category
                 </option>
 
+
                 <option value="laptop">
                     Laptop
                 </option>
+
 
                 <option value="electronics">
                     Smartphone
                 </option>
 
+
                 <option value="audio">
                     Audio
                 </option>
+
 
                 <option value="wearables">
                     Wearables
                 </option>
 
+
                 <option value="gaming">
                     Gaming
                 </option>
 
+
                 <option value="power">
                     Power Solutions
                 </option>
+
 
             </select>
 
 
             <div class="form-row">
 
+
                 <div>
 
-                    <label>Price (₹)</label>
+                    <label>
+                        Price (₹)
+                    </label>
 
-                    <input id="productPrice"
-                           type="number"
-                           min="1"
-                           required>
+
+                    <input
+                        id="productPrice"
+                        type="number"
+                        min="1"
+                        required
+                    >
 
                 </div>
 
+
                 <div>
 
-                    <label>Stock</label>
+                    <label>
+                        Stock
+                    </label>
 
-                    <input id="productStock"
-                           type="number"
-                           min="0"
-                           required>
+
+                    <input
+                        id="productStock"
+                        type="number"
+                        min="0"
+                        required
+                    >
 
                 </div>
 
@@ -1021,9 +1584,13 @@
                 Product Image
             </label>
 
-            <input id="productImageFile"
-                   type="file"
-                   accept="image/*">
+
+            <input
+                id="productImageFile"
+                type="file"
+                accept="image/*"
+            >
+
 
             <small>
                 Optional. JPG, PNG or WEBP.
@@ -1034,55 +1601,76 @@
                 Image Path
             </label>
 
-            <input id="productImage"
-                   type="text"
-                   placeholder="images/laptop.jpg">
+
+            <input
+                id="productImage"
+                type="text"
+                placeholder="images/laptop.jpg"
+            >
 
 
             <label>
                 Description
             </label>
 
-            <textarea id="productDescription"
-                      rows="4"
-                      required
-                      placeholder="Enter product description...">
+
+            <textarea
+                id="productDescription"
+                rows="4"
+                required
+                placeholder="Enter product description...">
             </textarea>
 
 
-            <label>Badge</label>
+            <label>
+                Badge
+            </label>
+
 
             <select id="productBadge">
 
-                <option value="New">New</option>
+
+                <option value="New">
+                    New
+                </option>
+
 
                 <option value="Popular">
                     Popular
                 </option>
 
+
                 <option value="Best Seller">
                     Best Seller
                 </option>
+
 
                 <option value="Trending">
                     Trending
                 </option>
 
+
                 <option value="Value Pick">
                     Value Pick
                 </option>
 
+
                 <option value="">
                     No Badge
                 </option>
+
 
             </select>
 
 
             <div class="form-preview">
 
-                <img id="productImagePreview"
-                     alt="Image Preview">
+
+                <img
+                    id="productImagePreview"
+                    alt="Image Preview"
+                >
+
 
                 <span id="previewText">
                     Image Preview
@@ -1093,18 +1681,27 @@
 
             <div class="form-actions">
 
-                <button type="button"
-                        class="cancel-form"
-                        onclick="closeProductForm()">
+
+                <button
+                    type="button"
+                    class="cancel-form"
+                    onclick="closeProductForm()">
+
                     Cancel
+
                 </button>
 
-                <button type="submit"
-                        class="save-product-button">
+
+                <button
+                    type="submit"
+                    class="save-product-button">
+
                     💾 Save Product
+
                 </button>
 
             </div>
+
 
         </form>
 
@@ -1115,8 +1712,9 @@
 
 <!-- ================= TOAST ================= -->
 
-<div id="toast"
-     class="toast">
+<div
+    id="toast"
+    class="toast">
 </div>
 
 
@@ -1124,11 +1722,16 @@
 
 <footer>
 
-    <h2>⚡ TechNova</h2>
+
+    <h2>
+        ⚡ TechNova
+    </h2>
+
 
     <p>
         Smart Shopping • Smart Algorithms
     </p>
+
 
 </footer>
 
@@ -1136,4 +1739,5 @@
 <script src="script.js"></script>
 
 </body>
+
 </html>
