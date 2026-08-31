@@ -1,6 +1,9 @@
 🛒 TechNova – Smart Shopping
 DSA-Based E-Commerce Web Application
-<p align="center"> <a href="https://dhruvpatil2411-png.github.io/Ecommerce-DSA/"> <strong>🌐 View Live Project</strong> </a> </p>
+🌐 View Live Project
+
+🔗 TechNova – Smart Shopping
+
 📖 Overview
 
 TechNova – Smart Shopping is a web-based E-Commerce application developed using HTML, CSS, and JavaScript with practical implementation of Data Structures and Algorithms (DSA).
@@ -70,18 +73,6 @@ Ecommerce-DSA/
 ├── images/
 └── README.md
 
-📸 Project Screenshots
-
-Add screenshots of the major sections of the project here.
-
-Home Page
-Product Section
-Product Search
-Shopping Cart
-Wishlist
-Checkout
-Orders
-Admin Panel
 🚀 Getting Started
 Clone the Repository
 git clone https://github.com/dhruvpatil2411-png/Ecommerce-DSA.git
@@ -93,8 +84,9 @@ cd Ecommerce-DSA
 Open index.html in your browser.
 
 🌐 Live Project
-
 TechNova – Smart Shopping
+
+🔗 Open Live Project
 
 🔮 Future Scope
 
@@ -113,4 +105,6 @@ Order Tracking
 
 DSA + Web Development Project
 
-<p align="center"> <strong>TechNova — Smart Shopping, Powered by DSA</strong> </p> <p align="center"> HTML · CSS · JavaScript · Data Structures & Algorithms </p>
+TechNova — Smart Shopping, Powered by DSA
+
+HTML · CSS · JavaScript · Data Structures & Algorithms
