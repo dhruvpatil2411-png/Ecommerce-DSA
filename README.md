@@ -100,8 +100,7 @@ Open index.html in your browser.
 📊 Admin Analytics Dashboard
 📦 Inventory Management
 🚚 Order Tracking
-👨‍💻 Developer
-Dhruv Patil
+
 
 DSA + Web Development Project
 
